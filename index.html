@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title i18n-content="appname">Notes</title>
+		<link rel="shortcut icon" href="http://davsket.me/notes/notes.png">
+		<style type="text/css">
+		html {
+			background:#000000;
+			padding: 0;
+			margin: 0;
+			height:100%;
+			width:100%;
+			background: #142547;
+		}
+
+		body {
+			height:100%;
+			width:100%;
+			padding: 0;
+			margin: 0;
+		}
+
+		section {
+			cursor:text;
+			display:block;
+			height:100%;
+			padding-bottom:0px;
+			padding-top:0px;
+			width:100%;
+		}
+
+		textarea {
+			background-color: #142547;
+			border:0px;
+			color:#B9B9B9;
+			display:block;
+			font-family: sans-serif;
+			font-size:12pt;
+			height:100%;
+			line-height:1.3em;
+			width: 600px;
+			outline:none;
+			overflow-y:scroll;
+			padding: 0;
+			margin: 0 auto;
+			resize:none;
+			box-sizing:border-box;
+			-webkit-box-sizing:border-box;
+			/*user-select:text;
+			-webkit-user-select:text;*/
+			padding: 20px 0px 40px 0px;
+		}
+
+		textarea::-webkit-scrollbar {
+			display:none;
+		}
+
+		footer {
+			background:#171717;
+			cursor:default;
+			display:block;
+			width:100%;
+		}
+
+		p {
+			color:#7F7F7F;
+			display:block;
+			font-family:monospace;
+			font-size:10.68pt;
+			margin:0px auto;
+			padding:0.25em 0em;
+			width:660px;
+		}
+		</style>
+		
+	</head>
+	<body>
+			<textarea id="textarea" spellcheck="true"></textarea>
+		<script type="text/javascript">
+			textarea.value = localStorage.getItem('dasket-content');
+			textarea.addEventListener('keyup', function(evt){
+				localStorage.setItem('dasket-content', textarea.value);
+			});
+			/*textarea.addEventListener('keydown', function(evt){
+				if(evt.metaKey && evt.keyIdentifier== "U+005A"){
+					evt.preventDefault();
+					
+				}
+				return false;
+			});*/
+		</script>
+	</body>
+</html>
