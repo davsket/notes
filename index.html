@@ -15,8 +15,7 @@
 
 		body {
 			height:100%;
-			width:100%;
-			padding: 0;
+			padding: 0 40px;
 			margin: 0;
 		}
 
@@ -37,8 +36,9 @@
 			font-family: sans-serif;
 			font-size:12pt;
 			height:100%;
+			width: 100%;
+			max-width: 600px;
 			line-height:1.3em;
-			width: 600px;
 			outline:none;
 			overflow-y:scroll;
 			padding: 0;
@@ -46,6 +46,8 @@
 			resize:none;
 			box-sizing:border-box;
 			-webkit-box-sizing:border-box;
+			position: relative;
+			z-index: 1;
 			/*user-select:text;
 			-webkit-user-select:text;*/
 			padding: 20px 0px 40px 0px;
@@ -56,7 +58,6 @@
 		}
 		#menu{
 			position: absolute;
-			background-color: #142547;
 			left: 10px;
 			top: 10px;
 			color: #ccc;
@@ -66,12 +67,14 @@
 		}
 		#menu .index{
 			position: relative;
-			z-index: 2;
 			background-color: #142547;
+			width: auto;
+			z-index: 1;
 		}
 		#menu:hover{
 			color: #eee;
 			cursor: default;
+			z-index: 3;
 		}
 		#menu:hover .items{
 			/*height: 300px;*/
@@ -102,6 +105,11 @@
 		#menu .delete{
 			position: absolute;
 			right: 5px;
+			padding: 5px;
+			top: 0;
+		}
+		#menu .delete:hover{
+			color: #F2133C;
 		}
 		#menu li:hover{
 			color: #142547;
@@ -174,13 +182,13 @@
 			});
 
 			function initialize(){
-				var lists;
+				var lists, i, list, length;
 				if(!localStorage.getItemJSON('dasket-lists')){
 					localStorage.setItem('dasket-lists','["Main"]');
 				}
 				lists = localStorage.getItemJSON('dasket-lists');
-				for (var i = 0; i < lists.length; i++) {
-					var list = lists[i];
+				for (i = 0; i < lists.length; i++) {
+					list = lists[i];
 					createMenuItem(list);
 				};
 				loadNote(localStorage.getItemJSON('dasket-lastlist'));
@@ -191,6 +199,11 @@
 				localStorage.setItem('dasket-lastlist', noteName);
 				actualnote = noteName.toLowerCase().replace(/[^\w\d]/,'');
 				textarea.value = localStorage.getItemJSON('dasket-'+actualnote+'content') || 'Write something...';
+
+				length = textarea.value.length;
+				//textarea.scrollTop = textarea.scrollHeight;
+				textarea.setSelectionRange(length, length);
+				textarea.focus();
 			}
 
 			function createNote(name){
