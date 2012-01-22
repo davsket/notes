@@ -186,7 +186,7 @@
 								reader = new FileReader();
 							reader.onload = function (event) {
 								console.log(event);
-								evt.target.innerHTML += '<img src="url('+event.target.result+')" />';
+								evt.target.innerHTML += '<img src="'+event.target.result+'" />';
 								console.log(evt.target);
 							};
 							reader.readAsDataURL(file);
