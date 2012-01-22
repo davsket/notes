@@ -1,21 +1,35 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" manifest="manifest.cache">
 	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<title i18n-content="appname">Simple text editor | davsket</title>
 		<link rel="shortcut icon" href="http://davsket.me/notes/sicon.png">
 		<style type="text/css">
+		@font-face {
+		    font-family: 'symbol';
+		    src: url('font/websymbols-regular-webfont.eot');
+		    src: url('font/websymbols-regular-webfont.eot?#iefix') format('embedded-opentype'),
+		         url('font/websymbols-regular-webfont.woff') format('woff'),
+		         url('font/websymbols-regular-webfont.ttf') format('truetype'),
+		         url('font/websymbols-regular-webfont.svg#WebSymbolsRegular') format('svg');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+
 		html {
 			background:#000000;
 			padding: 0;
 			margin: 0;
 			height:100%;
 			width:100%;
-			background: #142547;
+			background-color: white;
+			background-image: -webkit-linear-gradient(0deg, transparent 30px, #ABCED4 30px, #ABCED4 31px, transparent 31px), -webkit-linear-gradient(#EEE 0.05em, transparent 0.05em);
+			background-size: 100% 1.2em;
 		}
 
 		body {
 			height:100%;
-			padding: 0 40px;
+			padding: 0 20px 0 45px;
 			margin: 0;
 		}
 
@@ -28,53 +42,47 @@
 			width:100%;
 		}
 
-		textarea {
-			background-color: #142547;
-			border:0px;
-			color:#eee;
+		#textarea{
+			box-sizing:border-box;
+			-webkit-box-sizing:border-box;
+			color:#888;
 			display:block;
 			font-family: sans-serif;
 			font-size:12pt;
-			height:100%;
-			width: 100%;
-			max-width: 600px;
-			line-height:1.3em;
-			outline:none;
-			overflow-y:scroll;
-			padding: 0;
+			line-height:19px;
 			margin: 0 auto;
-			resize:none;
-			box-sizing:border-box;
-			-webkit-box-sizing:border-box;
-			position: relative;
-			z-index: 1;
-			/*user-select:text;
-			-webkit-user-select:text;*/
+			max-width: 600px;
+			outline:none;
+			padding: 0;
 			padding: 20px 0px 40px 0px;
-		}
-
-		textarea::-webkit-scrollbar {
-			display:none;
+			position: relative;
+			width: 100%;
+			z-index: 1;
+			min-height: 100%;
+			height: auto;
 		}
 		#menu{
 			position: absolute;
-			left: 10px;
-			top: 10px;
-			color: #ccc;
-			font-size:22px;
+			left: 6px;
+			top: 6px;
+			color: #AAA;
 			text-decoration: none;
 			padding-right: 10px;
 		}
 		#menu .index{
 			position: relative;
-			background-color: #142547;
 			width: auto;
 			z-index: 1;
+			font-family: symbol;
+			font-size: 18px;
 		}
 		#menu:hover{
-			color: #eee;
+			color: #777;
 			cursor: default;
 			z-index: 3;
+		}
+		#menu:hover .index{
+			color: #ABCED4;
 		}
 		#menu:hover .items{
 			/*height: 300px;*/
@@ -90,9 +98,10 @@
 			padding: 0;
 			-webkit-transition-property: all;
 			-webkit-transition-duration: 500ms;
-			background-color: #142547;
+			background-color: #fff;
 			position: relative;
 			left: -1000px;
+			border: 1px solid #ddd;
 		}
 		#menu li{
 			list-style: none;
@@ -109,11 +118,11 @@
 			top: 0;
 		}
 		#menu .delete:hover{
-			color: #F2133C;
+			color: #ff8888;
 		}
 		#menu li:hover{
-			color: #142547;
-			background: #eee;
+			color: #fff;
+			background: #ABCED4;
 		}
 		#menu ul{
 			padding: 0;
@@ -124,7 +133,7 @@
 	</head>
 	<body>
 		<div id="menu">
-			<span href="#" class="index">&#10026;</span>
+			<span href="#" class="index">²</span>
 			<div class="items">
 				<ul id="menulist">
 					<li id="newnote">
@@ -133,7 +142,7 @@
 				</ul>
 			</div>
 		</div>
-			<textarea id="textarea" spellcheck="true"></textarea>
+			<div id="textarea" spellcheck="true" contenteditable ></div>
 		<script type="text/javascript">
 			var actualnote = '';
 
@@ -149,8 +158,48 @@
 			initialize();
 
 			textarea.addEventListener('keyup', function(evt){
-				localStorage.setItem('dasket-'+actualnote+'content', textarea.value);
+				localStorage.setItem('dasket-'+actualnote+'content', textarea.innerHTML);
 			});
+
+			function cancel(evt){
+				evt.preventDefault();
+			    evt.dataTransfer.dropEffect = 'copy';
+				return false;
+			}
+			textarea.addEventListener('dragenter', cancel);
+			textarea.addEventListener('dragover', cancel);
+
+			textarea.addEventListener('drop', function(evt){
+				evt.preventDefault();
+				//console.log(evt.dataTransfer);
+				//soma = evt;
+
+				
+				if (evt.dataTransfer.types){
+					console.log(evt.dataTransfer.types);
+				    [].forEach.call(evt.dataTransfer.types, function (type) {
+				    	if(type == 'text/html'){
+				    		evt.target.innerHTML += evt.dataTransfer.getData(type).replace(/(style=(\")[^\"]*(\"))|(style=(\')[^\']*(\'))|^((\s)*(&nbsp;)*)/g,'');
+				    	}
+				    	else if(type == 'Files'){
+				    		var file = evt.dataTransfer.files[0],
+								reader = new FileReader();
+							reader.onload = function (event) {
+								console.log(event);
+								evt.target.innerHTML += '<img src="url('+event.target.result+')" />';
+								console.log(evt.target);
+							};
+							reader.readAsDataURL(file);
+				    	}
+				    });
+				    
+				} else {
+					evt.target.innerHTML = evt.dataTransfer.getData('Text');
+				}
+
+				return false;
+			});
+
 			newnote.addEventListener('click', function(evt){
 				var name = window.prompt('New note name:');
 				evt.cancelBubble = true;
@@ -198,12 +247,13 @@
 				noteName = noteName || 'Main';
 				localStorage.setItem('dasket-lastlist', noteName);
 				actualnote = noteName.toLowerCase().replace(/[^\w\d]/,'');
-				textarea.value = localStorage.getItemJSON('dasket-'+actualnote+'content') || 'Write something...';
+				textarea.innerHTML = localStorage.getItemJSON('dasket-'+actualnote+'content') || 'Write something...';
 
-				length = textarea.value.length;
+				length = textarea.innerHTML.length;
 				//textarea.scrollTop = textarea.scrollHeight;
-				textarea.setSelectionRange(length, length);
+				//textarea.setSelectionRange(length, length);
 				textarea.focus();
+				window.title = 'Editing ' + noteName;
 			}
 
 			function createNote(name){
@@ -247,7 +297,6 @@
 				localStorage.setItem('dasket-lists', JSON.stringify(lists));
 				localStorage.setItem('dasket-'+name+'content', '');
 				localStorage.removeItem('dasket-'+name+'content');
-
 			}
 
 			/*textarea.addEventListener('keydown', function(evt){
