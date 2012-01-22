@@ -184,12 +184,18 @@
 				    	else if(type == 'Files'){
 				    		var file = evt.dataTransfer.files[0],
 								reader = new FileReader();
-							reader.onload = function (event) {
-								console.log(event);
-								evt.target.innerHTML += '<img src="'+event.target.result+'" />';
-								console.log(evt.target);
-							};
+							if(file.type.match(/image/)){
+								reader.onload = function (event) {
+									evt.target.innerHTML += '<img src="'+event.target.result+'" />';
+								};
+							}
+							else if(file.type.match(/video/)){
+								reader.onload = function (event) {
+									evt.target.innerHTML += '<video src="'+event.target.result+'" />';
+								};
+							}
 							reader.readAsDataURL(file);
+							soma =file;
 				    	}
 				    });
 				    
