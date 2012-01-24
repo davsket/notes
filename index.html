@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" manifest="manifest.cache">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<title i18n-content="appname">Simple text editor | davsket</title>
+		<title i18n-content="appname">Note Editor</title>
 		<link rel="shortcut icon" href="http://davsket.me/notes/sicon.png">
 		<style type="text/css">
 		@font-face {
@@ -16,6 +16,60 @@
 		    font-style: normal;
 		}
 
+		/* Erics reset */
+		/* http://meyerweb.com/eric/tools/css/reset/ 
+		   v2.0 | 20110126
+		   License: none (public domain)
+		*/
+
+		html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		b, u, i, center,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td,
+		article, aside, canvas, details, embed, 
+		figure, figcaption, footer, header, hgroup, 
+		menu, nav, output, ruby, section, summary,
+		time, mark, audio, video {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: baseline;
+		}
+		/* HTML5 display-role reset for older browsers */
+		article, aside, details, figcaption, figure, 
+		footer, header, hgroup, menu, nav, section {
+			display: block;
+		}
+		body {
+			line-height: 1;
+		}
+		ol, ul {
+			list-style: none;
+		}
+		blockquote, q {
+			quotes: none;
+		}
+		blockquote:before, blockquote:after,
+		q:before, q:after {
+			content: '';
+			content: none;
+		}
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+		/* End Reset */
+		[draggable] {
+			-webkit-user-select: none;
+			user-select: none;
+		}
 		html {
 			background:#000000;
 			padding: 0;
@@ -25,6 +79,7 @@
 			background-color: white;
 			background-image: -webkit-linear-gradient(0deg, transparent 30px, #ABCED4 30px, #ABCED4 31px, transparent 31px), -webkit-linear-gradient(#EEE 0.05em, transparent 0.05em);
 			background-size: 100% 1.2em;
+			font-family: sans-serif;
 		}
 
 		body {
@@ -60,6 +115,9 @@
 			z-index: 1;
 			min-height: 100%;
 			height: auto;
+		}
+		#textarea img{
+			display: block;
 		}
 		#menu{
 			position: absolute;
@@ -105,11 +163,24 @@
 		}
 		#menu li{
 			list-style: none;
-			padding: 5px 30px 5px 5px;
+			padding: 5px 50px 5px 5px;
 			margin: 0;
 			font-family: sans-serif;
 			cursor: pointer;
 			position: relative;
+		}
+		#menu li.dragging{
+			cursor: move;
+			opacity: 0.5;
+		}
+		#menu li.over{
+			border-top: 2em solid #ddd;
+		}
+		#menu .option{
+			color: #ddd;
+		}
+		#menu li:hover .option{
+			color: #fff;
 		}
 		#menu .delete{
 			position: absolute;
@@ -117,8 +188,19 @@
 			padding: 5px;
 			top: 0;
 		}
-		#menu .delete:hover{
-			color: #ff8888;
+		#menu .rename{
+			position: absolute;
+			right: 20px;
+			padding: 5px;
+			top: 0;
+			font-family: symbol;
+			font-size: 11px;
+		}
+		#menu li:hover .delete:hover{
+			color: #ee8888;
+		}
+		#menu li:hover .rename:hover{
+			color: #6688aa;
 		}
 		#menu li:hover{
 			color: #fff;
@@ -127,6 +209,27 @@
 		#menu ul{
 			padding: 0;
 			margin: 0;
+		}
+		#status{
+			position: fixed;
+			right: 0;
+			bottom: 0;
+			padding: 10px;
+			color: #333;
+			background-color: #DDD;
+			opacity: 0;
+			-webkit-transition-property: opacity;
+			-webkit-transition-duration: 500ms;
+		}
+		#status.show{
+			opacity: 1;
+		}
+		#status.hide{
+			-webkit-transition-delay: 5s;
+			opacity: 0;
+		}
+		#newnote{
+			border-top: 1px solid #ddd;
 		}
 		</style>
 		
@@ -142,9 +245,14 @@
 				</ul>
 			</div>
 		</div>
-			<div id="textarea" spellcheck="true" contenteditable ></div>
+		<div id="textarea" spellcheck="true" contenteditable ></div>
+		<div id="status" class='hide'></div>
 		<script type="text/javascript">
-			var actualnote = '';
+			var actualnote = '',
+				listsPrefix = 'notes/lists',
+				notesPrefix = 'notes/lists/',
+				lastPrefix = 'notes/lastlist',
+				clearTextarea = false;
 
 			Storage.prototype.getItemJSON = function(item){
 				var val = this.getItem(item)||'null';
@@ -154,11 +262,38 @@
 					return val;
 				}
 			}
+			Element.prototype.hasClassName = function(name) {
+			  return new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)").test(this.className);
+			};
+
+			Element.prototype.addClassName = function(name) {
+			  if (!this.hasClassName(name)) {
+			    this.className = this.className ? [this.className, name].join(' ') : name;
+			  }
+			};
+
+			Element.prototype.removeClassName = function(name) {
+			  if (this.hasClassName(name)) {
+			    var c = this.className;
+			    this.className = c.replace(new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)", "g"), "");
+			  }
+			};
 			
 			initialize();
 
-			textarea.addEventListener('keyup', function(evt){
-				localStorage.setItem('dasket-'+actualnote+'content', textarea.innerHTML);
+			function saveContent(){
+				localStorage.setItem(notesPrefix+localStorage.getItem(lastPrefix), textarea.innerHTML);
+				if(clearTextarea){
+					clearTextarea = false;
+					textarea.innerHTML = cleanStylesAndSpaces(textarea.innerHTML);
+				}
+			}
+
+			textarea.addEventListener('keyup', saveContent);
+			textarea.addEventListener('paste', function(evt){
+				clearTextarea = true;
+				saveContent();
+				clearTextarea = true;
 			});
 
 			function cancel(evt){
@@ -172,14 +307,13 @@
 			textarea.addEventListener('drop', function(evt){
 				evt.preventDefault();
 				//console.log(evt.dataTransfer);
-				//soma = evt;
 
 				
 				if (evt.dataTransfer.types){
-					console.log(evt.dataTransfer.types);
+					//console.log(evt.dataTransfer.types);
 				    [].forEach.call(evt.dataTransfer.types, function (type) {
 				    	if(type == 'text/html'){
-				    		evt.target.innerHTML += evt.dataTransfer.getData(type).replace(/(style=(\")[^\"]*(\"))|(style=(\')[^\']*(\'))|^((\s)*(&nbsp;)*)/g,'');
+				    		evt.target.innerHTML += cleanStylesAndSpaces(evt.dataTransfer.getData(type));
 				    	}
 				    	else if(type == 'Files'){
 				    		var file = evt.dataTransfer.files[0],
@@ -189,13 +323,8 @@
 									evt.target.innerHTML += '<img src="'+event.target.result+'" />';
 								};
 							}
-							else if(file.type.match(/video/)){
-								reader.onload = function (event) {
-									evt.target.innerHTML += '<video src="'+event.target.result+'" />';
-								};
-							}
 							reader.readAsDataURL(file);
-							soma =file;
+							soma = file;
 				    	}
 				    });
 				    
@@ -212,106 +341,240 @@
 				evt.preventDefault();
 				if(name){
 					createNote(name);
+					loadNote(name);
 				}
 			});
+
 			menulist.addEventListener('click', function(evt){
 				var tn = evt.target.tagName, name, bool;
 				if(tn == 'LI'){
 					loadNote(evt.target.getElementsByClassName('txt')[0].innerHTML);
 				}
-				else if(tn == 'SPAN' && !/delete/.test(evt.target.className)){
+				else if(tn == 'SPAN' && !/option/.test(evt.target.className)){
 					loadNote(evt.target.parentElement.getElementsByClassName('txt')[0].innerHTML);
 				}
 				else if(tn == 'SPAN' && /delete/.test(evt.target.className)){
 					name = evt.target.parentElement.getElementsByClassName('txt')[0].innerHTML;
 					bool = window.confirm('Are you sure you want to delete the note: '+name+'?');
 					if(!bool) return false;
-					if(name == 'Main'){
-						alert('You can\'t delete this note.');
-						return false;
-					}else{
+					//if(name == 'Main'){
+					//	alert('You can\'t delete this note.');
+					//	return false;
+					//}
+					else{
 						menulist.removeChild(evt.target.parentElement);
-						deleteList(name);
+						deleteNote(name);
+					}
+				}
+				else if(tn == 'SPAN' && /rename/.test(evt.target.className)){
+					var text = evt.target.parentElement.getElementsByClassName('txt')[0],
+						oldname = text.innerHTML,
+						name = window.prompt('New note name:');
+					if(!name){
+						return false;
+					} 
+					else{
+						text.innerHTML = name;
+						localStorage.setItem(notesPrefix+name, localStorage.getItem(notesPrefix+oldname));
+						newlists = localStorage.getItemJSON(listsPrefix);
+						newlists.push(name);
+						localStorage.setItem(listsPrefix, JSON.stringify(newlists));
+						deleteNote(oldname);
+						loadNote(name);
 					}
 				}
 			});
 
 			function initialize(){
 				var lists, i, list, length;
-				if(!localStorage.getItemJSON('dasket-lists')){
-					localStorage.setItem('dasket-lists','["Main"]');
+				lists = localStorage.getItemJSON(listsPrefix);
+				if(!lists || lists.length == 0){
+					loadNote();
 				}
-				lists = localStorage.getItemJSON('dasket-lists');
-				for (i = 0; i < lists.length; i++) {
-					list = lists[i];
-					createMenuItem(list);
-				};
-				loadNote(localStorage.getItemJSON('dasket-lastlist'));
+				else{
+					for (i = 0; i < lists.length; i++) {
+						list = lists[i];
+						createMenuItem(list);
+					}
+					loadNote(localStorage.getItemJSON(lastPrefix));
+				}
 			}
 
 			function loadNote(noteName){
-				noteName = noteName || 'Main';
-				localStorage.setItem('dasket-lastlist', noteName);
-				actualnote = noteName.toLowerCase().replace(/[^\w\d]/,'');
-				textarea.innerHTML = localStorage.getItemJSON('dasket-'+actualnote+'content') || 'Write something...';
+				if(!noteName){
+					noteName = 'New note';
+					createNote(noteName);
+				}
+				localStorage.setItem(lastPrefix, noteName);
+				textarea.innerHTML = localStorage.getItemJSON(notesPrefix+noteName) || 'Write something...';
 
-				length = textarea.innerHTML.length;
+				//length = textarea.innerHTML.length;
 				//textarea.scrollTop = textarea.scrollHeight;
 				//textarea.setSelectionRange(length, length);
 				textarea.focus();
-				window.title = 'Editing ' + noteName;
+				document.title = 'Editing ' + noteName;
 			}
 
-			function createNote(name){
-				lists = localStorage.getItemJSON('dasket-lists');
+			function createNote(name, ignore_new_item){
+				lists = localStorage.getItemJSON(listsPrefix);
+				if(!lists){
+					lists = [];
+				}
 				for(var i=0; i<lists.length; i++){
 					if(lists[i] == name){
 						alert('Already extists anote with the name: '+name+'. Opening note '+name+'.');
 						loadNote(name);
 						return false;
 					}
-					if(lists[i].toLowerCase().replace(/[^\w\d]/,'') == name.toLowerCase().replace(/[^\w\d]/,'')){
-						alert('Already extists anote with equivalent name, loading note '+name+'.');
-						loadNote(name);
-						return false;
-					}
 				}
-				createMenuItem(name);
-				loadNote(name);
+				if(!ignore_new_item){
+					createMenuItem(name);
+				}
 				lists.push(name)
-				localStorage.setItem('dasket-lists',JSON.stringify(lists));
+				localStorage.setItem(listsPrefix,JSON.stringify(lists));
 			}
 
 			function createMenuItem(note){
-					var el = document.createElement('li'), del;
-					del = note == 'Main' ? '' : '<span class="delete">&#10006;</span>';
-					el.innerHTML = '<span class="txt">'+note+'</span>' + del;
+					var el = document.createElement('li'), opc;
+					//opc = note == 'New list' ? '' : '<span class="delete">&#10006;</span>';
+					opc = '<span class="rename option">S</span><span class="delete option">&#10006;</span>';
+					el.innerHTML = '<span class="txt">'+note+'</span>' + opc;
+					el.draggable = true;
 					menulist.insertBefore(el, newnote);
+					applyDragHandlers(el);
 			}
 
-			function deleteList(name){
-				var lists = localStorage.getItemJSON('dasket-lists');
+			function deleteNote(name){
+				var lists = localStorage.getItemJSON(listsPrefix);
 				for(var i=0; i<lists.length; i++){
 					if(lists[i] == name){
 						lists.splice(i,1);
 					}
 				}
-				if(localStorage.getItem('dasket-lastlist')==name){
-					loadNote('Main');
+				localStorage.setItem(listsPrefix, JSON.stringify(lists));
+				localStorage.setItem(notesPrefix+name, '');
+				localStorage.removeItem(notesPrefix+name);
+				if(lists.length == 0){
+					loadNote();
+					return;
 				}
-				name = name.toLowerCase().replace(/[^\w\d]/,'');
-				localStorage.setItem('dasket-lists', JSON.stringify(lists));
-				localStorage.setItem('dasket-'+name+'content', '');
-				localStorage.removeItem('dasket-'+name+'content');
+				if(localStorage.getItem(lastPrefix) == name){
+					loadNote(lists[0]);
+					return;
+				}
 			}
 
-			/*textarea.addEventListener('keydown', function(evt){
-				if(evt.metaKey && evt.keyIdentifier== "U+005A"){
+			function cleanStylesAndSpaces(val){
+				return val.replace(/(style=(\")[^\"]*(\"))|(style=(\')[^\']*(\'))|^((\s)*(&nbsp;)*)/g,'').replace(/\s+/,' ');
+			}
+
+			textarea.addEventListener('keydown', function(evt){
+				if(evt.metaKey && evt.keyIdentifier== "U+0053"){
+					var status = document.getElementById('status');
+					saveContent();
 					evt.preventDefault();
-					
+					status.innerHTML = 'note saved as: '+localStorage.getItem(lastPrefix);
+					status.className = 'show';
+					setTimeout(function(){
+						status.className = 'show hide';
+					}, 200);
+
 				}
 				return false;
-			});*/
+			});
+
+
+
+			//MENU Drag N Drop
+			var elem, menuItems = document.querySelectorAll('#menu li:not(#newnote)');
+			
+			function handleDragStart(e) {
+			  this.addClassName('dragging');  // this / e.target is the source node.
+
+			  dragSrcEl = this;
+
+			  e.dataTransfer.effectAllowed = 'move';
+			  e.dataTransfer.setData('text/html', this.innerHTML);
+			}
+
+			function handleDragOver(e) {
+			  if (e.preventDefault) {
+			    e.preventDefault(); // Necessary. Allows us to drop.
+			  }
+
+			  e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+
+			  return false;
+			}
+
+			function handleDragEnter(e) {
+			  // this / e.target is the current hover target.
+			  if(!this.hasClassName('dragging'))
+			  	this.addClassName('over');
+			}
+
+			function handleDragLeave(e) {
+			  this.removeClassName('over');  // this / e.target is previous target element.
+			}
+
+			function handleDrop(e) {
+			  // this / e.target is current target element.
+
+			  if (e.stopPropagation) {
+			    e.stopPropagation(); // stops the browser from redirecting.
+			  }
+
+			  // Don't do anything if dropping the same column we're dragging.
+			  if (dragSrcEl != this) {
+			    // Set the source column's HTML to the HTML of the columnwe dropped on.
+			    //dragSrcEl.innerHTML = this.innerHTML;
+			    //this.innerHTML = e.dataTransfer.getData('text/html');
+			    var prev = menulist.removeChild(dragSrcEl),
+			    	prevTxt = prev.getElementsByClassName('txt')[0].innerHTML,
+			    	thisTxt = this.getElementsByClassName('txt')[0].innerHTML;
+			    menulist.insertBefore(prev, this);
+			    var lists  = localStorage.getItemJSON(listsPrefix);
+			    for(var i=0; i<lists.length; i++){
+			    	if(lists[i].replace(notesPrefix,'') === prevTxt){
+			    		lists.splice(i, 1);
+			    		break;
+			    	}
+			    }
+			    for(var i=0; i<lists.length; i++){
+			    	if(lists[i].replace(notesPrefix,'') === thisTxt){
+			    		lists.splice(i, 0, prevTxt);
+			    		break;
+			    	}
+			    }
+			    localStorage.setItem(listsPrefix, JSON.stringify(lists));
+			  }
+
+
+			  // See the section on the DataTransfer object.
+
+			  return false;
+			}
+
+			function handleDragEnd(e) {
+			  // this/e.target is the source node.
+
+			  [].forEach.call(document.querySelectorAll('#menu li:not(#newnote)'), function (col) {
+			    col.removeClassName('over');
+			    col.removeClassName('dragging');
+			  });
+			}
+
+			function applyDragHandlers(col) {
+			  col.addEventListener('dragstart', handleDragStart, false);
+			  col.addEventListener('dragenter', handleDragEnter, false);
+			  col.addEventListener('dragover', handleDragOver, false);
+			  col.addEventListener('dragleave', handleDragLeave, false);
+			  col.addEventListener('drop', handleDrop, false);
+			  col.addEventListener('dragend', handleDragEnd, false);
+			}
+
+			[].forEach.call(menuItems, applyDragHandlers);
+
 		</script>
 	</body>
 </html>
