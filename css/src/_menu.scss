@@ -1,0 +1,91 @@
+#menu{
+	position: absolute;
+	left: 6px;
+	top: 6px;
+	color: #AAA;
+	text-decoration: none;
+	padding-right: 10px;
+
+	.index{
+		position: relative;
+		width: auto;
+		z-index: 1;
+		font-family: symbol;
+		font-size: 18px;
+	}
+
+	&:hover{
+		color: #777;
+		cursor: default;
+		z-index: 3;
+		.index{
+			color: $blue;
+		}
+		.items{
+			/*height: 300px;*/
+			left: 0;
+		}
+	}
+	.items{
+		/*height: 0;*/
+		overflow: hidden;
+		list-style: none;
+		font-size: 12px;
+		top: 0;
+		margin: 0;
+		padding: 0;
+		-webkit-transition-property: all;
+		-webkit-transition-duration: 500ms;
+		background-color: #fff;
+		position: relative;
+		left: -1000px;
+		border: 1px solid #ddd;
+	}
+	li{
+		list-style: none;
+		padding: 5px 50px 5px 5px;
+		margin: 0;
+		font-family: sans-serif;
+		cursor: pointer;
+		position: relative;
+	}
+	.dragging{
+		cursor: move;
+		opacity: 0.5;
+	}
+	.option{
+		color: #ddd;
+	}
+	li:hover{
+		color: #fff;
+		background: $blue;
+
+		.option{
+			color: #fff;
+		}
+		.delete:hover{
+			color: $red;
+		}
+		.rename:hover{
+			color: $blue-dark;
+		}
+	} 
+	.delete{
+		position: absolute;
+		right: 5px;
+		padding: 5px;
+		top: 0;
+	}
+	.rename{
+		position: absolute;
+		right: 20px;
+		padding: 5px;
+		top: 0;
+		font-family: symbol;
+		font-size: 11px;
+	}
+
+	#newnote{
+		border-top: 1px solid #ddd;
+	}
+}

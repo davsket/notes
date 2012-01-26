@@ -4,234 +4,12 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<title i18n-content="appname">Note Editor</title>
 		<link rel="shortcut icon" href="http://davsket.me/notes/sicon.png">
-		<style type="text/css">
-		@font-face {
-		    font-family: 'symbol';
-		    src: url('font/websymbols-regular-webfont.eot');
-		    src: url('font/websymbols-regular-webfont.eot?#iefix') format('embedded-opentype'),
-		         url('font/websymbols-regular-webfont.woff') format('woff'),
-		         url('font/websymbols-regular-webfont.ttf') format('truetype'),
-		         url('font/websymbols-regular-webfont.svg#WebSymbolsRegular') format('svg');
-		    font-weight: normal;
-		    font-style: normal; 
-		}
+		<!-- <link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'> -->
+		<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+		<!-- <link href='http://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css'> -->
 
-		/* Erics reset */
-		/* http://meyerweb.com/eric/tools/css/reset/ 
-		   v2.0 | 20110126
-		   License: none (public domain)
-		*/
 
-		html, body, div, span, applet, object, iframe,
-		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-		a, abbr, acronym, address, big, cite, code,
-		del, dfn, em, img, ins, kbd, q, s, samp,
-		small, strike, strong, sub, sup, tt, var,
-		b, u, i, center,
-		dl, dt, dd, ol, ul, li,
-		fieldset, form, label, legend,
-		table, caption, tbody, tfoot, thead, tr, th, td,
-		article, aside, canvas, details, embed, 
-		figure, figcaption, footer, header, hgroup, 
-		menu, nav, output, ruby, section, summary,
-		time, mark, audio, video {
-			margin: 0;
-			padding: 0;
-			border: 0;
-			font-size: 100%;
-			font: inherit;
-			vertical-align: baseline;
-		}
-		/* HTML5 display-role reset for older browsers */
-		article, aside, details, figcaption, figure, 
-		footer, header, hgroup, menu, nav, section {
-			display: block;
-		}
-		body {
-			line-height: 1;
-		}
-		ol, ul {
-			list-style: none;
-		}
-		blockquote, q {
-			quotes: none;
-		}
-		blockquote:before, blockquote:after,
-		q:before, q:after {
-			content: '';
-			content: none;
-		}
-		table {
-			border-collapse: collapse;
-			border-spacing: 0;
-		}
-		/* End Reset */
-		[draggable] {
-			-webkit-user-select: none;
-			user-select: none;
-		}
-		html {
-			background:#000000;
-			padding: 0;
-			margin: 0;
-			height:100%;
-			width:100%;
-			background-color: white;
-			background-image: -webkit-linear-gradient(0deg, transparent 30px, #ABCED4 30px, #ABCED4 31px, transparent 31px), -webkit-linear-gradient(#EEE 0.05em, transparent 0.05em);
-			background-size: 100% 1.2em;
-			font-family: sans-serif;
-		}
-
-		body {
-			height:100%;
-			padding: 0 20px 0 45px;
-			margin: 0;
-		}
-
-		section {
-			cursor:text;
-			display:block;
-			height:100%;
-			padding-bottom:0px;
-			padding-top:0px;
-			width:100%;
-		}
-
-		#textarea{
-			box-sizing:border-box;
-			-webkit-box-sizing:border-box;
-			color:#888;
-			display:block;
-			font-family: sans-serif;
-			font-size:12pt;
-			line-height:19px;
-			margin: 0 auto;
-			outline:none;
-			padding: 0;
-			padding: 20px 0px 40px 0px;
-			position: relative;
-			width: 100%;
-			z-index: 1;
-			min-height: 100%;
-			height: auto;
-		}
-		#textarea img{
-			display: block;
-		}
-		#menu{
-			position: absolute;
-			left: 6px;
-			top: 6px;
-			color: #AAA;
-			text-decoration: none;
-			padding-right: 10px;
-		}
-		#menu .index{
-			position: relative;
-			width: auto;
-			z-index: 1;
-			font-family: symbol;
-			font-size: 18px;
-		}
-		#menu:hover{
-			color: #777;
-			cursor: default;
-			z-index: 3;
-		}
-		#menu:hover .index{
-			color: #ABCED4;
-		}
-		#menu:hover .items{
-			/*height: 300px;*/
-			left: 0;
-		}
-		#menu .items{
-			/*height: 0;*/
-			overflow: hidden;
-			list-style: none;
-			font-size: 12px;
-			top: 0;
-			margin: 0;
-			padding: 0;
-			-webkit-transition-property: all;
-			-webkit-transition-duration: 500ms;
-			background-color: #fff;
-			position: relative;
-			left: -1000px;
-			border: 1px solid #ddd;
-		}
-		#menu li{
-			list-style: none;
-			padding: 5px 50px 5px 5px;
-			margin: 0;
-			font-family: sans-serif;
-			cursor: pointer;
-			position: relative;
-		}
-		#menu li.dragging{
-			cursor: move;
-			opacity: 0.5;
-		}
-		#menu li.over{
-			border-top: 2em solid #ddd;
-		}
-		#menu .option{
-			color: #ddd;
-		}
-		#menu li:hover .option{
-			color: #fff;
-		}
-		#menu .delete{
-			position: absolute;
-			right: 5px;
-			padding: 5px;
-			top: 0;
-		}
-		#menu .rename{
-			position: absolute;
-			right: 20px;
-			padding: 5px;
-			top: 0;
-			font-family: symbol;
-			font-size: 11px;
-		}
-		#menu li:hover .delete:hover{
-			color: #ee8888;
-		}
-		#menu li:hover .rename:hover{
-			color: #6688aa;
-		}
-		#menu li:hover{
-			color: #fff;
-			background: #ABCED4;
-		}
-		#menu ul{
-			padding: 0;
-			margin: 0;
-		}
-		#status{
-			position: fixed;
-			right: 0;
-			bottom: 0;
-			padding: 10px;
-			color: #333;
-			background-color: #DDD;
-			opacity: 0;
-			-webkit-transition-property: opacity;
-			-webkit-transition-duration: 500ms;
-		}
-		#status.show{
-			opacity: 1;
-		}
-		#status.hide{
-			-webkit-transition-delay: 5s;
-			opacity: 0;
-		}
-		#newnote{
-			border-top: 1px solid #ddd;
-		}
-		</style>
-		
+		<link rel="stylesheet" type="text/css" href="css/screen.css" />
 	</head>
 	<body>
 		<div id="menu">
@@ -246,12 +24,21 @@
 		</div>
 		<div id="textarea" spellcheck="true" contenteditable ></div>
 		<div id="status" class='hide'></div>
+		<div id="modal">
+			<div class="back"></div>
+			<div class="container">
+				<div class="content">
+				</div>
+				<button class="close">x</button>
+			</div>
+		</div>
 		<script type="text/javascript">
 			var actualnote = '',
 				listsPrefix = 'notes/lists',
 				notesPrefix = 'notes/lists/',
 				lastPrefix = 'notes/lastlist',
-				clearTextarea = false;
+				clearTextarea = false,
+				modal = new Modal();
 
 			Storage.prototype.getItemJSON = function(item){
 				var val = this.getItem(item)||'null';
@@ -277,6 +64,11 @@
 			    this.className = c.replace(new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)", "g"), "");
 			  }
 			};
+
+			function getStyle(elem, styleProp)
+			{
+				return elem.currentStyle ? elem.currentStyle[styleProp] : window.getComputedStyle(elem,null).getPropertyValue(styleProp);
+			}
 			
 			initialize();
 
@@ -335,18 +127,17 @@
 			});
 
 			newnote.addEventListener('click', function(evt){
-				var name = window.prompt('New note name:');
-				evt.cancelBubble = true;
-				evt.preventDefault();
-				if(name){
-					createNote(name);
-					loadNote(name);
-				}
+				modal.prompt('New note name:', function(name){
+					if(name){
+						createNote(name);
+						loadNote(name);
+					}
+				});
 			});
 
 			menulist.addEventListener('click', function(evt){
 				var tn = evt.target.tagName, name, bool;
-				if(tn == 'LI'){
+				if(tn == 'LI' && evt.target.getElementsByClassName('txt').length){
 					loadNote(evt.target.getElementsByClassName('txt')[0].innerHTML);
 				}
 				else if(tn == 'SPAN' && !/option/.test(evt.target.className)){
@@ -354,33 +145,36 @@
 				}
 				else if(tn == 'SPAN' && /delete/.test(evt.target.className)){
 					name = evt.target.parentElement.getElementsByClassName('txt')[0].innerHTML;
-					bool = window.confirm('Are you sure you want to delete the note: '+name+'?');
-					if(!bool) return false;
-					//if(name == 'Main'){
-					//	alert('You can\'t delete this note.');
-					//	return false;
-					//}
-					else{
-						menulist.removeChild(evt.target.parentElement);
-						deleteNote(name);
-					}
+					modal.confirm('Are you sure you want to delete the note: '+name+'?', function(bool){
+						if(!bool){
+							return false;
+						} 
+						else{
+							menulist.removeChild(evt.target.parentElement);
+							deleteNote(name);
+						}
+					});
+					
 				}
 				else if(tn == 'SPAN' && /rename/.test(evt.target.className)){
 					var text = evt.target.parentElement.getElementsByClassName('txt')[0],
-						oldname = text.innerHTML,
-						name = window.prompt('New note name:');
-					if(!name){
-						return false;
-					} 
-					else{
-						text.innerHTML = name;
-						localStorage.setItem(notesPrefix+name, localStorage.getItem(notesPrefix+oldname));
-						newlists = localStorage.getItemJSON(listsPrefix);
-						newlists.push(name);
-						localStorage.setItem(listsPrefix, JSON.stringify(newlists));
-						deleteNote(oldname);
-						loadNote(name);
-					}
+						oldname = text.innerHTML;
+					modal.prompt('New name:', (function(text, oldname){
+						return function(name){
+							if(!name){
+								return false;
+							} 
+							else{
+								text.innerHTML = name;
+								localStorage.setItem(notesPrefix+name, localStorage.getItem(notesPrefix+oldname));
+								newlists = localStorage.getItemJSON(listsPrefix);
+								newlists.push(name);
+								localStorage.setItem(listsPrefix, JSON.stringify(newlists));
+								deleteNote(oldname);
+								loadNote(name);
+							}
+						}
+					})(text, oldname));
 				}
 			});
 
@@ -574,6 +368,127 @@
 
 			[].forEach.call(menuItems, applyDragHandlers);
 
+
+
+			//Modal
+			function Modal(content, closable){
+				var modal = document.getElementById('modal'),
+					closeB = modal.getElementsByClassName('close')[0],
+					contentW = modal.getElementsByClassName('content')[0],
+					back = modal.getElementsByClassName('back')[0];
+				this.show = function(){
+					modal.className = 'show';
+				}
+				this.hide = function(){
+					modal.className = '';
+				}
+				this.setContent = function(content){
+					contentW.innerHTML = '';
+					if(typeof content == 'object'){
+						contentW.appendChild(content);
+					}else if(typeof content == 'string'){
+						contentW.innerHTML = content;
+					}
+				}
+				this.setClosable = function(closable){
+					closeB.style.display = closable ? 'block' : 'none';
+				}
+
+				//setup
+				this.setContent(content);
+				this.setClosable(closable);
+				closeB.onclick = (function(modal){
+					return function(){modal.hide();};
+					})(this);
+				
+
+				this.confirm = function(question, callback){
+					var wrapper = document.createElement('div'),
+						message = document.createElement('div'),
+						ok = document.createElement('button'),
+						cancel = document.createElement('button');
+					wrapper.className = 'prompt';
+					message.className = 'message';
+					ok.className = 'ok';
+					cancel.className = 'cancel';
+					
+					message.innerHTML = question;
+					ok.innerHTML = 'ok';
+					cancel.innerHTML = 'cancel';
+
+					ok.onclick = (function(modal, callback){
+						return function(){
+							modal.hide();
+							callback(true);
+						}
+					})(this, callback);
+
+					cancel.onclick = (function(modal, callback){
+						return function(){
+							modal.hide();
+							callback(false);
+						}
+					})(this, callback);
+
+					this.setClosable(false);
+
+					contentW.innerHTML = '';
+					wrapper.appendChild(message);
+					wrapper.appendChild(ok);
+					wrapper.appendChild(cancel);
+					contentW.appendChild(wrapper);
+
+					this.show();
+
+					ok.focus();
+				}
+
+
+				this.prompt = function(question, callback){
+					var wrapper = document.createElement('div'),
+						message = document.createElement('div'),
+						ok = document.createElement('button'),
+						input = document.createElement('input'),
+						cancel = document.createElement('button');
+					wrapper.className = 'prompt';
+					message.className = 'message';
+					ok.className = 'ok';
+					cancel.className = 'cancel';
+					input.className = 'text';
+					
+					message.innerHTML = question;
+					ok.innerHTML = 'ok';
+					cancel.innerHTML = 'cancel';
+
+					ok.onclick = (function(modal, callback, input){
+						return function(){
+							modal.hide();
+							callback(input.value);
+						}
+					})(this, callback, input);
+
+					cancel.onclick = (function(modal, callback){
+						return function(){
+							modal.hide();
+							callback(null);
+						}
+					})(this, callback);
+
+					this.setClosable(false);
+
+					contentW.innerHTML = '';
+					wrapper.appendChild(message);
+					wrapper.appendChild(input);
+					wrapper.appendChild(document.createElement('br'));
+					wrapper.appendChild(ok);
+					wrapper.appendChild(cancel);
+					contentW.appendChild(wrapper);
+
+					this.show();
+
+					input.focus();
+				}
+			}
 		</script>
 	</body>
 </html>

@@ -1,0 +1,65 @@
+[draggable] {
+	-webkit-user-select: none;
+	user-select: none;
+}
+html {
+	font-family: $font;
+	font-size: 16px;
+	background:#000000;
+	padding: 0;
+	margin: 0;
+	height:100%;
+	width:100%;
+	background-color: white;
+	background-image: 	-webkit-linear-gradient(0deg, transparent 30px, #ABCED4 30px, #ABCED4 31px, transparent 31px), 
+						-webkit-linear-gradient(#EEE 0.05em, transparent 0.05em);
+	background-size: 100% 1.6em;
+}
+
+body {
+	height:100%;
+	padding: 0 20px 0 45px;
+	margin: 0;
+}
+
+#textarea{
+	box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	color:#888;
+	display:block;
+	font-family: $font;
+	margin: 0 auto;
+	outline:none;
+	padding: 0;
+	padding: 1.6em 0px 2em 0px;
+	position: relative;
+	width: 100%;
+	z-index: 1;
+	min-height: 100%;
+	height: auto;
+	line-height: 1.6em;
+
+	img{
+		display: block;
+	}
+}
+		
+#status{
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	padding: 10px;
+	color: #333;
+	background-color: #DDD;
+	opacity: 0;
+	-webkit-transition-property: opacity;
+	-webkit-transition-duration: 500ms;
+	
+	&.show{
+		opacity: 1;
+	}
+	&.hide{
+		-webkit-transition-delay: 5s;
+		opacity: 0;
+	}
+}
