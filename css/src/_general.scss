@@ -15,6 +15,9 @@ html {
 						-webkit-linear-gradient(#EEE 0.05em, transparent 0.05em);
 	background-size: 100% 1.6em;
 }
+html::-webkit-scrollbar {
+	display:none;
+}
 
 body {
 	height:100%;
@@ -31,7 +34,7 @@ body {
 	margin: 0 auto;
 	outline:none;
 	padding: 0;
-	padding: 1.6em 0px 2em 0px;
+	padding: 0;
 	position: relative;
 	width: 100%;
 	z-index: 1;
@@ -48,12 +51,14 @@ body {
 	position: fixed;
 	right: 0;
 	bottom: 0;
-	padding: 10px;
+	padding: 10px 15px;;
 	color: #333;
 	background-color: #DDD;
+	font-size: 14px;
 	opacity: 0;
 	-webkit-transition-property: opacity;
 	-webkit-transition-duration: 500ms;
+	z-index: 99;
 	
 	&.show{
 		opacity: 1;

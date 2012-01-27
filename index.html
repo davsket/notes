@@ -22,7 +22,7 @@
 				</ul>
 			</div>
 		</div>
-		<div id="textarea" spellcheck="true" contenteditable ></div>
+		<iframe id="textarea" spellcheck="true" ></iframe>
 		<div id="status" class='hide'></div>
 		<div id="modal">
 			<div class="back"></div>
@@ -32,22 +32,13 @@
 				<button class="close">x</button>
 			</div>
 		</div>
+		<script type="text/javascript" src="js/menuDnD.js"></script>
+		<script type="text/javascript" src="js/modal.js"></script>
+		<script type="text/javascript" src="js/keyEvents.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<script type="text/javascript">
-			var actualnote = '',
-				listsPrefix = 'notes/lists',
-				notesPrefix = 'notes/lists/',
-				lastPrefix = 'notes/lastlist',
-				clearTextarea = false,
-				modal = new Modal();
-
-			Storage.prototype.getItemJSON = function(item){
-				var val = this.getItem(item)||'null';
-				try{
-					return JSON.parse(val);
-				}catch(e){
-					return val;
-				}
-			}
+			
+			
 			Element.prototype.hasClassName = function(name) {
 			  return new RegExp("(?:^|\\s+)" + name + "(?:\\s+|$)").test(this.className);
 			};
@@ -73,58 +64,58 @@
 			initialize();
 
 			function saveContent(){
-				localStorage.setItem(notesPrefix+localStorage.getItem(lastPrefix), textarea.innerHTML);
-				if(clearTextarea){
-					clearTextarea = false;
-					textarea.innerHTML = cleanStylesAndSpaces(textarea.innerHTML);
-				}
+				localStorage.setItem(notesPrefix+localStorage.getItem(lastPrefix), textarea.document.body.innerHTML);
+				// if(clearTextarea){
+				// 	clearTextarea = false;
+				// 	textarea.document.body.innerHTML = cleanStylesAndSpaces(textarea.document.body.innerHTML);
+				// }
 			}
 
-			textarea.addEventListener('keyup', saveContent);
-			textarea.addEventListener('paste', function(evt){
-				clearTextarea = true;
-				saveContent();
-				clearTextarea = true;
-			});
+			// textarea.addEventListener('keyup', saveContent);
+			// textarea.addEventListener('paste', function(evt){
+			// 	clearTextarea = true;
+			// 	saveContent();
+			// 	clearTextarea = true;
+			// });
 
 			function cancel(evt){
 				evt.preventDefault();
 			    evt.dataTransfer.dropEffect = 'copy';
 				return false;
 			}
-			textarea.addEventListener('dragenter', cancel);
-			textarea.addEventListener('dragover', cancel);
+			// textarea.addEventListener('dragenter', cancel);
+			// textarea.addEventListener('dragover', cancel);
 
-			textarea.addEventListener('drop', function(evt){
-				evt.preventDefault();
-				//console.log(evt.dataTransfer);
+			// textarea.addEventListener('drop', function(evt){
+			// 	evt.preventDefault();
+			// 	//console.log(evt.dataTransfer);
 
 				
-				if (evt.dataTransfer.types){
-					//console.log(evt.dataTransfer.types);
-				    [].forEach.call(evt.dataTransfer.types, function (type) {
-				    	if(type == 'text/html'){
-				    		evt.target.innerHTML += cleanStylesAndSpaces(evt.dataTransfer.getData(type));
-				    	}
-				    	else if(type == 'Files'){
-				    		var file = evt.dataTransfer.files[0],
-								reader = new FileReader();
-							if(file.type.match(/image/)){
-								reader.onload = function (event) {
-									evt.target.innerHTML += '<img src="'+event.target.result+'" />';
-								};
-							}
-							reader.readAsDataURL(file);
-							soma = file;
-				    	}
-				    });
+			// 	if (evt.dataTransfer.types){
+			// 		//console.log(evt.dataTransfer.types);
+			// 	    [].forEach.call(evt.dataTransfer.types, function (type) {
+			// 	    	if(type == 'text/html'){
+			// 	    		evt.target.innerHTML += cleanStylesAndSpaces(evt.dataTransfer.getData(type));
+			// 	    	}
+			// 	    	else if(type == 'Files'){
+			// 	    		var file = evt.dataTransfer.files[0],
+			// 					reader = new FileReader();
+			// 				if(file.type.match(/image/)){
+			// 					reader.onload = function (event) {
+			// 						evt.target.innerHTML += '<img src="'+event.target.result+'" />';
+			// 					};
+			// 				}
+			// 				reader.readAsDataURL(file);
+			// 				soma = file;
+			// 	    	}
+			// 	    });
 				    
-				} else {
-					evt.target.innerHTML = evt.dataTransfer.getData('Text');
-				}
+			// 	} else {
+			// 		evt.target.innerHTML = evt.dataTransfer.getData('Text');
+			// 	}
 
-				return false;
-			});
+			// 	return false;
+			// });
 
 			newnote.addEventListener('click', function(evt){
 				modal.prompt('New note name:', function(name){
@@ -199,13 +190,14 @@
 					createNote(noteName);
 				}
 				localStorage.setItem(lastPrefix, noteName);
-				textarea.innerHTML = localStorage.getItemJSON(notesPrefix+noteName) || 'Write something...';
+				textarea.document.body.innerHTML = localStorage.getItemJSON(notesPrefix+noteName) || 'Write something...';
 
-				//length = textarea.innerHTML.length;
+				//length = textarea.document.body.innerHTML.length;
 				//textarea.scrollTop = textarea.scrollHeight;
 				//textarea.setSelectionRange(length, length);
-				textarea.focus();
+				textarea.document.body.focus();
 				document.title = 'Editing ' + noteName;
+				resizeIframe();
 			}
 
 			function createNote(name, ignore_new_item){
@@ -261,233 +253,13 @@
 				return val.replace(/(style=(\")[^\"]*(\"))|(style=(\')[^\']*(\'))|^((\s)*(&nbsp;)*)/g,'').replace(/\s+/,' ');
 			}
 
-			textarea.addEventListener('keydown', function(evt){
-				if(evt.metaKey && evt.keyIdentifier== "U+0053"){
-					var status = document.getElementById('status');
-					saveContent();
-					evt.preventDefault();
-					status.innerHTML = 'note saved as: '+localStorage.getItem(lastPrefix);
-					status.className = 'show';
-					setTimeout(function(){
-						status.className = 'show hide';
-					}, 200);
-
-				}
-				return false;
-			});
-
-
-
-			//MENU Drag N Drop
-			var elem, menuItems = document.querySelectorAll('#menu li:not(#newnote)');
-			
-			function handleDragStart(e) {
-			  this.addClassName('dragging');  // this / e.target is the source node.
-
-			  dragSrcEl = this;
-
-			  e.dataTransfer.effectAllowed = 'move';
-			  e.dataTransfer.setData('text/html', this.innerHTML);
-			}
-
-			function handleDragOver(e) {
-			  if (e.preventDefault) {
-			    e.preventDefault(); // Necessary. Allows us to drop.
-			  }
-
-			  e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
-
-			  return false;
-			}
-
-			function handleDragEnter(e) {
-			  // this / e.target is the current hover target.
-			  if(!this.hasClassName('dragging'))
-			  	this.addClassName('over');
-			}
-
-			function handleDragLeave(e) {
-			  this.removeClassName('over');  // this / e.target is previous target element.
-			}
-
-			function handleDrop(e) {
-			  // this / e.target is current target element.
-
-			  if (e.stopPropagation) {
-			    e.stopPropagation(); // stops the browser from redirecting.
-			  }
-
-			  // Don't do anything if dropping the same column we're dragging.
-			  if (dragSrcEl != this) {
-			    // Set the source column's HTML to the HTML of the columnwe dropped on.
-			    //dragSrcEl.innerHTML = this.innerHTML;
-			    //this.innerHTML = e.dataTransfer.getData('text/html');
-			    var prev = menulist.removeChild(dragSrcEl),
-			    	prevTxt = prev.getElementsByClassName('txt')[0].innerHTML,
-			    	thisTxt = this.getElementsByClassName('txt')[0].innerHTML;
-			    menulist.insertBefore(prev, this);
-			    var lists  = localStorage.getItemJSON(listsPrefix);
-			    for(var i=0; i<lists.length; i++){
-			    	if(lists[i].replace(notesPrefix,'') === prevTxt){
-			    		lists.splice(i, 1);
-			    		break;
-			    	}
-			    }
-			    for(var i=0; i<lists.length; i++){
-			    	if(lists[i].replace(notesPrefix,'') === thisTxt){
-			    		lists.splice(i, 0, prevTxt);
-			    		break;
-			    	}
-			    }
-			    localStorage.setItem(listsPrefix, JSON.stringify(lists));
-			  }
-
-
-			  // See the section on the DataTransfer object.
-
-			  return false;
-			}
-
-			function handleDragEnd(e) {
-			  // this/e.target is the source node.
-
-			  [].forEach.call(document.querySelectorAll('#menu li:not(#newnote)'), function (col) {
-			    col.removeClassName('over');
-			    col.removeClassName('dragging');
-			  });
-			}
-
-			function applyDragHandlers(col) {
-			  col.addEventListener('dragstart', handleDragStart, false);
-			  col.addEventListener('dragenter', handleDragEnter, false);
-			  col.addEventListener('dragover', handleDragOver, false);
-			  col.addEventListener('dragleave', handleDragLeave, false);
-			  col.addEventListener('drop', handleDrop, false);
-			  col.addEventListener('dragend', handleDragEnd, false);
-			}
-
-			[].forEach.call(menuItems, applyDragHandlers);
-
-
-
-			//Modal
-			function Modal(content, closable){
-				var modal = document.getElementById('modal'),
-					closeB = modal.getElementsByClassName('close')[0],
-					contentW = modal.getElementsByClassName('content')[0],
-					back = modal.getElementsByClassName('back')[0];
-				this.show = function(){
-					modal.className = 'show';
-				}
-				this.hide = function(){
-					modal.className = '';
-				}
-				this.setContent = function(content){
-					contentW.innerHTML = '';
-					if(typeof content == 'object'){
-						contentW.appendChild(content);
-					}else if(typeof content == 'string'){
-						contentW.innerHTML = content;
-					}
-				}
-				this.setClosable = function(closable){
-					closeB.style.display = closable ? 'block' : 'none';
-				}
-
-				//setup
-				this.setContent(content);
-				this.setClosable(closable);
-				closeB.onclick = (function(modal){
-					return function(){modal.hide();};
-					})(this);
-				
-
-				this.confirm = function(question, callback){
-					var wrapper = document.createElement('div'),
-						message = document.createElement('div'),
-						ok = document.createElement('button'),
-						cancel = document.createElement('button');
-					wrapper.className = 'prompt';
-					message.className = 'message';
-					ok.className = 'ok';
-					cancel.className = 'cancel';
-					
-					message.innerHTML = question;
-					ok.innerHTML = 'ok';
-					cancel.innerHTML = 'cancel';
-
-					ok.onclick = (function(modal, callback){
-						return function(){
-							modal.hide();
-							callback(true);
-						}
-					})(this, callback);
-
-					cancel.onclick = (function(modal, callback){
-						return function(){
-							modal.hide();
-							callback(false);
-						}
-					})(this, callback);
-
-					this.setClosable(false);
-
-					contentW.innerHTML = '';
-					wrapper.appendChild(message);
-					wrapper.appendChild(ok);
-					wrapper.appendChild(cancel);
-					contentW.appendChild(wrapper);
-
-					this.show();
-
-					ok.focus();
-				}
-
-
-				this.prompt = function(question, callback){
-					var wrapper = document.createElement('div'),
-						message = document.createElement('div'),
-						ok = document.createElement('button'),
-						input = document.createElement('input'),
-						cancel = document.createElement('button');
-					wrapper.className = 'prompt';
-					message.className = 'message';
-					ok.className = 'ok';
-					cancel.className = 'cancel';
-					input.className = 'text';
-					
-					message.innerHTML = question;
-					ok.innerHTML = 'ok';
-					cancel.innerHTML = 'cancel';
-
-					ok.onclick = (function(modal, callback, input){
-						return function(){
-							modal.hide();
-							callback(input.value);
-						}
-					})(this, callback, input);
-
-					cancel.onclick = (function(modal, callback){
-						return function(){
-							modal.hide();
-							callback(null);
-						}
-					})(this, callback);
-
-					this.setClosable(false);
-
-					contentW.innerHTML = '';
-					wrapper.appendChild(message);
-					wrapper.appendChild(input);
-					wrapper.appendChild(document.createElement('br'));
-					wrapper.appendChild(ok);
-					wrapper.appendChild(cancel);
-					contentW.appendChild(wrapper);
-
-					this.show();
-
-					input.focus();
-				}
+			function notifySaved(){
+				var status = document.getElementById('status');
+				status.innerHTML = 'note saved as: '+localStorage.getItem(lastPrefix);
+				status.className = 'show';
+				setTimeout(function(){
+					status.className = 'show hide';
+				}, 200);
 			}
 		</script>
 	</body>
