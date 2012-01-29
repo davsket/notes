@@ -54,8 +54,8 @@ textarea.addEventListener('drop', function(evt){
 				reader.onload = function (event) {
 					console.log(event.target.result);
 				};
-				reader.readAsDataURL(file);
-				// reader.readAsText(file);
+				// reader.readAsDataURL(file);
+				reader.readAsText(file);
 				console.log('reading..');
 	    	}
 	    });
