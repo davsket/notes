@@ -51,6 +51,8 @@ textarea.addEventListener('drop', function(evt){
 			if(type == 'Files'){
 	    		var file = evt.dataTransfer.files[0],
 					reader = new FileReader();
+				console.log(file.type);
+				console.log(file);
 				reader.onload = function (event) {
 					console.log(event.target.result);
 				};
