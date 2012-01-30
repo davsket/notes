@@ -16,7 +16,7 @@ fonts.setAttribute('href', 'http://fonts.googleapis.com/css?family=Droid+Sans');
 fonts.setAttribute('rel', 'stylesheet');
 fonts.setAttribute('type', 'text/css');
 	
-style.setAttribute('href', 'css/iframe_doc.css?a='+(new Date().getTime()));
+style.setAttribute('href', 'css/iframe_doc.css');
 style.setAttribute('rel', 'stylesheet');
 style.setAttribute('type', 'text/css');
 

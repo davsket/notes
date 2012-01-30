@@ -26,48 +26,36 @@ textarea.addEventListener('dragenter', cancel);
 textarea.addEventListener('dragover', cancel);
 
 textarea.addEventListener('drop', function(evt){
-	// evt.preventDefault();
-	//console.log(evt.dataTransfer);
-
-	
+	evt.preventDefault();
 	if (evt.dataTransfer.types){
-		//console.log(evt.dataTransfer.types);
-	    [].forEach.call(evt.dataTransfer.types, function (type) {
-	   //  	if(type == 'text/html'){
-	   //  		evt.target.innerHTML += cleanStylesAndSpaces(evt.dataTransfer.getData(type));
-	   //  	}
-	   //  	else if(type == 'Files'){
-	   //  		var file = evt.dataTransfer.files[0],
-				// 	reader = new FileReader();
-				// if(file.type.match(/image/)){
-				// 	reader.onload = function (event) {
-				// 		evt.target.innerHTML += '<img src="'+event.target.result+'" />';
-				// 	};
-				// }
-				// reader.readAsDataURL(file);
-				// soma = file;
-	   //  	}
-			console.log(type);
-			if(type == 'Files'){
-	    		var file = evt.dataTransfer.files[0],
-					reader = new FileReader();
-				console.log(file.type);
-				console.log(file);
-				reader.onload = function (event) {
-					console.log(event.target.result);
-				};
-				// reader.readAsDataURL(file);
-				reader.readAsText(file);
-				console.log('reading..');
-	    	}
-	    });
-	    
+		var type = evt.dataTransfer.types[0];
+		if(type == 'Files'){
+    		var file = evt.dataTransfer.files[0],
+				reader = new FileReader();
+			if(file.type.match(/text/)){
+				modal.confirm('Do you want to load this file as a new note with name: '+file.name+'?', function(res){
+					reader.onload = function (event) {
+						if(res){
+							createNote(file.name);
+							localStorage.setItem(notesPrefix+file.name,'<div>'+event.target.result+'</div>');
+							loadNote(file.name);
+						}else{
+							textarea.document.body.innerHTML+='<div>'+event.target.result+'</div>';
+							saveContent();
+						}
+					};
+					reader.readAsText(file);
+				});
+			}
+    	}
+    	else{
+    		textarea.document.execCommand('InsertHTML', false, evt.dataTransfer.getData(type));
+    	}
 	}
-	// else {
-	// 	evt.target.innerHTML = evt.dataTransfer.getData('Text');
-	// }
-
-	// return false;
+	else {
+		textarea.document.execCommand('InsertHTML', false, evt.dataTransfer.getData(type));
+	}
+	return false;
 });
 
 newnote.addEventListener('click', function(evt){
