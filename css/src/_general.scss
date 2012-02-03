@@ -11,17 +11,21 @@ html {
 	height:100%;
 	width:100%;
 	background-color: white;
-	background-image: 	-webkit-linear-gradient(0deg, transparent 30px, #ABCED4 30px, #ABCED4 31px, transparent 31px), 
-						-webkit-linear-gradient(#EEE 0.05em, transparent 0.05em);
-	background-size: 100% 1.6em;
+// 	background-image: 	-webkit-linear-gradient(0deg, transparent 30px, #ABCED4 30px, #ABCED4 31px, transparent 31px), 
+// 						-webkit-linear-gradient(#EEE 0.05em, transparent 0.05em);
+// 	background-size: 100% 1.6em;
+// 
 }
 html::-webkit-scrollbar {
+	display:none;
+}
+iframe::-webkit-scrollbar {
 	display:none;
 }
 
 body {
 	height:100%;
-	padding: 0 20px 0 45px;
+	padding: 0 0 0 32px;
 	margin: 0;
 }
 

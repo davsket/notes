@@ -78,7 +78,7 @@ html::-webkit-scrollbar {
 
 /* line 7, src/iframe_doc.scss */
 body {
-  color: #888;
+  color: #777;
   font-family: "Droid Sans", sans-serif;
   font-size: 16px;
   margin: 0 auto;
@@ -91,22 +91,66 @@ body {
   height: auto;
   line-height: 1.6em;
   word-wrap: break-word;
-  padding: 1.6em 0 3.2em;
-  box-sizing: border-box;
+  padding: 1.6em !important;
+  background-image: -webkit-linear-gradient(#eeeeee 0.05em, transparent 0.05em) !important;
+  background-size: 100% 1.6em;
+  box-sizing: border-box !important;
 }
-/* line 24, src/iframe_doc.scss */
+/* line 26, src/iframe_doc.scss */
 body img {
   display: block;
   max-height: 100%;
   max-width: 100%;
 }
 
-/* line 32, src/iframe_doc.scss */
+/* line 34, src/iframe_doc.scss */
 * {
   font-family: "Droid Sans", sans-serif !important;
   background: transparent !important;
   font-size: 16px !important;
-  color: #888 !important;
+  color: #777 !important;
   padding: 0 !important;
-  margin: 0!important;
+  margin-right: 0!important;
+  margin-top: 0!important;
+  margin-bottom: 0!important;
+  border: none !important;
+  font-weight: normal !important;
+  line-height: 1.6em !important;
+}
+
+/* line 47, src/iframe_doc.scss */
+strong, b {
+  font-weight: bold !important;
+}
+
+/* line 50, src/iframe_doc.scss */
+u {
+  text-decoration: underline;
+}
+
+/* line 53, src/iframe_doc.scss */
+i {
+  font-style: italic;
+}
+
+/* line 56, src/iframe_doc.scss */
+ul {
+  list-style: disc !important;
+  list-style-position: inside !important;
+}
+/* line 59, src/iframe_doc.scss */
+ul li {
+  list-style: disc !important;
+  list-style-position: inside !important;
+}
+
+/* line 64, src/iframe_doc.scss */
+ol {
+  list-style: decimal !important;
+  list-style-position: inside !important;
+}
+/* line 67, src/iframe_doc.scss */
+ol li {
+  list-style: decimal !important;
+  list-style-position: inside !important;
 }

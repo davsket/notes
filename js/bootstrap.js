@@ -23,11 +23,4 @@ style.setAttribute('type', 'text/css');
 textarea.document.head.appendChild(fonts);
 textarea.document.head.appendChild(style);
 
-Storage.prototype.getItemJSON = function(item){
-	var val = this.getItem(item)||'null';
-	try{
-		return JSON.parse(val);
-	}catch(e){
-		return val;
-	}
-}
+document.getElementById('textarea').style.display = 'block';

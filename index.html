@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
-<!-- <html xmlns="http://www.w3.org/1999/xhtml"> -->
-<html xmlns="http://www.w3.org/1999/xhtml" manifest="manifest.appcache">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- <html xmlns="http://www.w3.org/1999/xhtml" manifest="manifest.appcache"> -->
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<title i18n-content="appname">Note Editor</title>
@@ -13,17 +13,19 @@
 		<link rel="stylesheet" type="text/css" href="css/screen.css" />
 	</head>
 	<body>
-		<div id="menu">
-			<span href="#" class="index">²</span>
-			<div class="items">
-				<ul id="menulist">
-					<li id="newnote">
-						New Note
-					</li>
-				</ul>
-			</div>
-		</div>
-		<iframe id="textarea" spellcheck="true" ></iframe>
+		<ul id="menu">
+			<li>
+				<span href="#" class="index">a</span>
+				<div class="items">
+					<ul id="menulist">
+						<li id="newnote">
+							Add Note <span class="option">&#10006;</span>
+						</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+		<iframe id="textarea" spellcheck="true" style="display: none;"></iframe>
 		<div id="status" class='hide'></div>
 		<div id="modal">
 			<div class="back"></div>

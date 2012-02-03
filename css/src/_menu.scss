@@ -1,91 +1,130 @@
 #menu{
-	position: absolute;
-	left: 6px;
-	top: 6px;
-	color: #AAA;
+	position: fixed;
 	text-decoration: none;
-	padding-right: 10px;
+	padding: 0;
+	width: 32px;
+	background: $bg;
+	top: 0;
+	left: 0;
+	height: 100%;
+	text-align: center;
+	padding: 0;
+	z-index: 9;
 
-	.index{
+	li{
 		position: relative;
-		width: auto;
-		z-index: 1;
-		font-family: symbol;
-		font-size: 18px;
-	}
 
-	&:hover{
-		color: #777;
-		cursor: default;
-		z-index: 3;
 		.index{
-			color: $blue;
+			position: relative;
+			z-index: 1;
+			font-family: symbol;
+			font-size: 18px;
+			color: $inactive;
+			display: inline-block;
+			padding-top: 7px;
 		}
 		.items{
-			/*height: 300px;*/
-			left: 0;
-		}
-	}
-	.items{
-		/*height: 0;*/
-		overflow: hidden;
-		list-style: none;
-		font-size: 12px;
-		top: 0;
-		margin: 0;
-		padding: 0;
-		-webkit-transition-property: all;
-		-webkit-transition-duration: 500ms;
-		background-color: #fff;
-		position: relative;
-		left: -1000px;
-		border: 1px solid #ddd;
-	}
-	li{
-		list-style: none;
-		padding: 5px 50px 5px 5px;
-		margin: 0;
-		font-family: sans-serif;
-		cursor: pointer;
-		position: relative;
-	}
-	.dragging{
-		cursor: move;
-		opacity: 0.5;
-	}
-	.option{
-		color: #ddd;
-	}
-	li:hover{
-		color: #fff;
-		background: $blue;
+			overflow: hidden;
+			font-size: 13px;
+			top: -1000px;
+			background-color: #fff;
+			position: absolute;
+			border: 1px solid #ddd;
+			z-index: 9;
+			color: #777;
+			width: 160px;
+			left: 100%;
+			text-align: left;
+			opacity: 0;
+			top: 0px;
+			height: 0;
 
+			-webkit-transition-property: all;
+			-webkit-transition-duration: 300ms;
+
+			// -webkit-transform-origin: 0 0;
+			// -webkit-transform: rotate(-90deg);
+		}
+
+		&:hover{
+			cursor: default;
+			z-index: 3;
+			.index{
+				color: $active;
+			}
+			.items{
+				/*height: 300px;*/
+				opacity: 1;
+				height: auto;
+				//-webkit-transform: rotate(0deg);
+			}
+		}
+		
+		li{
+			list-style: none;
+			padding: 5px 50px 5px 5px;
+			margin: 0;
+			font-family: sans-serif;
+			cursor: pointer;
+			position: relative;
+			width: 160px;
+			@include box-sizing(border-box);
+		}
+		.dragging{
+			cursor: move;
+			opacity: 0.5;
+		}
 		.option{
+			color: #ddd;
+		}
+		li:hover{
 			color: #fff;
+			background: $blue;
+
+			.option{
+				color: #fff;
+			}
+			.delete:hover{
+				color: $red;
+			}
+			.rename:hover{
+				color: $blue-dark;
+			}
+		} 
+		.delete{
+			position: absolute;
+			right: 5px;
+			padding: 5px;
+			top: 0;
 		}
-		.delete:hover{
-			color: $red;
+		.rename{
+			position: absolute;
+			right: 20px;
+			padding: 5px;
+			top: 0;
+			font-family: symbol;
+			font-size: 11px;
 		}
-		.rename:hover{
-			color: $blue-dark;
+
+		#newnote{
+			//border-top: 1px solid #ddd;
+			background: #aaa;
+			color: white;
+			&:hover{
+				background: $blue;
+			}
+			.option{
+				position: absolute;
+				right: 5px;
+				padding: 5px;
+				top: 0;
+				color: white;
+				-webkit-transform-origin: 50% 50%;
+				-webkit-transform: rotate(45deg);
+			}
+		}
+		.over{
+			border-top: 1.8em solid #ccc;
 		}
 	} 
-	.delete{
-		position: absolute;
-		right: 5px;
-		padding: 5px;
-		top: 0;
-	}
-	.rename{
-		position: absolute;
-		right: 20px;
-		padding: 5px;
-		top: 0;
-		font-family: symbol;
-		font-size: 11px;
-	}
-
-	#newnote{
-		border-top: 1px solid #ddd;
-	}
 }

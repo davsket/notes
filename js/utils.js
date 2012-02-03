@@ -15,7 +15,16 @@ Element.prototype.removeClassName = function(name) {
   }
 };
 
+Storage.prototype.getItemJSON = function(item){
+	var val = this.getItem(item)||'null';
+	try{
+		return JSON.parse(val);
+	}catch(e){
+		return val;
+	}
+};
+
 function getStyle(elem, styleProp)
 {
 	return elem.currentStyle ? elem.currentStyle[styleProp] : window.getComputedStyle(elem,null).getPropertyValue(styleProp);
-}
+};

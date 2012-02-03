@@ -91,23 +91,26 @@ html {
   height: 100%;
   width: 100%;
   background-color: white;
-  background-image: -webkit-linear-gradient(0deg, transparent 30px, #abced4 30px, #abced4 31px, transparent 31px), -webkit-linear-gradient(#eeeeee 0.05em, transparent 0.05em);
-  background-size: 100% 1.6em;
 }
 
-/* line 18, src/_general.scss */
+/* line 19, src/_general.scss */
 html::-webkit-scrollbar {
   display: none;
 }
 
 /* line 22, src/_general.scss */
+iframe::-webkit-scrollbar {
+  display: none;
+}
+
+/* line 26, src/_general.scss */
 body {
   height: 100%;
-  padding: 0 20px 0 45px;
+  padding: 0 0 0 32px;
   margin: 0;
 }
 
-/* line 28, src/_general.scss */
+/* line 32, src/_general.scss */
 #textarea {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -125,12 +128,12 @@ body {
   height: auto;
   line-height: 1.6em;
 }
-/* line 45, src/_general.scss */
+/* line 49, src/_general.scss */
 #textarea img {
   display: block;
 }
 
-/* line 50, src/_general.scss */
+/* line 54, src/_general.scss */
 #status {
   position: fixed;
   right: 0;
@@ -144,11 +147,11 @@ body {
   -webkit-transition-duration: 500ms;
   z-index: 99;
 }
-/* line 63, src/_general.scss */
+/* line 67, src/_general.scss */
 #status.show {
   opacity: 1;
 }
-/* line 66, src/_general.scss */
+/* line 70, src/_general.scss */
 #status.hide {
   -webkit-transition-delay: 5s;
   opacity: 0;
@@ -156,96 +159,115 @@ body {
 
 /* line 1, src/_menu.scss */
 #menu {
-  position: absolute;
-  left: 6px;
-  top: 6px;
-  color: #AAA;
+  position: fixed;
   text-decoration: none;
-  padding-right: 10px;
+  padding: 0;
+  width: 32px;
+  background: #3a3533;
+  top: 0;
+  left: 0;
+  height: 100%;
+  text-align: center;
+  padding: 0;
+  z-index: 9;
 }
-/* line 9, src/_menu.scss */
-#menu .index {
+/* line 14, src/_menu.scss */
+#menu li {
   position: relative;
-  width: auto;
+}
+/* line 17, src/_menu.scss */
+#menu li .index {
+  position: relative;
   z-index: 1;
   font-family: symbol;
   font-size: 18px;
+  color: #7a7573;
+  display: inline-block;
+  padding-top: 7px;
 }
-/* line 17, src/_menu.scss */
-#menu:hover {
+/* line 26, src/_menu.scss */
+#menu li .items {
+  overflow: hidden;
+  font-size: 13px;
+  top: -1000px;
+  background-color: #fff;
+  position: absolute;
+  border: 1px solid #ddd;
+  z-index: 9;
   color: #777;
+  width: 160px;
+  left: 100%;
+  text-align: left;
+  opacity: 0;
+  top: 0px;
+  height: 0;
+  -webkit-transition-property: all;
+  -webkit-transition-duration: 300ms;
+}
+/* line 49, src/_menu.scss */
+#menu li:hover {
   cursor: default;
   z-index: 3;
 }
-/* line 21, src/_menu.scss */
-#menu:hover .index {
-  color: #abced4;
+/* line 52, src/_menu.scss */
+#menu li:hover .index {
+  color: #cac5c3;
 }
-/* line 24, src/_menu.scss */
-#menu:hover .items {
+/* line 55, src/_menu.scss */
+#menu li:hover .items {
   /*height: 300px;*/
-  left: 0;
+  opacity: 1;
+  height: auto;
 }
-/* line 29, src/_menu.scss */
-#menu .items {
-  /*height: 0;*/
-  overflow: hidden;
-  list-style: none;
-  font-size: 12px;
-  top: 0;
-  margin: 0;
-  padding: 0;
-  -webkit-transition-property: all;
-  -webkit-transition-duration: 500ms;
-  background-color: #fff;
-  position: relative;
-  left: -1000px;
-  border: 1px solid #ddd;
-}
-/* line 44, src/_menu.scss */
-#menu li {
+/* line 63, src/_menu.scss */
+#menu li li {
   list-style: none;
   padding: 5px 50px 5px 5px;
   margin: 0;
   font-family: sans-serif;
   cursor: pointer;
   position: relative;
+  width: 160px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
 }
-/* line 52, src/_menu.scss */
-#menu .dragging {
+/* line 73, src/_menu.scss */
+#menu li .dragging {
   cursor: move;
   opacity: 0.5;
 }
-/* line 56, src/_menu.scss */
-#menu .option {
+/* line 77, src/_menu.scss */
+#menu li .option {
   color: #ddd;
 }
-/* line 59, src/_menu.scss */
-#menu li:hover {
+/* line 80, src/_menu.scss */
+#menu li li:hover {
   color: #fff;
   background: #abced4;
 }
-/* line 63, src/_menu.scss */
-#menu li:hover .option {
+/* line 84, src/_menu.scss */
+#menu li li:hover .option {
   color: #fff;
 }
-/* line 66, src/_menu.scss */
-#menu li:hover .delete:hover {
+/* line 87, src/_menu.scss */
+#menu li li:hover .delete:hover {
   color: #ee8888;
 }
-/* line 69, src/_menu.scss */
-#menu li:hover .rename:hover {
+/* line 90, src/_menu.scss */
+#menu li li:hover .rename:hover {
   color: #6688aa;
 }
-/* line 73, src/_menu.scss */
-#menu .delete {
+/* line 94, src/_menu.scss */
+#menu li .delete {
   position: absolute;
   right: 5px;
   padding: 5px;
   top: 0;
 }
-/* line 79, src/_menu.scss */
-#menu .rename {
+/* line 100, src/_menu.scss */
+#menu li .rename {
   position: absolute;
   right: 20px;
   padding: 5px;
@@ -253,9 +275,28 @@ body {
   font-family: symbol;
   font-size: 11px;
 }
-/* line 88, src/_menu.scss */
-#menu #newnote {
-  border-top: 1px solid #ddd;
+/* line 109, src/_menu.scss */
+#menu li #newnote {
+  background: #aaa;
+  color: white;
+}
+/* line 113, src/_menu.scss */
+#menu li #newnote:hover {
+  background: #abced4;
+}
+/* line 116, src/_menu.scss */
+#menu li #newnote .option {
+  position: absolute;
+  right: 5px;
+  padding: 5px;
+  top: 0;
+  color: white;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-transform: rotate(45deg);
+}
+/* line 126, src/_menu.scss */
+#menu li .over {
+  border-top: 1.8em solid #ccc;
 }
 
 /* line 1, src/_modal.scss */
@@ -311,23 +352,23 @@ body {
   opacity: 1;
 }
 /* line 53, src/_modal.scss */
-#modal .prompt, #modal .confirm {
+#modal .prompt, #modal .confirm, #modal .alert {
   color: #666;
   font-size: 14px;
   text-align: center;
 }
 /* line 58, src/_modal.scss */
-#modal .prompt .message, #modal .confirm .message {
+#modal .prompt .message, #modal .confirm .message, #modal .alert .message {
   margin-bottom: 0.8em;
 }
 /* line 61, src/_modal.scss */
-#modal .prompt .text, #modal .confirm .text {
+#modal .prompt .text, #modal .confirm .text, #modal .alert .text {
   padding: 6px 10px;
   margin: 0 auto 0.8em;
   border: 1px solid #ddd;
 }
 /* line 66, src/_modal.scss */
-#modal .prompt button, #modal .confirm button {
+#modal .prompt button, #modal .confirm button, #modal .alert button {
   background: #ddd;
   color: #555;
   border: 1px solid #ddd;
@@ -341,6 +382,6 @@ body {
   font-size: 13px;
 }
 /* line 74, src/_modal.scss */
-#modal .prompt .ok, #modal .confirm .ok {
+#modal .prompt .ok, #modal .confirm .ok, #modal .alert .ok {
   margin-right: 15px;
 }

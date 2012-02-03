@@ -1,21 +1,11 @@
 
-
-
-
 function saveContent(){
 	localStorage.setItem(notesPrefix+localStorage.getItem(lastPrefix), textarea.document.body.innerHTML);
-	// if(clearTextarea){
-	// 	clearTextarea = false;
-	// 	textarea.document.body.innerHTML = cleanStylesAndSpaces(textarea.document.body.innerHTML);
-	// }
 }
 
-// textarea.addEventListener('keyup', saveContent);
-// textarea.addEventListener('paste', function(evt){
-// 	clearTextarea = true;
-// 	saveContent();
-// 	clearTextarea = true;
-// });
+textarea.addEventListener('paste', function(evt){
+	saveContent();
+});
 
 function cancel(evt){
 	evt.preventDefault();
@@ -32,20 +22,33 @@ textarea.addEventListener('drop', function(evt){
 		if(type == 'Files'){
     		var file = evt.dataTransfer.files[0],
 				reader = new FileReader();
-			if(file.type.match(/text/)){
+			console.log(file.type);
+			if(!file.type || file.type.match(/text/)){
 				modal.confirm('Do you want to load this file as a new note with name: '+file.name+'?', function(res){
 					reader.onload = function (event) {
+						var result = event.target.result;
+						if(!file.type || !file.type.match(/html/)){
+							result = result.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>').replace(/\s/g,'&nbsp;');
+						}
 						if(res){
 							createNote(file.name);
-							localStorage.setItem(notesPrefix+file.name,'<div>'+event.target.result+'</div>');
+							localStorage.setItem(notesPrefix+file.name,result);
 							loadNote(file.name);
 						}else{
-							textarea.document.body.innerHTML+='<div>'+event.target.result+'</div>';
+							textarea.document.body.innerHTML+=result;
 							saveContent();
 						}
 					};
 					reader.readAsText(file);
 				});
+			}
+			else if(file.type.match(/image/)){
+				reader.onload = function (event) {
+						var result = event.target.result;
+						textarea.document.body.innerHTML+='<img src="'+result+'"/>';
+						saveContent();
+					};
+				reader.readAsDataURL(file);
 			}
     	}
     	else{
@@ -69,14 +72,14 @@ newnote.addEventListener('click', function(evt){
 
 menulist.addEventListener('click', function(evt){
 	var tn = evt.target.tagName, name, bool;
-	if(tn == 'LI' && evt.target.getElementsByClassName('txt').length){
-		loadNote(evt.target.getElementsByClassName('txt')[0].innerHTML);
+	if(tn == 'LI' && evt.target.id != 'newnote'){
+		loadNote(evt.target.dataset.name);
 	}
 	else if(tn == 'SPAN' && !/option/.test(evt.target.className)){
-		loadNote(evt.target.parentElement.getElementsByClassName('txt')[0].innerHTML);
+		loadNote(evt.target.parentElement.dataset.name);
 	}
 	else if(tn == 'SPAN' && /delete/.test(evt.target.className)){
-		name = evt.target.parentElement.getElementsByClassName('txt')[0].innerHTML;
+		name = evt.target.parentElement.dataset.name;
 		modal.confirm('Are you sure you want to delete the note: '+name+'?', function(bool){
 			if(!bool){
 				return false;
@@ -90,7 +93,7 @@ menulist.addEventListener('click', function(evt){
 	}
 	else if(tn == 'SPAN' && /rename/.test(evt.target.className)){
 		var text = evt.target.parentElement.getElementsByClassName('txt')[0],
-			oldname = text.innerHTML;
+			oldname = evt.target.parentElement.dataset.name;
 		modal.prompt('New name:', (function(text, oldname){
 			return function(name){
 				if(!name){
@@ -98,6 +101,7 @@ menulist.addEventListener('click', function(evt){
 				} 
 				else{
 					text.innerHTML = name;
+					evt.target.parentElement.dataset.name = name;
 					localStorage.setItem(notesPrefix+name, localStorage.getItem(notesPrefix+oldname));
 					newlists = localStorage.getItemJSON(listsPrefix);
 					newlists.push(name);
@@ -141,7 +145,6 @@ function loadNote(noteName){
 	document.title = 'Editing ' + noteName;
 	
 	document.getElementById('textarea').style.height = 'auto';
-	resizeIframe();
 }
 
 function createNote(name, ignore_new_item){
@@ -151,8 +154,9 @@ function createNote(name, ignore_new_item){
 	}
 	for(var i=0; i<lists.length; i++){
 		if(lists[i] == name){
-			alert('Already extists anote with the name: '+name+'. Opening note '+name+'.');
-			loadNote(name);
+			modal.alert('Already extists anote with the name: '+name+'. Opening note '+name+'.', function(){
+				loadNote(name);
+			});
 			return false;
 		}
 	}
@@ -168,6 +172,7 @@ function createMenuItem(note){
 		//opc = note == 'New list' ? '' : '<span class="delete">&#10006;</span>';
 		opc = '<span class="rename option">S</span><span class="delete option">&#10006;</span>';
 		el.innerHTML = '<span class="txt">'+note+'</span>' + opc;
+		el.dataset.name = note;
 		el.draggable = true;
 		menulist.insertBefore(el, newnote);
 		applyDragHandlers(el);
@@ -191,10 +196,6 @@ function deleteNote(name){
 		loadNote(lists[0]);
 		return;
 	}
-}
-
-function cleanStylesAndSpaces(val){
-	return val.replace(/(style=(\")[^\"]*(\"))|(style=(\')[^\']*(\'))|^((\s)*(&nbsp;)*)/g,'').replace(/\s+/,' ');
 }
 
 function notifySaved(){

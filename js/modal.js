@@ -4,6 +4,7 @@ function Modal(content, closable){
 		closeB = modal.getElementsByClassName('close')[0],
 		contentW = modal.getElementsByClassName('content')[0],
 		back = modal.getElementsByClassName('back')[0];
+	
 	this.show = function(){
 		modal.className = 'show';
 	}
@@ -71,6 +72,37 @@ function Modal(content, closable){
 		this.show();
 
 		ok.focus();
+	}
+
+	this.alert = function(info, callback){
+		var wrapper = document.createElement('div'),
+			message = document.createElement('div'),
+			ok = document.createElement('button');
+		wrapper.className = 'alert';
+		message.className = 'message';
+		ok.className = 'ok';
+		
+		message.innerHTML = info;
+		ok.innerHTML = 'ok';
+
+		ok.onclick = (function(modal, callback){
+			return function(){
+				modal.hide();
+				textarea.document.body.focus();
+				callback(true);
+			}
+		})(this, callback);
+
+		this.setClosable(false);
+
+		contentW.innerHTML = '';
+		wrapper.appendChild(message);
+		wrapper.appendChild(ok);
+		contentW.appendChild(wrapper);
+
+		this.show();
+
+		ok.focus(); 
 	}
 
 

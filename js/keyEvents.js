@@ -1,7 +1,37 @@
 textarea.addEventListener('keydown', function(evt){
-	if(evt.metaKey && evt.keyIdentifier== "U+0053"){
+	var kc = evt.keyCode;
+	if(evt.metaKey && kc == 83){
 		evt.preventDefault();
 		notifySaved();
+	}
+	else if(kc==66 && evt.metaKey){
+		textarea.document.execCommand('bold', false);
+	}
+	else if(kc==85 && evt.metaKey){
+		textarea.document.execCommand('underline', false);
+	}
+	else if(kc==73 && evt.metaKey){
+		textarea.document.execCommand('italic', false);
+	}
+	else if(kc==69 && evt.metaKey){
+		evt.preventDefault();
+		textarea.document.execCommand('removeFormat', false);
+	}
+	else if(kc==76 && evt.metaKey && evt.shiftKey){
+	evt.preventDefault();
+		textarea.document.execCommand('insertOrderedList', false);
+	}
+	else if(kc==76 && evt.metaKey){
+	evt.preventDefault();
+		textarea.document.execCommand('insertUnorderedList', false);
+	}
+	else if(kc==221 && evt.metaKey){
+	evt.preventDefault();
+		textarea.document.execCommand('indent', false);
+	}
+	else if(kc==219 && evt.metaKey){
+	evt.preventDefault();
+		textarea.document.execCommand('outdent', false);
 	}
 	saveContent();
 	return false;
@@ -39,10 +69,5 @@ textarea.addEventListener('keyup', function(evt){
 		clearTimeout(timeOut);
 		setTimeout(notifySaved, 5000);
 	}
-	resizeIframe();
 	return;
 });
-
-function resizeIframe(){
-	document.getElementById('textarea').style.height = getStyle(textarea.document.body, 'height');
-}
