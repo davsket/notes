@@ -1,17 +1,18 @@
 CACHE MANIFEST
 
 CACHE:
+
+NETWORK:
 index.html
 note_icon.png
 js/menuDnD.js
 js/utils.js
 http://fonts.googleapis.com/css?family=Droid+Sans
 http://themes.googleusercontent.com/static/fonts/droidsans/v3/s-BiyweUPV0v-yRb-cjciL3hpw3pgy2gAi-Ip7WPMi0.woff
-css/iframe_doc.css
 css/screen.css
 js/bootstrap.js
 font/websymbols-regular-webfont.woff
 js/keyEvents.js
 js/modal.js
 js/general.js
-NETWORK:
+css/iframe_doc.css

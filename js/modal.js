@@ -1,4 +1,6 @@
-//Modal
+/************************************
+ * The Modal Class
+ ************************************/
 function Modal(content, closable){
 	var modal = document.getElementById('modal'),
 		closeB = modal.getElementsByClassName('close')[0],
@@ -36,6 +38,10 @@ function Modal(content, closable){
 			message = document.createElement('div'),
 			ok = document.createElement('button'),
 			cancel = document.createElement('button');
+
+		callback = callback || function(){};
+		question = question || '';
+
 		wrapper.className = 'prompt';
 		message.className = 'message';
 		ok.className = 'ok';
@@ -45,21 +51,21 @@ function Modal(content, closable){
 		ok.innerHTML = 'ok';
 		cancel.innerHTML = 'cancel';
 
-		ok.onclick = (function(modal, callback){
+		ok.onclick = (function(modal, callback, ok){
 			return function(){
 				modal.hide();
-				textarea.document.body.focus();
+				ok.blur();
 				callback(true);
 			}
-		})(this, callback);
+		})(this, callback, ok);
 
-		cancel.onclick = (function(modal, callback){
+		cancel.onclick = (function(modal, callback, cancel){
 			return function(){
 				modal.hide();
-				textarea.document.body.focus();
+				cancel.blur();
 				callback(false);
 			}
-		})(this, callback);
+		})(this, callback, cancel);
 
 		this.setClosable(false);
 
@@ -74,10 +80,13 @@ function Modal(content, closable){
 		ok.focus();
 	}
 
-	this.alert = function(info, callback){
+	this.alert = function(info, callback, dontFocusOk){
 		var wrapper = document.createElement('div'),
 			message = document.createElement('div'),
 			ok = document.createElement('button');
+
+		callback = callback || function(){};
+		info = info || '';
 		wrapper.className = 'alert';
 		message.className = 'message';
 		ok.className = 'ok';
@@ -85,13 +94,13 @@ function Modal(content, closable){
 		message.innerHTML = info;
 		ok.innerHTML = 'ok';
 
-		ok.onclick = (function(modal, callback){
+		ok.onclick = (function(modal, callback, ok){
 			return function(){
 				modal.hide();
-				textarea.document.body.focus();
+				ok.blur();
 				callback(true);
 			}
-		})(this, callback);
+		})(this, callback, ok);
 
 		this.setClosable(false);
 
@@ -102,7 +111,9 @@ function Modal(content, closable){
 
 		this.show();
 
-		ok.focus(); 
+		if(!dontFocusOk){
+			ok.focus(); 
+		}
 	}
 
 
@@ -112,6 +123,10 @@ function Modal(content, closable){
 			ok = document.createElement('button'),
 			input = document.createElement('input'),
 			cancel = document.createElement('button');
+
+		callback = callback || function(){};
+		question = question || '';
+
 		wrapper.className = 'prompt';
 		message.className = 'message';
 		ok.className = 'ok';
@@ -122,31 +137,31 @@ function Modal(content, closable){
 		ok.innerHTML = 'ok';
 		cancel.innerHTML = 'cancel';
 
-		ok.onclick = (function(modal, callback, input){
+		ok.onclick = (function(modal, callback, input, ok){
 			return function(){
 				modal.hide();
-				textarea.document.body.focus();
+				ok.blur();
 				callback(input.value);
 			}
-		})(this, callback, input);
+		})(this, callback, input, ok);
 
-		cancel.onclick = (function(modal, callback){
+		cancel.onclick = (function(modal, callback, cancel){
 			return function(){
 				modal.hide();
-				textarea.document.body.focus();
+				cancel.blur();
 				callback(null);
 			}
-		})(this, callback);
+		})(this, callback, cancel);
 
-		input.addEventListener('keyup', (function(modal, callback){
+		input.addEventListener('keyup', (function(modal, callback, input){
 			return function(evt){
 				if(evt.keyCode == 13){
 					modal.hide();
-					textarea.document.body.focus();
+					input.blur();
 					callback(this.value);
 				}
 			}
-		})(this, callback));
+		})(this, callback, input));
 
 		this.setClosable(false);
 
