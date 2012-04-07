@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#Cache version 18
+#Cache version 19
 
 CACHE:
 #HTML
@@ -29,3 +29,4 @@ font/DroidSans-Bold-webfont.woff
 font/DroidSans-Bold-webfont.ttf
 
 NETWORK:
+/
