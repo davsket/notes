@@ -399,7 +399,7 @@ function showAbout(){
 			"This application stores the data every time you type, which means, you dont need to press any button to save the info.<br><br>"+
 			"Notes also lets you set styling on the notes via shortcuts like: Cmd+b, Cmd+i, etc. (For more information visit the shurcuts, or press Alt+s)!<br><br>"+
 			"All your data is stored in the browser Local Storage, which means: your data won't ever be stored on the server, but in the browser, so... yes, you change from browser or open this in an incognito window and there won't be any of your notes.<br><br>"+
-			"Is there a way to retrieve your notes and load them in other browser? well right know I'm working on it, if you press Alt+g, it will open a modal with the application data as text. And in the future Alt+l will load (add, append) that data into the other Notes app.<br><br><br>"+
+			"Is there a way to retrieve your notes and load them in other browser? yes! if you go to the menu options or press Alt+g, it will open a modal with the application data as text. And in the menu options or with Alt+l you can load (add/append) that data into the other Notes app.<br><br><br>"+
 			"<h1>About me and Notes</h1>"+
 			"My name is David Avellaneda a.k.a. <a href='http://twitter.com/Davsket' target='_blank'>Davsket</a> and I built this app for my self and my friends.<br><br>"+
 			"The source of this application can be found at <a href='http://github.com/davsket/notes' target='_blank'>Github</a>.<br><br>"+
@@ -432,6 +432,8 @@ function showData(){
 	modal.alert(message, function(){
 		textarea.contentDocument.body.focus();
 	});
+
+	$$('#modal textarea')[0].select();
 };
 
 /**
@@ -447,7 +449,7 @@ function importData(){
 
 	wrapper.addClassName('alert about');
 	title.innerHTML = 'Notes Importer';
-	message.innerHTML = 'Please enter your data here:';
+	message.innerHTML = 'Please enter your data here:<br><br>';
 	importB.innerHTML = 'import';
 
 	importB.addEventListener('click', _importData.bind(textarea));
@@ -479,6 +481,8 @@ function importData(){
 	modal.setContent(wrapper);
 
 	modal.show();
+
+	textarea.focus();
 
 	// modal.alert('This option will be available soon');
 };
@@ -659,7 +663,7 @@ function keyUpDownEvents(evt){
 
 	if(evt.altKey){
 		if(evt.type != 'keyup'){
-			if(kc == 83 || kc == 229 || kc == 73 || kc == 71){
+			if(kc == 83 || kc == 229 || kc == 73 || kc == 71 || kc == 76){
 				evt.preventDefault();
 			}
 		}else{
@@ -673,10 +677,15 @@ function keyUpDownEvents(evt){
 				evt.preventDefault();
 				showAbout();
 			}
-			//Alt+i, About 
+			//Alt+g, About 
 			else if(kc == 71 && evt.type == 'keyup'){
 				evt.preventDefault();
 				showData();
+			}
+			//Alt+l, About 
+			else if(kc == 76 && evt.type == 'keyup'){
+				evt.preventDefault();
+				importData();
 			}
 		}
 
