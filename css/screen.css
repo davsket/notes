@@ -107,7 +107,7 @@ html {
   width: 100%;
   background: #F2D199;
   background-color: #F2D199;
-  background-image: url(../img/wood.png?v=2);
+  background-image: url(../img/wood.png);
 }
 
 /* line 22, src/_general.scss */
@@ -244,7 +244,7 @@ input:focus, button:focus {
   padding: 0;
   width: 1.7em;
   background: #3a3533;
-  background: url(../img/leatherb.png?v=2) #151515;
+  background: url(../img/leatherb.png) #151515;
   top: 0;
   left: 0;
   height: 100%;
