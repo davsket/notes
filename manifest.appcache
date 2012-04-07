@@ -2,7 +2,6 @@ CACHE MANIFEST
 
 CACHE:
 #HTML
-index.html
 
 #Images
 note_icon.png
@@ -29,3 +28,4 @@ font/DroidSans-Bold-webfont.woff
 font/DroidSans-Bold-webfont.ttf
 
 NETWORK:
+index.html
