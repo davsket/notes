@@ -1,29 +1,42 @@
 <!DOCTYPE HTML>
-<!-- <html xmlns="http://www.w3.org/1999/xhtml"> -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!-- <html xmlns="http://www.w3.org/1999/xhtml" manifest="manifest.appcache"> -->
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<title i18n-content="appname">Note Editor</title>
+		<title i18n-content="appname">Notes</title>
 		<link rel="shortcut icon" href="note_icon.png">
-		<!-- <link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'> -->
-		<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-		<!-- <link href='http://fonts.googleapis.com/css?family=Actor' rel='stylesheet' type='text/css'> -->
-
-
 		<link rel="stylesheet" type="text/css" href="css/screen.css" />
 	</head>
 	<body>
 		<ul id="menu">
 			<li>
-				<span href="#" class="index">a</span>
-				<div class="items">
+				<span href="#" class="index">7</span>
+				<div class="items first">
 					<ul id="menulist">
 						<li id="newnote">
-							Add Note <span class="option">&#10006;</span>
+							Add Note <span class="option">5</span>
 						</li>
 					</ul>
 				</div>
+			</li>
+			<li id="shortcuts">
+				<span href="#" class="index" title="Shortcuts">8</span>
+			</li>
+			<li id="options">
+				<span href="#" class="index">6</span>
+				<div class="items">
+					<ul>
+						<li id="export_data">
+							<span class="option">1</span> Export Notes
+						</li>
+						<li id="import_data">
+							<span class="option">0</span> Import Notes
+						</li>
+					</ul>
+				</div>
+			</li>
+			<li id="about">
+				<span href="#" class="index">a</span>
 			</li>
 		</ul>
 		<iframe id="textarea" spellcheck="true" style="display: none;"></iframe>
@@ -33,7 +46,7 @@
 			<div class="container">
 				<div class="content">
 				</div>
-				<button class="close">x</button>
+				<a class="close">o</a>
 			</div>
 		</div>
 		<script type="text/javascript" src="js/modal.js"></script>

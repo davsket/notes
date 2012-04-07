@@ -4,19 +4,21 @@
 }
 html {
 	// font-family: $font;
-	font-family: sans-serif;
-	font-size: 16px;
-	background:#000000;
+	font-family: DroidSans;
+	font-size: 22px;
 	padding: 0;
 	margin: 0;
 	height:100%;
 	width:100%;
-	background-color: #3A3533;
-	max-width: 450px;
-// 	background-image: 	-webkit-linear-gradient(0deg, transparent 30px, #ABCED4 30px, #ABCED4 31px, transparent 31px), 
-// 						-webkit-linear-gradient(#EEE 0.05em, transparent 0.05em);
-// 	background-size: 100% 1.6em;
-// 
+	background: #F2D199;
+	background-color: #F2D199;
+	background-image: url(../img/wood.png);
+
+
+	// Cicada
+	// background-image: -webkit-linear-gradient(0, rgba(255, 255, 255, .07) 50%, transparent 50%), -webkit-linear-gradient(0, rgba(255, 255, 255, .13) 50%, transparent 50%), -webkit-linear-gradient(0, transparent 50%, rgba(255, 255, 255, .17) 50%), -webkit-linear-gradient(0, transparent 50%, rgba(255, 255, 255, .19) 50%);
+	// background-color: #F6C980;
+	// background-size: 4%, 11%, 35%, 23%;
 }
 html::-webkit-scrollbar {
 	display:none;
@@ -27,15 +29,15 @@ iframe::-webkit-scrollbar {
 
 body {
 	height:100%;
-	padding: 0 0 0 32px;
+	padding: 0 0 0 1.8em;
 	margin: 0;
-	@include box-shadow(3px 0 20px #111);
+	@include box-shadow(-3px 0 17px 5px rgba(0,0,0,0.7), inset -2px 0 25px -10px rgba(0,0,0,0.7));
 	background: white;
+	max-width: 25em;
 }
 
 #textarea{
-	box-sizing:border-box;
-	-webkit-box-sizing:border-box;
+	@include box-sizing(border-box);
 	color:#888;
 	display:block;
 	font-family: $font;
@@ -82,7 +84,7 @@ body {
 
 	h1{
 		margin-bottom: 1.3em;
-		font-size: 1.2em;
+		font-size: 1.4em;
 		font-weight: normal;
 	}
 	textarea{
@@ -90,6 +92,25 @@ body {
 		height: 145px;
 		border: 2px dotted #DDD;
 		padding: 10px;
-		box-sizing: border-box;
+		@include box-sizing(border-box);
+		padding: 1em;
+		margin: 0 auto 0.8em;
+		border: 1px solid rgba(0,0,0,0.2);
+		@include border-radius(5px);
+		font-family: monospace;
+		color: #555;
+		@include box-shadow(inset 0 0 11px -5px rgba(0,0,0,0.7));
+
+		&:focus{
+			border-color: rgba(0,0,0,0.4);
+		}
+	}
+}
+
+input, button{
+	font-family: DroidSans;
+
+	&:focus{
+		outline: none;
 	}
 }

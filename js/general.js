@@ -59,9 +59,13 @@ var
 	//The note prefix for the last/active note
 	lastPrefix = 'notes/lastlist',
 	//The modal used
-	modal = new Modal(),
+	modal = new Modal(null, true),
 	//Timeout for notifications
-	timeOut;
+	timeOut,
+	menuAbout = $('about'),
+	menuExportData = $('export_data'),
+	menuImportData = $('import_data'),
+	menuShortcuts = $('shortcuts')
 ;
 
 
@@ -90,6 +94,10 @@ document.addEventListener('keyup', keyUpDownEvents);
 //MENU EVENTS
 newnote.addEventListener('click', onNewNote);
 menulist.addEventListener('click', onMenuClick);
+menuAbout.addEventListener('click', showAbout);
+menuExportData.addEventListener('click', showData);
+menuImportData.addEventListener('click', importData);
+menuShortcuts.addEventListener('click', showShortcuts);
 
 
 
@@ -318,6 +326,8 @@ function onMenuClick(evt){
 			}
 		})(textNode, oldname, parentNode));
 	}
+
+	hideMenu();
 };
 
 /**
@@ -328,7 +338,7 @@ function onMenuClick(evt){
 function createMenuItem(name){
 		var el = document.createElement('li'), opc;
 		// S is the char for the edit icon in the symbols font
-		opc = '<span class="rename option">S</span><span class="delete option">&#10006;</span>';
+		opc = '<span class="rename option">2</span><span class="delete option">3</span>';
 		el.innerHTML = '<span class="txt">'+name+'</span>' + opc;
 		//Saves the name in the dataset
 		el.dataset.name = name;
@@ -395,6 +405,9 @@ function showAbout(){
 			"The source of this application can be found at <a href='http://github.com/davsket/notes' target='_blank'>Github</a>.<br><br>"+
 			"Please enjoy it and any suggestion please let me know via <a href='http://twitter.com/intent/tweet?text=Hey @Davsket, I like your app but...' target='_blank'>Twitter</a>."+
 		"</div>";
+
+	hideMenu();
+	
 	modal.alert(message, function(){
 		textarea.contentDocument.body.focus();
 	}, true);
@@ -406,7 +419,9 @@ function showAbout(){
 function showData(){
 	var message, i, data = {}
 		notes = localStorage.getItemJSON(listsPrefix);
-
+	
+	hideMenu();
+	
 	for(i=0; i<notes.length; i++){
 		data[notes[i]] = localStorage.getItemJSON(notesPrefix+notes[i]);
 	}
@@ -418,6 +433,119 @@ function showData(){
 		textarea.contentDocument.body.focus();
 	});
 };
+
+/**
+ * Shows the LocalStorage Data
+ */
+function importData(){
+	var i, data = {},
+		wrapper = document.createElement('div'),
+		title = document.createElement('h1'),
+		message = document.createElement('div'),
+		textarea = document.createElement('textarea'),
+		importB = document.createElement('button');
+
+	wrapper.addClassName('alert about');
+	title.innerHTML = 'Notes Importer';
+	message.innerHTML = 'Please enter your data here:';
+	importB.innerHTML = 'import';
+
+	importB.addEventListener('click', _importData.bind(textarea));
+	importB.addEventListener('click', modal.hide.bind(modal));
+
+	wrapper.appendChild(title);
+	wrapper.appendChild(message);
+	wrapper.appendChild(textarea);
+	wrapper.appendChild(importB);
+
+	// 	notes = localStorage.getItemJSON(listsPrefix);
+
+	// for(i=0; i<notes.length; i++){
+	// 	data[notes[i]] = localStorage.getItemJSON(notesPrefix+notes[i]);
+	// }
+	// message = 
+	// 	"<div class='data-output'> "+
+	// 		"<h1>This is your data:</h1> Please copy this:<br><br> <textarea>"+ JSON.stringify(data)+
+	// 	"</textarea></div>";
+	// modal.alert(message, function(){
+	// 	textarea.contentDocument.body.focus();
+	// });
+
+	hideMenu();
+
+
+
+	modal.setClosable(true);
+	modal.setContent(wrapper);
+
+	modal.show();
+
+	// modal.alert('This option will be available soon');
+};
+
+/**
+ * Listen the import click event and does the dirty job.
+ * 
+ * @param {Event} evt
+ */
+function _importData(evt){
+	var value, note, list = localStorage.getItemJSON(listsPrefix),
+		imported = [], index;
+
+	function NonObject(message){
+		this.name = 'NonObject';
+		this.message = message;
+	}
+
+	try{
+		value = JSON.parse(this.value);
+		if(typeof value == 'object'){
+			for(key in value){
+				note = value[key];
+				if(typeof key == 'string'){
+					index = list.indexOf(key);
+					if(index==-1){
+						list.push(key);
+						localStorage.setItem(listsPrefix, JSON.stringify(list));
+					}
+					localStorage.setItem(notesPrefix+key, note);
+					imported.push(key);
+				}else{
+					throw new NonObject("the format of the data is incorrect."+(imported.length?' Except for these notes, the other couldn\'t be imported: '+imported.join(', '):''));
+				}
+			}
+			setTimeout(function(){
+				modal.alert('These notes were imported successfully: '+ imported.join(', '));
+			}, 300);
+		}else{
+			throw new NonObject("the format of the data is incorrect.");
+		}
+	}catch(e){
+		console.log(e);
+		if(e instanceof NonObject){
+			setTimeout(function(){
+				modal.alert('Sorry, the data couldn\'t be imported, '+ e.message);
+			}, 300);
+		}
+		else{
+			setTimeout(function(){
+				modal.alert('Sorry, the data couldn\'t be imported, the data is corrupt or null.');
+			}, 300);
+		}
+	}
+}
+
+/**
+ * Hides temproaly the menu
+ */
+function hideMenu(){
+	menulist.style.display='none';
+	menuExportData.parentElement.parentElement.style.display='none';
+	setTimeout(function(){
+		menulist.style.display=''; 
+		menuExportData.parentElement.parentElement.style.display='';
+	},300);	
+}
 
 
 /////////////////////////////////////////

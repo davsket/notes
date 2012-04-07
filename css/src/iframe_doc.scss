@@ -5,10 +5,10 @@ html::-webkit-scrollbar {
 	display:none;
 }
 body{
-	color:#777;
+	color:#555;
 	// font-family: $font;
-	font-family: sans-serif;
-	font-size: 16px;
+	font-family: DroidSans;
+	font-size: 18px !important;
 	margin: 0 auto;
 	outline:none;
 	padding: 0;
@@ -22,6 +22,8 @@ body{
 	padding: 1.6em !important;
 	background-image: -webkit-linear-gradient(#EEE 0.05em, transparent 0.05em) !important;
 	background-size: 100% 1.6em;
+
+	// background: url(../img/paper.png) !important;
 	box-sizing: border-box !important;
 
 	img{
@@ -33,11 +35,11 @@ body{
 }
 //MY RESET
 *{
-	font-family: sans-serif !important;
+	font-family: DroidSans !important;
 	// font-family: $font !important;
 	background: transparent !important;
-	font-size: 16px !important;
-	color: #777 !important;
+	font-size: 1em !important;
+	color: #555 !important;
 	padding: 0 !important;
 	margin-right: 0!important;
 	margin-top: 0!important;
@@ -46,6 +48,7 @@ body{
 	font-weight: normal !important;
 	line-height: 1.6em !important;
 }
+
 strong, b {
 	font-weight: bold !important;
 }

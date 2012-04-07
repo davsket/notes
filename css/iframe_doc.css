@@ -71,6 +71,30 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'fontnomas';
+  src: url("../font/fontomas-webfont.eot");
+  src: url("../font/fontomas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/fontomas-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DroidSans';
+  src: url("../font/DroidSans-webfont.eot");
+  src: url("../font/DroidSans-webfont.eot?#iefix") format("embedded-opentype"), url("../font/DroidSans-webfont.woff") format("woff"), url("../font/DroidSans-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DroidSans';
+  src: url("../font/DroidSans-Bold-webfont.eot");
+  src: url("../font/DroidSans-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("../font/DroidSans-Bold-webfont.woff") format("woff"), url("../font/DroidSans-Bold-webfont.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
 /* line 4, src/iframe_doc.scss */
 html::-webkit-scrollbar {
   display: none;
@@ -78,9 +102,9 @@ html::-webkit-scrollbar {
 
 /* line 7, src/iframe_doc.scss */
 body {
-  color: #777;
-  font-family: sans-serif;
-  font-size: 16px;
+  color: #555;
+  font-family: DroidSans;
+  font-size: 18px !important;
   margin: 0 auto;
   outline: none;
   padding: 0;
@@ -96,19 +120,19 @@ body {
   background-size: 100% 1.6em;
   box-sizing: border-box !important;
 }
-/* line 27, src/iframe_doc.scss */
+/* line 29, src/iframe_doc.scss */
 body img {
   display: block;
   max-height: 100%;
   max-width: 100%;
 }
 
-/* line 35, src/iframe_doc.scss */
+/* line 37, src/iframe_doc.scss */
 * {
-  font-family: sans-serif !important;
+  font-family: DroidSans !important;
   background: transparent !important;
-  font-size: 16px !important;
-  color: #777 !important;
+  font-size: 1em !important;
+  color: #555 !important;
   padding: 0 !important;
   margin-right: 0!important;
   margin-top: 0!important;
@@ -118,38 +142,38 @@ body img {
   line-height: 1.6em !important;
 }
 
-/* line 49, src/iframe_doc.scss */
+/* line 52, src/iframe_doc.scss */
 strong, b {
   font-weight: bold !important;
 }
 
-/* line 52, src/iframe_doc.scss */
+/* line 55, src/iframe_doc.scss */
 u {
   text-decoration: underline;
 }
 
-/* line 55, src/iframe_doc.scss */
+/* line 58, src/iframe_doc.scss */
 i {
   font-style: italic;
 }
 
-/* line 58, src/iframe_doc.scss */
+/* line 61, src/iframe_doc.scss */
 ul {
   list-style: disc !important;
   list-style-position: inside !important;
 }
-/* line 61, src/iframe_doc.scss */
+/* line 64, src/iframe_doc.scss */
 ul li {
   list-style: disc !important;
   list-style-position: inside !important;
 }
 
-/* line 66, src/iframe_doc.scss */
+/* line 69, src/iframe_doc.scss */
 ol {
   list-style: decimal !important;
   list-style-position: inside !important;
 }
-/* line 69, src/iframe_doc.scss */
+/* line 72, src/iframe_doc.scss */
 ol li {
   list-style: decimal !important;
   list-style-position: inside !important;

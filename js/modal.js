@@ -6,31 +6,43 @@ function Modal(content, closable){
 		closeB = modal.getElementsByClassName('close')[0],
 		contentW = modal.getElementsByClassName('content')[0],
 		back = modal.getElementsByClassName('back')[0];
+
+	this.keyUpEvents = function(evt){
+		console.log('keyUpEvents');
+		if(evt.keyCode == 27){
+			this.hide();
+		}
+	};
+	this.bindKeyUpEvents = this.keyUpEvents.bind(this);
 	
 	this.show = function(){
 		modal.className = 'show';
-	}
+		contentW.style.maxHeight = parseInt(getStyle(document.body,'height')) - 150 + 'px';
+		document.addEventListener('keyup', this.bindKeyUpEvents);
+	};
+
 	this.hide = function(){
 		modal.className = '';
-	}
+		document.removeEventListener('keyup', this.bindKeyUpEvents);
+	};
+
 	this.setContent = function(content){
 		contentW.innerHTML = '';
-		if(typeof content == 'object'){
+		if(content && typeof content == 'object'){
 			contentW.appendChild(content);
-		}else if(typeof content == 'string'){
+		}else if(content && typeof content == 'string'){
 			contentW.innerHTML = content;
 		}
-	}
+	};
+
 	this.setClosable = function(closable){
 		closeB.style.display = closable ? 'block' : 'none';
-	}
+	};
 
 	//setup
 	this.setContent(content);
 	this.setClosable(closable);
-	closeB.onclick = (function(modal){
-		return function(){modal.hide();};
-		})(this);
+	closeB.onclick = (function(){this.hide();}).bind(this);
 	
 
 	this.confirm = function(question, callback){
@@ -102,7 +114,7 @@ function Modal(content, closable){
 			}
 		})(this, callback, ok);
 
-		this.setClosable(false);
+		this.setClosable(true);
 
 		contentW.innerHTML = '';
 		wrapper.appendChild(message);

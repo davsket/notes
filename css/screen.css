@@ -75,6 +75,30 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'fontnomas';
+  src: url("../font/fontomas-webfont.eot");
+  src: url("../font/fontomas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/fontomas-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DroidSans';
+  src: url("../font/DroidSans-webfont.eot");
+  src: url("../font/DroidSans-webfont.eot?#iefix") format("embedded-opentype"), url("../font/DroidSans-webfont.woff") format("woff"), url("../font/DroidSans-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DroidSans';
+  src: url("../font/DroidSans-Bold-webfont.eot");
+  src: url("../font/DroidSans-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("../font/DroidSans-Bold-webfont.woff") format("woff"), url("../font/DroidSans-Bold-webfont.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
 /* line 1, src/_general.scss */
 [draggable] {
   -webkit-user-select: none;
@@ -83,43 +107,46 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /* line 5, src/_general.scss */
 html {
-  font-family: sans-serif;
-  font-size: 16px;
-  background: #000000;
+  font-family: DroidSans;
+  font-size: 22px;
   padding: 0;
   margin: 0;
   height: 100%;
   width: 100%;
-  background-color: #3A3533;
-  max-width: 450px;
+  background: #F2D199;
+  background-color: #F2D199;
+  background-image: url(../img/wood.png);
 }
 
-/* line 21, src/_general.scss */
+/* line 23, src/_general.scss */
 html::-webkit-scrollbar {
   display: none;
 }
 
-/* line 24, src/_general.scss */
+/* line 26, src/_general.scss */
 iframe::-webkit-scrollbar {
   display: none;
 }
 
-/* line 28, src/_general.scss */
+/* line 30, src/_general.scss */
 body {
   height: 100%;
-  padding: 0 0 0 32px;
+  padding: 0 0 0 1.8em;
   margin: 0;
-  -moz-box-shadow: 3px 0 20px #111111;
-  -webkit-box-shadow: 3px 0 20px #111111;
-  -o-box-shadow: 3px 0 20px #111111;
-  box-shadow: 3px 0 20px #111111;
+  -moz-box-shadow: -3px 0 17px 5px rgba(0, 0, 0, 0.7), inset -2px 0 25px -10px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: -3px 0 17px 5px rgba(0, 0, 0, 0.7), inset -2px 0 25px -10px rgba(0, 0, 0, 0.7);
+  -o-box-shadow: -3px 0 17px 5px rgba(0, 0, 0, 0.7), inset -2px 0 25px -10px rgba(0, 0, 0, 0.7);
+  box-shadow: -3px 0 17px 5px rgba(0, 0, 0, 0.7), inset -2px 0 25px -10px rgba(0, 0, 0, 0.7);
   background: white;
+  max-width: 25em;
 }
 
-/* line 36, src/_general.scss */
+/* line 39, src/_general.scss */
 #textarea {
-  box-sizing: border-box;
+  -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
   color: #888;
   display: block;
   font-family: "Droid Sans", sans-serif;
@@ -134,12 +161,12 @@ body {
   height: auto;
   line-height: 1.6em;
 }
-/* line 53, src/_general.scss */
+/* line 55, src/_general.scss */
 #textarea img {
   display: block;
 }
 
-/* line 58, src/_general.scss */
+/* line 60, src/_general.scss */
 #status {
   position: fixed;
   right: 0;
@@ -153,33 +180,64 @@ body {
   -webkit-transition-duration: 500ms;
   z-index: 99;
 }
-/* line 71, src/_general.scss */
+/* line 73, src/_general.scss */
 #status.show {
   opacity: 1;
 }
-/* line 74, src/_general.scss */
+/* line 76, src/_general.scss */
 #status.hide {
   -webkit-transition-delay: 5s;
   opacity: 0;
 }
 
-/* line 80, src/_general.scss */
+/* line 82, src/_general.scss */
 .shortcuts, .about, .data-output {
   text-align: left;
 }
-/* line 83, src/_general.scss */
+/* line 85, src/_general.scss */
 .shortcuts h1, .about h1, .data-output h1 {
   margin-bottom: 1.3em;
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-weight: normal;
 }
-/* line 88, src/_general.scss */
+/* line 90, src/_general.scss */
 .shortcuts textarea, .about textarea, .data-output textarea {
   width: 290px;
   height: 145px;
   border: 2px dotted #DDD;
   padding: 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
   box-sizing: border-box;
+  padding: 1em;
+  margin: 0 auto 0.8em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  font-family: monospace;
+  color: #555;
+  -moz-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+  -o-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+}
+/* line 104, src/_general.scss */
+.shortcuts textarea:focus, .about textarea:focus, .data-output textarea:focus {
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+/* line 110, src/_general.scss */
+input, button {
+  font-family: DroidSans;
+}
+/* line 113, src/_general.scss */
+input:focus, button:focus {
+  outline: none;
 }
 
 /* line 1, src/_menu.scss */
@@ -187,141 +245,223 @@ body {
   position: fixed;
   text-decoration: none;
   padding: 0;
-  width: 32px;
+  width: 1.7em;
   background: #3a3533;
+  background: url(../img/leatherb.png) #151515;
   top: 0;
   left: 0;
   height: 100%;
   text-align: center;
   padding: 0;
   z-index: 9;
+  -moz-box-shadow: -4px 0 10px 3px #333333;
+  -webkit-box-shadow: -4px 0 10px 3px #333333;
+  -o-box-shadow: -4px 0 10px 3px #333333;
+  box-shadow: -4px 0 10px 3px #333333;
 }
-/* line 14, src/_menu.scss */
+/* line 16, src/_menu.scss */
 #menu li {
   position: relative;
 }
-/* line 17, src/_menu.scss */
+/* line 19, src/_menu.scss */
 #menu li .index {
   position: relative;
   z-index: 1;
-  font-family: symbol;
-  font-size: 18px;
-  color: #7a7573;
-  display: inline-block;
-  padding-top: 7px;
+  font-family: fontnomas;
+  font-size: 1.5em;
+  color: #999999;
+  display: block;
+  padding-top: 0.4em;
+  text-align: left;
+  text-indent: 0.18em;
 }
-/* line 26, src/_menu.scss */
+/* line 30, src/_menu.scss */
 #menu li .items {
   overflow: hidden;
-  font-size: 13px;
-  top: -1000px;
+  font-size: 0.7em;
   background-color: #fff;
   position: absolute;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-left: none;
   z-index: 9;
   color: #777;
-  width: 160px;
+  width: 15em;
   left: 100%;
   text-align: left;
   opacity: 0;
   top: 0px;
-  height: 0;
+  width: 0;
+  -moz-transition-property: all;
   -webkit-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -moz-transition-duration: 300ms;
   -webkit-transition-duration: 300ms;
+  -o-transition-duration: 300ms;
+  transition-duration: 300ms;
 }
 /* line 49, src/_menu.scss */
+#menu li .items.first {
+  border-top: none;
+}
+/* line 54, src/_menu.scss */
 #menu li:hover {
   cursor: default;
   z-index: 3;
 }
-/* line 52, src/_menu.scss */
+/* line 57, src/_menu.scss */
 #menu li:hover .index {
-  color: #cac5c3;
+  color: #dddddd;
 }
-/* line 55, src/_menu.scss */
+/* line 60, src/_menu.scss */
 #menu li:hover .items {
-  /*height: 300px;*/
   opacity: 1;
   height: auto;
+  width: 15em;
 }
-/* line 63, src/_menu.scss */
+/* line 67, src/_menu.scss */
 #menu li li {
   list-style: none;
-  padding: 5px 50px 5px 5px;
+  padding: 0.6em 3.7em 0.6em 0.6em;
   margin: 0;
   font-family: sans-serif;
   cursor: pointer;
   position: relative;
-  width: 160px;
+  width: 15em;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 73, src/_menu.scss */
+/* line 77, src/_menu.scss */
+#menu li li:hover {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.75);
+}
+/* line 81, src/_menu.scss */
+#menu li li:hover .option {
+  color: #fff;
+  opacity: 1;
+}
+/* line 85, src/_menu.scss */
+#menu li li:hover .delete:hover {
+  color: rgba(200, 35, 35, 0.9);
+}
+/* line 88, src/_menu.scss */
+#menu li li:hover .rename:hover {
+  color: #0f7dd6;
+}
+/* line 93, src/_menu.scss */
 #menu li .dragging {
   cursor: move;
   opacity: 0.5;
 }
-/* line 77, src/_menu.scss */
+/* line 97, src/_menu.scss */
 #menu li .option {
-  color: #ddd;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 1.2em;
+  width: 0.8em;
+  top: 0.2em;
+  font-family: fontnomas;
+  opacity: 0;
+  -moz-transition-property: all;
+  -webkit-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -moz-transition-duration: 100ms;
+  -webkit-transition-duration: 100ms;
+  -o-transition-duration: 100ms;
+  transition-duration: 100ms;
 }
-/* line 80, src/_menu.scss */
-#menu li li:hover {
-  color: #fff;
-  background: #abced4;
-}
-/* line 84, src/_menu.scss */
-#menu li li:hover .option {
-  color: #fff;
-}
-/* line 87, src/_menu.scss */
-#menu li li:hover .delete:hover {
-  color: #ee8888;
-}
-/* line 90, src/_menu.scss */
-#menu li li:hover .rename:hover {
-  color: #6688aa;
-}
-/* line 94, src/_menu.scss */
-#menu li .delete {
+/* line 108, src/_menu.scss */
+#menu li .option.delete {
   position: absolute;
-  right: 5px;
-  padding: 5px;
-  top: 0;
+  right: 0.3em;
+  padding: 0.2em;
+  font-size: 1.3em;
 }
-/* line 100, src/_menu.scss */
-#menu li .rename {
+/* line 114, src/_menu.scss */
+#menu li .option.rename {
   position: absolute;
-  right: 20px;
-  padding: 5px;
-  top: 0;
-  font-family: symbol;
-  font-size: 11px;
+  right: 1.8em;
+  padding: 0.3em;
 }
-/* line 109, src/_menu.scss */
+/* line 120, src/_menu.scss */
+#menu li .txt {
+  word-break: break-word;
+}
+/* line 124, src/_menu.scss */
 #menu li #newnote {
-  background: #aaa;
+  background: rgba(0, 0, 0, 0.5);
   color: white;
 }
-/* line 113, src/_menu.scss */
+/* line 127, src/_menu.scss */
 #menu li #newnote:hover {
-  background: #abced4;
+  background: rgba(0, 0, 0, 0.75);
 }
-/* line 116, src/_menu.scss */
+/* line 130, src/_menu.scss */
 #menu li #newnote .option {
   position: absolute;
-  right: 5px;
-  padding: 5px;
+  right: 0.3em;
+  padding: 0.3em;
   top: 0;
   color: white;
-  -webkit-transform-origin: 50% 50%;
-  -webkit-transform: rotate(45deg);
+  font-size: 1.3em;
+  right: 0.74em;
+  width: 1em;
+  opacity: 1;
 }
-/* line 126, src/_menu.scss */
+/* line 142, src/_menu.scss */
 #menu li .over {
   border-top: 1.8em solid #ccc;
+}
+/* line 146, src/_menu.scss */
+#menu #shortcuts {
+  cursor: pointer;
+}
+/* line 149, src/_menu.scss */
+#menu #shortcuts .index {
+  font-size: 1.2em;
+  text-indent: 0.38em;
+  margin-top: 1em;
+}
+/* line 156, src/_menu.scss */
+#menu #options .index {
+  font-size: 1.05em;
+  text-indent: 0.32em;
+  margin-top: 0.6em;
+}
+/* line 161, src/_menu.scss */
+#menu #options .items {
+  top: 0.3em;
+}
+/* line 165, src/_menu.scss */
+#menu #about {
+  cursor: pointer;
+}
+/* line 168, src/_menu.scss */
+#menu #about .index {
+  font-size: 0.95em;
+  text-indent: 0.54em;
+  margin-top: 0.7em;
+}
+/* line 176, src/_menu.scss */
+#menu #shortcuts .index, #menu #options .index, #menu #about .index {
+  opacity: 0.5;
+}
+/* line 180, src/_menu.scss */
+#menu #shortcuts:hover .index, #menu #options:hover .index, #menu #about:hover .index {
+  opacity: 0.8;
+}
+/* line 183, src/_menu.scss */
+#menu #shortcuts .option, #menu #options .option, #menu #about .option {
+  position: absolute;
+  right: 0.3em;
+  padding: 0.3em;
+  top: 0;
+  font-size: 1.3em;
+  right: 0.74em;
+  opacity: 1;
 }
 
 /* line 1, src/_modal.scss */
@@ -334,8 +474,14 @@ body {
   height: 0;
   overflow: hidden;
   opacity: 0;
+  -moz-transition-duration: 300ms;
   -webkit-transition-duration: 300ms;
-  -webkit-transition-properties: all;
+  -o-transition-duration: 300ms;
+  transition-duration: 300ms;
+  -moz-transition-property: opacity;
+  -webkit-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
 }
 /* line 13, src/_modal.scss */
 #modal.show {
@@ -356,65 +502,109 @@ body {
   padding: 40px 30px;
   margin: 30px auto;
   background: white;
-  -webkit-box-shadow: 0 0 15px #ccc;
+  -moz-box-shadow: 0 0 15px #cccccc;
+  -webkit-box-shadow: 0 0 15px #cccccc;
+  -o-box-shadow: 0 0 15px #cccccc;
+  box-shadow: 0 0 15px #cccccc;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
   position: relative;
   max-width: 300px;
 }
-/* line 36, src/_modal.scss */
+/* line 37, src/_modal.scss */
 #modal .container .close {
   position: absolute;
-  top: 0;
-  right: 0;
-  color: #ee8888;
+  top: -0.4em;
+  right: -0.3em;
+  color: rgba(8, 4, 0, 0.9);
   background: transparent;
   border: none;
-  font-size: 1.2em;
-  opacity: 0.8;
+  font-size: 1.6em;
+  opacity: 0.7;
   cursor: pointer;
+  font-family: fontnomas;
+  width: 1.5em;
 }
-/* line 47, src/_modal.scss */
+/* line 50, src/_modal.scss */
 #modal .container .close:hover {
   opacity: 1;
 }
-/* line 51, src/_modal.scss */
+/* line 53, src/_modal.scss */
+#modal .container .close:active {
+  color: rgba(200, 35, 35, 0.9);
+}
+/* line 57, src/_modal.scss */
 #modal .container .content {
   overflow: auto;
-  max-height: 322px;
   padding-bottom: 10px;
 }
-/* line 58, src/_modal.scss */
+/* line 64, src/_modal.scss */
 #modal .prompt, #modal .confirm, #modal .alert {
   color: #666;
   font-size: 14px;
   text-align: center;
 }
-/* line 63, src/_modal.scss */
+/* line 69, src/_modal.scss */
 #modal .prompt .message, #modal .confirm .message, #modal .alert .message {
   margin-bottom: 1.4em;
   font-weight: 100;
-  line-height: 1.2em;
+  line-height: 1.4em;
 }
-/* line 68, src/_modal.scss */
+/* line 74, src/_modal.scss */
 #modal .prompt .text, #modal .confirm .text, #modal .alert .text {
-  padding: 6px 10px;
+  padding: 0.5em 0.6em 0.4em;
   margin: 0 auto 0.8em;
-  border: 1px solid #ddd;
-}
-/* line 73, src/_modal.scss */
-#modal .prompt button, #modal .confirm button, #modal .alert button {
-  background: #ddd;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 1.3em;
   color: #555;
-  border: 1px solid #ddd;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -o-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -khtml-border-radius: 4px;
-  border-radius: 4px;
-  padding: 6px 10px;
-  font-size: 13px;
+  -moz-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+  -o-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
 }
-/* line 81, src/_modal.scss */
-#modal .prompt .ok, #modal .confirm .ok, #modal .alert .ok {
-  margin-right: 15px;
+/* line 83, src/_modal.scss */
+#modal .prompt .text:focus, #modal .confirm .text:focus, #modal .alert .text:focus {
+  border-color: rgba(0, 0, 0, 0.4);
+}
+/* line 91, src/_modal.scss */
+#modal button {
+  background: rgba(8, 4, 0, 0.9);
+  color: #E0E0E0;
+  -moz-border-radius: 2em;
+  -webkit-border-radius: 2em;
+  -o-border-radius: 2em;
+  -ms-border-radius: 2em;
+  -khtml-border-radius: 2em;
+  border-radius: 2em;
+  padding: 0.7em 1.4em 0.7em;
+  font-size: 13px;
+  cursor: pointer;
+  margin: 5px;
+  text-shadow: 0 0px 2px black;
+  border: none;
+  -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+  -o-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+}
+/* line 104, src/_modal.scss */
+#modal button:active {
+  background: rgba(8, 4, 0, 0.6);
+}
+/* line 108, src/_modal.scss */
+#modal button:hover, #modal button:focus {
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
