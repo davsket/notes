@@ -144,7 +144,7 @@ function initializeNotes(){
 	// fonts.setAttribute('rel', 'stylesheet');
 	// fonts.setAttribute('type', 'text/css');
 		
-	style.setAttribute('href', 'css/iframe_doc.css');
+	style.setAttribute('href', 'css/iframe_doc.css?v=2');
 	style.setAttribute('rel', 'stylesheet');
 	style.setAttribute('type', 'text/css');
 

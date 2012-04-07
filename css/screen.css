@@ -68,14 +68,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 @font-face {
-  font-family: 'symbol';
-  src: url("../font/websymbols-regular-webfont.eot");
-  src: url("../font/websymbols-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../font/websymbols-regular-webfont.woff") format("woff"), url("../font/websymbols-regular-webfont.ttf") format("truetype"), url("../font/websymbols-regular-webfont.svg#WebSymbolsRegular") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: 'fontnomas';
   src: url("../font/fontomas-webfont.eot");
   src: url("../font/fontomas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/fontomas-webfont.ttf") format("truetype");
@@ -115,25 +107,25 @@ html {
   width: 100%;
   background: #F2D199;
   background-color: #F2D199;
-  background-image: url(../img/wood.png);
+  background-image: url(../img/wood.png?v=2);
 }
 
-/* line 23, src/_general.scss */
+/* line 22, src/_general.scss */
 html::-webkit-scrollbar {
   display: none;
 }
 
-/* line 26, src/_general.scss */
+/* line 25, src/_general.scss */
 iframe::-webkit-scrollbar {
   display: none;
 }
 
-/* line 30, src/_general.scss */
+/* line 29, src/_general.scss */
 a {
   color: dodgerblue;
 }
 
-/* line 34, src/_general.scss */
+/* line 33, src/_general.scss */
 body {
   height: 100%;
   padding: 0 0 0 1.8em;
@@ -146,7 +138,7 @@ body {
   max-width: 25em;
 }
 
-/* line 43, src/_general.scss */
+/* line 42, src/_general.scss */
 #textarea {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -166,12 +158,12 @@ body {
   height: auto;
   line-height: 1.6em;
 }
-/* line 59, src/_general.scss */
+/* line 58, src/_general.scss */
 #textarea img {
   display: block;
 }
 
-/* line 64, src/_general.scss */
+/* line 63, src/_general.scss */
 #status {
   position: fixed;
   right: 0;
@@ -185,27 +177,27 @@ body {
   -webkit-transition-duration: 500ms;
   z-index: 99;
 }
-/* line 77, src/_general.scss */
+/* line 76, src/_general.scss */
 #status.show {
   opacity: 1;
 }
-/* line 80, src/_general.scss */
+/* line 79, src/_general.scss */
 #status.hide {
   -webkit-transition-delay: 5s;
   opacity: 0;
 }
 
-/* line 86, src/_general.scss */
+/* line 85, src/_general.scss */
 .shortcuts, .about, .data-output {
   text-align: left;
 }
-/* line 89, src/_general.scss */
+/* line 88, src/_general.scss */
 .shortcuts h1, .about h1, .data-output h1 {
   margin-bottom: 1.3em;
   font-size: 1.4em;
   font-weight: normal;
 }
-/* line 94, src/_general.scss */
+/* line 93, src/_general.scss */
 .shortcuts textarea, .about textarea, .data-output textarea {
   width: 290px;
   height: 145px;
@@ -231,16 +223,16 @@ body {
   -o-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
   box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
 }
-/* line 108, src/_general.scss */
+/* line 107, src/_general.scss */
 .shortcuts textarea:focus, .about textarea:focus, .data-output textarea:focus {
   border-color: rgba(0, 0, 0, 0.4);
 }
 
-/* line 114, src/_general.scss */
+/* line 113, src/_general.scss */
 input, button {
   font-family: DroidSans;
 }
-/* line 117, src/_general.scss */
+/* line 116, src/_general.scss */
 input:focus, button:focus {
   outline: none;
 }
@@ -252,7 +244,7 @@ input:focus, button:focus {
   padding: 0;
   width: 1.7em;
   background: #3a3533;
-  background: url(../img/leatherb.png) #151515;
+  background: url(../img/leatherb.png?v=2) #151515;
   top: 0;
   left: 0;
   height: 100%;
