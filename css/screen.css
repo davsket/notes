@@ -139,6 +139,38 @@ body {
 }
 
 /* line 42, src/_general.scss */
+#header {
+  z-index: 2;
+  background: white;
+  position: relative;
+  -moz-box-shadow: inset -12px 0 25px -20px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: inset -12px 0 25px -20px rgba(0, 0, 0, 0.7);
+  -o-box-shadow: inset -12px 0 25px -20px rgba(0, 0, 0, 0.7);
+  box-shadow: inset -12px 0 25px -20px rgba(0, 0, 0, 0.7);
+}
+/* line 48, src/_general.scss */
+#header input {
+  border: none;
+  display: block;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  background: transparent;
+  text-align: center;
+  padding: 0.75em 1em 0.4em;
+  font-size: 1.1em;
+  box-sizing: border-box;
+  height: 58px;
+}
+/* line 61, src/_general.scss */
+#header input:focus {
+  -moz-box-shadow: inset 0 0 5px 8px rgba(255, 255, 0, 0.2);
+  -webkit-box-shadow: inset 0 0 5px 8px rgba(255, 255, 0, 0.2);
+  -o-box-shadow: inset 0 0 5px 8px rgba(255, 255, 0, 0.2);
+  box-shadow: inset 0 0 5px 8px rgba(255, 255, 0, 0.2);
+}
+
+/* line 67, src/_general.scss */
 #textarea {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -147,7 +179,7 @@ body {
   color: #888;
   display: block;
   font-family: "Droid Sans", sans-serif;
-  margin: 0 auto;
+  margin: -56px auto 0;
   outline: none;
   padding: 0;
   padding: 0;
@@ -158,12 +190,12 @@ body {
   height: auto;
   line-height: 1.6em;
 }
-/* line 58, src/_general.scss */
+/* line 83, src/_general.scss */
 #textarea img {
   display: block;
 }
 
-/* line 63, src/_general.scss */
+/* line 88, src/_general.scss */
 #status {
   position: fixed;
   right: 0;
@@ -177,27 +209,27 @@ body {
   -webkit-transition-duration: 500ms;
   z-index: 99;
 }
-/* line 76, src/_general.scss */
+/* line 101, src/_general.scss */
 #status.show {
   opacity: 1;
 }
-/* line 79, src/_general.scss */
+/* line 104, src/_general.scss */
 #status.hide {
   -webkit-transition-delay: 5s;
   opacity: 0;
 }
 
-/* line 85, src/_general.scss */
+/* line 110, src/_general.scss */
 .shortcuts, .about, .data-output {
   text-align: left;
 }
-/* line 88, src/_general.scss */
+/* line 113, src/_general.scss */
 .shortcuts h1, .about h1, .data-output h1 {
   margin-bottom: 1.3em;
   font-size: 1.4em;
   font-weight: normal;
 }
-/* line 93, src/_general.scss */
+/* line 118, src/_general.scss */
 .shortcuts textarea, .about textarea, .data-output textarea {
   width: 290px;
   height: 145px;
@@ -223,16 +255,16 @@ body {
   -o-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
   box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
 }
-/* line 107, src/_general.scss */
+/* line 132, src/_general.scss */
 .shortcuts textarea:focus, .about textarea:focus, .data-output textarea:focus {
   border-color: rgba(0, 0, 0, 0.4);
 }
 
-/* line 113, src/_general.scss */
+/* line 138, src/_general.scss */
 input, button {
   font-family: DroidSans;
 }
-/* line 116, src/_general.scss */
+/* line 141, src/_general.scss */
 input:focus, button:focus {
   outline: none;
 }

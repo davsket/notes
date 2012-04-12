@@ -56,6 +56,8 @@ var
 	menulist = $('menulist'),
 	//The new note button in the menu
 	newnote = $('newnote'),
+	//Title input
+	titleInput = $$('#header .title')[0],
 	//The DnD source element 
 	dragSrcEl,
 	//The app prefix for the notes list
@@ -68,6 +70,8 @@ var
 	modal = new Modal(null, true),
 	//Timeout for notifications
 	timeOut,
+	//Timeout for keyEvent
+	timeOutKey,
 	menuAbout = $('about'),
 	menuExportData = $('export_data'),
 	menuImportData = $('import_data'),
@@ -78,6 +82,8 @@ var
 /************************************
  * Events listening
  ************************************/
+//TITLE EVENTS
+titleInput.addEventListener('keyup', titleKeyUpEvents);
 
 //TEXTAREA EVENTS
 
@@ -195,7 +201,7 @@ function createNote(name, ignore_new_item){
  *
  * @param {String} [noteName] if not given creates a default 'New note'.
  */
-function loadNote(noteName){
+function loadNote(noteName, ignoreFocus){
 	//If no name is given, creates a new one
 	//with the name 'New one'
 	if(!noteName){
@@ -207,9 +213,13 @@ function loadNote(noteName){
 
 	//Loads the content in the textarea iframe
 	textarea.contentDocument.body.innerHTML = localStorage.getItemJSON(notesPrefix+noteName) || '';
-	//Focus the textarea body
-	textarea.contentDocument.body.focus();
-	//And sets the application title
+	if(!ignoreFocus){
+		//Focus the textarea body
+		textarea.contentDocument.body.focus();
+	}
+	//Sets the application title
+	titleInput.value = noteName;
+	//And sets the browser title
 	document.title = 'Editing ' + noteName;
 	//Sets the textarea height to auto... FIXME?
 	textarea.style.height = 'auto';
@@ -309,7 +319,7 @@ function onMenuClick(evt){
 			oldname = parentNode.dataset.name;
 		modal.prompt('New name:', (function(textNode, oldname, parentNode){
 			return function(name){
-				if(!name){
+				if(!name || oldname == name){
 					return false;
 				} 
 				//If a name is given 
@@ -318,14 +328,16 @@ function onMenuClick(evt){
 					textNode.innerHTML = name;
 					//Reset the parent node dataset
 					parentNode.dataset.name = name;
+					//Reset the title value
+					titleInput.value = name;
 					//Rename the local storage note name
 					localStorage.setItem(notesPrefix+name, localStorage.getItem(notesPrefix+oldname));
-					//Deletes the old one
-					deleteNote(oldname);
 					//Update the notes list
 					newlists = localStorage.getItemJSON(listsPrefix);
 					newlists.push(name);
 					localStorage.setItem(listsPrefix, JSON.stringify(newlists));
+					//Deletes the old one
+					deleteNote(oldname);
 					//Load this note (sets this note as actual)
 					loadNote(name);
 				}
@@ -561,6 +573,52 @@ function hideMenu(){
 /////////////////////////////////////////
 //KEY EVENTS FUNCTIONS 
 /////////////////////////////////////////
+
+/**
+ * Listen the keyup events from the title input
+ * and asigns to the actual note it's new name
+ * 
+ * @param {Event} evt
+ */
+function titleKeyUpEvents(evt){
+	var name = this.value,
+		oldname = localStorage.getItem(lastPrefix),
+		liNode,
+		textNode;
+	
+	clearTimeout(timeOutKey);
+	
+	console.log(name , oldname, name == oldname);
+	if(oldname == name)
+			return true;
+
+	if(name == ""){
+		this.value = oldname;
+		return true;
+	}
+	
+	liNode = $$('[data-name="'+oldname+'"]')[0];
+	textNode = $$('[data-name="'+oldname+'"] .txt')[0];
+
+	timeOutKey = setTimeout((function(name, oldname, liNode, textNode){ 
+		return function blind(){
+			textNode.innerHTML = name;
+			//Reset the parent node dataset
+			liNode.dataset.name = name;
+			//Rename the local storage note name
+			localStorage.setItem(notesPrefix+name, localStorage.getItem(notesPrefix+oldname));
+			//Update the notes list
+			newlists = localStorage.getItemJSON(listsPrefix);
+			newlists.push(name);
+			localStorage.setItem(listsPrefix, JSON.stringify(newlists));
+			localStorage.setItem(lastPrefix, name);
+			//Deletes the old one
+			deleteNote(oldname);
+			//Load this note (sets this note as actual)
+			loadNote(name, true);
+		}
+	 })(name, oldname, liNode, textNode), 300);
+};
 
 /**
  * Listen the keyup events and notifies 'saved'
