@@ -216,9 +216,9 @@ function loadNote(noteName, ignoreFocus){
 	if(!ignoreFocus){
 		//Focus the textarea body
 		textarea.contentDocument.body.focus();
+		//Sets the application title
+		titleInput.value = noteName;
 	}
-	//Sets the application title
-	titleInput.value = noteName;
 	//And sets the browser title
 	document.title = 'Editing ' + noteName;
 	//Sets the textarea height to auto... FIXME?
