@@ -156,7 +156,7 @@ function initializeNotes(){
 	// fonts.setAttribute('rel', 'stylesheet');
 	// fonts.setAttribute('type', 'text/css');
 		
-	style.setAttribute('href', 'css/iframe_doc.css?v=2');
+	style.setAttribute('href', 'css/iframe_doc.css?v=1');
 	style.setAttribute('rel', 'stylesheet');
 	style.setAttribute('type', 'text/css');
 
@@ -596,7 +596,7 @@ function titleKeyUpEvents(evt){
 		this.value = oldname;
 		return true;
 	}
-	
+
 	liNode = $$('[data-name="'+oldname+'"]')[0];
 	textNode = $$('[data-name="'+oldname+'"] .txt')[0];
 
