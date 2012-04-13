@@ -427,7 +427,7 @@ function showAbout(){
 			"Notes also lets you set styling on the notes via shortcuts like: Cmd+b, Cmd+i, etc. (For more information visit the shurcuts, or press Alt+s)!<br><br>"+
 			"All your data is stored in the browser Local Storage, which means: your data won't ever be stored on the server, but in the browser, so... yes, you change from browser or open this in an incognito window and there won't be any of your notes.<br><br>"+
 			"Is there a way to retrieve your notes and load them in other browser? yes! if you go to the menu options or press Alt+g, it will open a modal with the application data as text. And in the menu options or with Alt+l you can load (add/append) that data into the other Notes app.<br><br><br>"+
-			"<h1>About me and Notes</h1>"+
+			"<h1>About me and Notes (v 0.1)</h1>"+
 			"My name is David Avellaneda a.k.a. <a href='http://twitter.com/Davsket' target='_blank'>Davsket</a> and I built this app for my self and my friends.<br><br>"+
 			"The source of this application can be found at <a href='http://github.com/davsket/notes' target='_blank'>Github</a>.<br><br>"+
 			"Please enjoy it and any suggestion please let me know via <a href='http://twitter.com/intent/tweet?text=Hey @notes_app, I like your app but...' target='_blank'>Twitter: @notes_app</a>."+
