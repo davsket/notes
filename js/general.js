@@ -421,7 +421,7 @@ function showAbout(){
 			"<h1>About me and Notes</h1>"+
 			"My name is David Avellaneda a.k.a. <a href='http://twitter.com/Davsket' target='_blank'>Davsket</a> and I built this app for my self and my friends.<br><br>"+
 			"The source of this application can be found at <a href='http://github.com/davsket/notes' target='_blank'>Github</a>.<br><br>"+
-			"Please enjoy it and any suggestion please let me know via <a href='http://twitter.com/intent/tweet?text=Hey @Davsket, I like your app but...' target='_blank'>Twitter</a>."+
+			"Please enjoy it and any suggestion please let me know via <a href='http://twitter.com/intent/tweet?text=Hey @notes_app, I like your app but...' target='_blank'>Twitter: @notes_app</a>."+
 		"</div>";
 
 	hideMenu();
