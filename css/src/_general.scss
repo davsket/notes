@@ -87,16 +87,21 @@ body {
 		
 #status{
 	position: fixed;
-	right: 0;
-	bottom: 0;
-	padding: 10px 15px;;
+	left: 38px;
+	top: 15px;
+	padding: 8px 11px 6px;
 	color: #333;
-	background-color: #DDD;
+	background-color: 
+	rgba(245, 245, 80, 0.4);
 	font-size: 14px;
 	opacity: 0;
-	-webkit-transition-property: opacity;
-	-webkit-transition-duration: 500ms;
-	z-index: 99;
+	@include transition-property(opacity);
+	@include transition-duration(500ms);
+	z-index: 4;
+	@include border-radius(0 6px 6px 0 );
+	font-size: 0.55em;
+	@include box-shadow(3px 0px 9px rgba(245, 245, 80, 0.4));
+
 	
 	&.show{
 		opacity: 1;

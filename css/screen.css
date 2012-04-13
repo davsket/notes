@@ -198,38 +198,55 @@ body {
 /* line 88, /Users/davsket/workspace/notes/css/src/_general.scss */
 #status {
   position: fixed;
-  right: 0;
-  bottom: 0;
-  padding: 10px 15px;
+  left: 38px;
+  top: 15px;
+  padding: 8px 11px 6px;
   color: #333;
-  background-color: #DDD;
+  background-color: rgba(245, 245, 80, 0.4);
   font-size: 14px;
   opacity: 0;
+  -moz-transition-property: opacity;
   -webkit-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
+  -moz-transition-duration: 500ms;
   -webkit-transition-duration: 500ms;
-  z-index: 99;
+  -o-transition-duration: 500ms;
+  transition-duration: 500ms;
+  z-index: 4;
+  -moz-border-radius: 0 6px 6px 0;
+  -webkit-border-radius: 0 6px 6px 0;
+  -o-border-radius: 0 6px 6px 0;
+  -ms-border-radius: 0 6px 6px 0;
+  -khtml-border-radius: 0 6px 6px 0;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.55em;
+  -moz-box-shadow: 3px 0px 9px rgba(245, 245, 80, 0.4);
+  -webkit-box-shadow: 3px 0px 9px rgba(245, 245, 80, 0.4);
+  -o-box-shadow: 3px 0px 9px rgba(245, 245, 80, 0.4);
+  box-shadow: 3px 0px 9px rgba(245, 245, 80, 0.4);
 }
-/* line 101, /Users/davsket/workspace/notes/css/src/_general.scss */
+/* line 106, /Users/davsket/workspace/notes/css/src/_general.scss */
 #status.show {
   opacity: 1;
 }
-/* line 104, /Users/davsket/workspace/notes/css/src/_general.scss */
+/* line 109, /Users/davsket/workspace/notes/css/src/_general.scss */
 #status.hide {
   -webkit-transition-delay: 5s;
   opacity: 0;
 }
 
-/* line 110, /Users/davsket/workspace/notes/css/src/_general.scss */
+/* line 115, /Users/davsket/workspace/notes/css/src/_general.scss */
 .shortcuts, .about, .data-output {
   text-align: left;
 }
-/* line 113, /Users/davsket/workspace/notes/css/src/_general.scss */
+/* line 118, /Users/davsket/workspace/notes/css/src/_general.scss */
 .shortcuts h1, .about h1, .data-output h1 {
   margin-bottom: 1.3em;
   font-size: 1.4em;
   font-weight: normal;
 }
-/* line 118, /Users/davsket/workspace/notes/css/src/_general.scss */
+/* line 123, /Users/davsket/workspace/notes/css/src/_general.scss */
 .shortcuts textarea, .about textarea, .data-output textarea {
   width: 290px;
   height: 145px;
@@ -255,16 +272,16 @@ body {
   -o-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
   box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
 }
-/* line 132, /Users/davsket/workspace/notes/css/src/_general.scss */
+/* line 137, /Users/davsket/workspace/notes/css/src/_general.scss */
 .shortcuts textarea:focus, .about textarea:focus, .data-output textarea:focus {
   border-color: rgba(0, 0, 0, 0.4);
 }
 
-/* line 138, /Users/davsket/workspace/notes/css/src/_general.scss */
+/* line 143, /Users/davsket/workspace/notes/css/src/_general.scss */
 input, button {
   font-family: DroidSans;
 }
-/* line 141, /Users/davsket/workspace/notes/css/src/_general.scss */
+/* line 146, /Users/davsket/workspace/notes/css/src/_general.scss */
 input:focus, button:focus {
   outline: none;
 }

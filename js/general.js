@@ -75,7 +75,8 @@ var
 	menuAbout = $('about'),
 	menuExportData = $('export_data'),
 	menuImportData = $('import_data'),
-	menuShortcuts = $('shortcuts')
+	menuShortcuts = $('shortcuts'),
+	welcomeNote = {name: "Welcome", content: "<div><br></div><div>Hello, it looks like it's your first time here. Here are some tips about this application, you can modify this note as you want:</div><blockquote style=\"margin: 0 0 0 40px; border: none; padding: 0px;\"><ol><li>It lets you apply to your notes styles like: <i>italic, </i><b>bold, </b><u>underline</u>, all them <i><u><b>together</b></u></i>, and erase them, just by using key board short-cuts.</li><li>You can also make indentations, ordered and unordered lists, and tabs, just in the <i>same way</i>.</li><li>Your data keeps locally (this browser) and it's never gonna be stored in any server or elsewhere.</li><li>It lets you do: <b>undo</b> and <b>redo </b>your changes.</li><li>You can change the name of this note by editing the title directly or using the list... <i>(read next tip)</i></li><li>Te <b>four-squared</b> icon lets you acces to a list with all the notes you have. From there you can create new notes, edit them and delete them.</li><li>The <b>lightning</b> icon lets you access to a list with all the shortcuts.</li><li>The <b>wheel</b> lets you access to all the configuration options, by the while just: copy your notes and import some notes.</li><li>The information, there I will put information about this app, like versioning and fixes/improvements.</li></ol></blockquote>"}
 ;
 
 
@@ -129,7 +130,10 @@ function initializeNotes(){
 
 	//If there are no notes
 	if(!lists || lists.length == 0){
-		loadNote();
+		createNote(welcomeNote.name);
+		localStorage.setItem(lastPrefix, welcomeNote.name);
+		saveContent(welcomeNote.content);
+		loadNote(welcomeNote.name);
 	}
 	else{
 		//Create the menu list
@@ -199,14 +203,15 @@ function createNote(name, ignore_new_item){
 /**
  * Loads a note
  *
- * @param {String} [noteName] if not given creates a default 'New note'.
+ * @param {String} [noteName] if not given creates a welcome note.
  */
 function loadNote(noteName, ignoreFocus){
 	//If no name is given, creates a new one
-	//with the name 'New one'
 	if(!noteName){
-		noteName = 'New note';
-		createNote(noteName);
+		// createNote(welcomeNote.name);
+		// localStorage.getItemJSON(lastPrefix, welcomeNote.name);
+		// saveContent(welcomeNote.content);
+		console.log('damn')
 	}
 	//Then set this note as the actual
 	localStorage.setItem(lastPrefix, noteName);
@@ -242,7 +247,10 @@ function deleteNote(name){
 	localStorage.removeItem(notesPrefix+name);
 	//If the list is empty creates a new note
 	if(lists.length == 0){
-		loadNote();
+		createNote(welcomeNote.name);
+		localStorage.setItem(lastPrefix, welcomeNote.name);
+		saveContent(welcomeNote.content);
+		loadNote(welcomeNote.name);
 	}
 	//Else, if the actual note is the deleted one
 	//then open the first one
@@ -254,8 +262,9 @@ function deleteNote(name){
 /**
  * Saves the content in the actual note
  */
-function saveContent(){
-	localStorage.setItem(notesPrefix+localStorage.getItem(lastPrefix), textarea.contentDocument.body.innerHTML);
+function saveContent(content){
+	content = content || textarea.contentDocument.body.innerHTML;
+	localStorage.setItem(notesPrefix+localStorage.getItem(lastPrefix), content);
 };
 
 /**
@@ -374,7 +383,7 @@ function createMenuItem(name){
  */
 function notifySaved(){
 	var status = document.getElementById('status');
-	status.innerHTML = 'note saved as: '+localStorage.getItem(lastPrefix);
+	status.innerHTML = 'note saved!';
 	status.className = 'show';
 	setTimeout(function(){
 		status.className = 'show hide';
