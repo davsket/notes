@@ -398,8 +398,10 @@ function showShortcuts(){
 	var message = 
 		"<div class='shortcuts'> "+
 			"<h1>Notes Application' Shortcuts</h1>"+
+			"(Cmd in Mac, Ctrl in Windows/Linux)"
 			"Cmd + b = Bold<br>"+
 			"Cmd + u = Underline<br>"+
+			"Cmd + k = Strike Through<br>"+
 			"Cmd + i = Italic<br>"+
 			"Cmd + e = Erase format<br>"+
 			"Cmd + l = Unordered list<br>"+
