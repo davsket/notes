@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#Cache version 20
+#Cache version 21
 
 CACHE:
 #Images
@@ -25,3 +25,6 @@ font/DroidSans-webfont.ttf
 font/DroidSans-Bold-webfont.eot
 font/DroidSans-Bold-webfont.woff
 font/DroidSans-Bold-webfont.ttf
+
+NETWORK:
+http://www.google-analytics.com/ga.js
