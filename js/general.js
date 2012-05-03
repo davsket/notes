@@ -686,6 +686,11 @@ function textareaKeyDownEvents(evt){
 			evt.preventDefault();
 			textarea.contentDocument.execCommand('underline', false);
 		}
+		//Cmd+k, strikeThrough
+		else if(kc==75){
+			evt.preventDefault();
+			textarea.contentDocument.execCommand('strikeThrough', false);
+		}
 		//Cmd+i, Italic
 		else if(kc==73){
 			evt.preventDefault();
