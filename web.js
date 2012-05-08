@@ -6,6 +6,7 @@ var express = require('express'),
 	myPassword = 'le_password';
 
 app.use(express.static(__dirname+'/'));
+app.use(express.bodyParser());
 
 //Getting the application's email and password 
 redis.get('notesapp_email', function(err, value) {
