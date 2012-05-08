@@ -1,9 +1,9 @@
 CACHE MANIFEST
-#Cache version 25
+#Cache version 26
 
 CACHE:
 #Images
-note_icon.png
+icon.png
 img/wood.png
 img/leatherb.png
 
