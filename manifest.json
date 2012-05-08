@@ -1,0 +1,20 @@
+{
+    "name": "Notes App",
+    "description": "Create and edit your notes locally",
+    "version": "1",
+    "app": {
+        "urls": [
+            "*://davsket.me/notes"
+        ],
+        "launch": {
+            "web_url": "http://davsket.me/notes"
+        }
+    },
+    "icons": {
+        "128": "icon_128.png"
+    },
+    "permissions": [
+        "unlimitedStorage",
+        "notifications"
+    ]
+}

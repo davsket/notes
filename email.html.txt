@@ -1,0 +1,12 @@
+<table>
+	<tr>
+		<td>
+			<h1>A note was shared with you:</h1>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		{{{text}}}
+		</td>
+	</tr>
+<table>
