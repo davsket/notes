@@ -15,9 +15,9 @@ redis.get('notesapp_email_password', function(err, value) {
 	myPassword = value;
 });
 
-app.get('/test', function(request, response) {
+app.post('/test', function(request, response) {
 	var req = require('url').parse(request.url, true),
-		shortNote = req.query.note.replace(/<\/?[^<>]+>/g,'').substring(0,15);
+		shortNote = request.body.note.replace(/<\/?[^<>]+>/g,'').substring(0,15);
 
 	shortNote = shortNote.length > 15 ? shortNote + '...' : shortNote;
 
@@ -26,14 +26,14 @@ app.get('/test', function(request, response) {
 			host : "smtp.gmail.com",            // smtp server hostname
 			port : "25",                     	// smtp server port
 			domain : "davset.me",            	// domain used by client to identify itself to server
-			to : req.query.email,
+			to : request.body.email,
 			from : "no-reply@davsket.me",
 			subject : "Shared note: " + shortNote,
 			template : "email.html.txt",   		// path to template name
 			username: myEmail,
 			password: myPassword,
 		    data : {
-		      "text": req.query.note
+		      "text": request.body.note
 		    },
 			authentication : "login",        	// auth login is supported; anything else is no auth
 		},
