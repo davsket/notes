@@ -17,12 +17,10 @@ redis.get('notesapp_email_password', function(err, value) {
 });
 
 app.post('/test', function(request, response) {
-	// var shortNote = request.body.note.replace(/<\/?[^<>]+>/g,'').substring(0,15);
+	var shortNote = request.body.note.replace(/<\/?[^<>]+>/g,'').substring(0,15);
 
-	// shortNote = shortNote.length > 15 ? shortNote + '...' : shortNote;
-	console.log(request.body)
-	response.send(request.body);
-	return;
+	shortNote = shortNote.length > 15 ? shortNote + '...' : shortNote;
+
 	email.send(
 		{
 			host : "smtp.gmail.com",            // smtp server hostname
