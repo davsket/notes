@@ -17,34 +17,39 @@ redis.get('notesapp_email_password', function(err, value) {
 });
 
 app.post('/test', function(request, response) {
-	var shortNote = request.body.note.replace(/<\/?[^<>]+>/g,'').substring(0,15);
+	var shortNote = '';
+	console.log(request);
+	if(request.body.note && request.body.email){
+		shortNote = request.body.note.replace(/<\/?[^<>]+>/g,'').substring(0,15);
+		shortNote = shortNote.length > 15 ? shortNote + '...' : shortNote;
 
-	shortNote = shortNote.length > 15 ? shortNote + '...' : shortNote;
-
-	email.send(
-		{
-			host : "smtp.gmail.com",            // smtp server hostname
-			port : "25",                     	// smtp server port
-			domain : "davset.me",            	// domain used by client to identify itself to server
-			to : request.body.email,
-			from : "no-reply@davsket.me",
-			subject : "Shared note: " + shortNote,
-			template : "email.html.txt",   		// path to template name
-			username: myEmail,
-			password: myPassword,
-		    data : {
-		      "text": request.body.note
-		    },
-			authentication : "login",        	// auth login is supported; anything else is no auth
-		},
-		function(err, result){
-			if(err){ 
-				console.log(err); 
+		email.send(
+			{
+				host : "smtp.gmail.com",            // smtp server hostname
+				port : "25",                     	// smtp server port
+				domain : "davset.me",            	// domain used by client to identify itself to server
+				to : request.body.email,
+				from : "no-reply@davsket.me",
+				subject : "Shared note: " + shortNote,
+				template : "email.html.txt",   		// path to template name
+				username: myEmail,
+				password: myPassword,
+			    data : {
+			      "text": request.body.note
+			    },
+				authentication : "login",        	// auth login is supported; anything else is no auth
+			},
+			function(err, result){
+				if(err){ 
+					console.log(err); 
+				}
 			}
-		}
-	);
+		);
 
-  	response.send('{"OK":"'+request.body.note+'"}');
+	  	response.send('{"status": true, "message": "ok, email sent"}');	
+	}else{
+		response.send('{"status": false, "message": "not enough params"}');
+	}
 });
 
 var port = process.env.PORT || 3000;
