@@ -524,13 +524,20 @@ function importData(){
 function sendEmail(){
 	modal.prompt('Please insert here your email:', function(res){
 		if(res){
-			var req = new XMLHttpRequest();
+			var req = new XMLHttpRequest(),
+				params = 'email=' + res + '&note=' + localStorage.getItemJSON(notesPrefix+localStorage.getItemJSON(lastPrefix));
 			req.open('POST', '/test', true);
-			req.setRequestHeader('email', res);
-			req.setRequestHeader('note', localStorage.getItemJSON(notesPrefix+localStorage.getItemJSON(lastPrefix)));
-			req.send();
+
+			req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			req.setRequestHeader("Content-length", params.length);
+			req.setRequestHeader("Connection", "close");
+			req.send(params);
 			req.onload = function(e) {  
-				modal.alert('The note has being sent.');
+				if(req.status == 200){
+					modal.alert('The note has being sent.');
+				}else{
+					modal.alert('Sorry, there was a problem with the server, please tray again later.');
+				}
 			}
 		}
 	});
