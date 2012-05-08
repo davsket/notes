@@ -16,8 +16,7 @@ redis.get('notesapp_email_password', function(err, value) {
 });
 
 app.post('/test', function(request, response) {
-	var req = require('url').parse(request.url, true),
-		shortNote = request.body.note.replace(/<\/?[^<>]+>/g,'').substring(0,15);
+	var shortNote = request.body.note.replace(/<\/?[^<>]+>/g,'').substring(0,15);
 
 	shortNote = shortNote.length > 15 ? shortNote + '...' : shortNote;
 
