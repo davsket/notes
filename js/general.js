@@ -525,9 +525,9 @@ function sendEmail(){
 	modal.prompt('Please insert here your email:', function(res){
 		if(res){
 			var req = new XMLHttpRequest(),
-				params = 'email=' + res + '&note=' + localStorage.getItemJSON(notesPrefix+localStorage.getItemJSON(lastPrefix));
+				params = 'email=' + encodeURIComponent(res) + '&note=' + encodeURIComponent(localStorage.getItemJSON(notesPrefix+localStorage.getItemJSON(lastPrefix)));
+			
 			req.open('POST', '/test', true);
-
 			req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			req.setRequestHeader("Content-length", params.length);
 			req.setRequestHeader("Connection", "close");
