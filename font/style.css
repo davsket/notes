@@ -1,0 +1,14 @@
+@font-face {
+	font-family: 'IcoMoon';
+	src: url('icomoon.eot');
+	src: url('icomoon.eot?#iefix') format('embedded-opentype'),
+		url('icomoon.svg#IcoMoon') format('svg'),
+		url('icomoon.woff') format('woff'),
+		url('icomoon.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+.icon-b:before, .icon-a:after {
+	font-family: 'IcoMoon';
+	content: attr(data-icon);
+}

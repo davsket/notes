@@ -76,6 +76,7 @@ var
 	menuExportData = $('export_data'),
 	menuImportData = $('import_data'),
 	menuShortcuts = $('shortcuts'),
+	sendByEmail = $('send_email'),
 	welcomeNote = {name: "Welcome", content: "<div><br></div><div>Hello, it looks like it's your first time here. Here are some tips about this application, you can modify this note as you want:</div><blockquote style=\"margin: 0 0 0 40px; border: none; padding: 0px;\"><ol><li>It lets you apply to your notes styles like: <i>italic, </i><b>bold, </b><u>underline</u>, all them <i><u><b>together</b></u></i>, and erase them, just by using key board short-cuts.</li><li>You can also make indentations, ordered and unordered lists, and tabs, just in the <i>same way</i>.</li><li>Your data keeps locally (this browser) and it's never gonna be stored in any server or elsewhere.</li><li>It lets you do: <b>undo</b> and <b>redo </b>your changes.</li><li>You can change the name of this note by editing the title directly or using the list... <i>(read next tip)</i></li><li>Te <b>four-squared</b> icon lets you acces to a list with all the notes you have. From there you can create new notes, edit them and delete them.</li><li>The <b>lightning</b> icon lets you access to a list with all the shortcuts.</li><li>The <b>wheel</b> lets you access to all the configuration options, by the while just: copy your notes and import some notes.</li><li>The information, there I will put information about this app, like versioning and fixes/improvements.</li></ol></blockquote>"}
 ;
 
@@ -111,6 +112,7 @@ menuAbout.addEventListener('click', showAbout);
 menuExportData.addEventListener('click', showData);
 menuImportData.addEventListener('click', importData);
 menuShortcuts.addEventListener('click', showShortcuts);
+sendByEmail.addEventListener('click', sendEmail);
 
 
 
@@ -365,7 +367,7 @@ function onMenuClick(evt){
 function createMenuItem(name){
 		var el = document.createElement('li'), opc;
 		// S is the char for the edit icon in the symbols font
-		opc = '<span class="rename option">2</span><span class="delete option">3</span>';
+		opc = '<span class="rename option">J</span><span class="delete option">s</span>';
 		el.innerHTML = '<span class="txt">'+name+'</span>' + opc;
 		//Saves the name in the dataset
 		el.dataset.name = name;
@@ -515,6 +517,24 @@ function importData(){
 
 	// modal.alert('This option will be available soon');
 };
+
+/**
+ * Sends an email with the actual note
+ */
+function sendEmail(){
+	modal.prompt('Please insert here your email:', function(res){
+		if(res){
+			var req = new XMLHttpRequest();
+			req.open('POST', '/test', true);
+			req.setRequestHeader('email', res);
+			req.setRequestHeader('note', localStorage.getItemJSON(notesPrefix+localStorage.getItemJSON(lastPrefix)));
+			req.send();
+			req.onload = function(e) {  
+				modal.alert('The note has being sent.');
+			}
+		}
+	});
+}
 
 /**
  * Listen the import click event and does the dirty job.

@@ -27,7 +27,20 @@
          url('../font/DroidSans-Bold-webfont.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
-
+}
+@font-face {
+    font-family: 'IcoMoon';
+    src: url('../font/icomoon.eot');
+    src: url('../font/icomoon.eot?#iefix') format('embedded-opentype'),
+        url('../font/icomoon.svg#IcoMoon') format('svg'),
+        url('../font/icomoon.woff') format('woff'),
+        url('../font/icomoon.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+.icon-b:before, .icon-a:after {
+    font-family: 'IcoMoon';
+    content: attr(data-icon);
 }
 
 

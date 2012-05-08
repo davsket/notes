@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#Cache version 23
+#Cache version 25
 
 CACHE:
 #Images
@@ -16,9 +16,13 @@ js/general.js
 js/modal.js
 
 #Fonts
-font/fontomas-webfont.eot
-font/fontomas-webfont.ttf
-font/fontomas.svg
+#font/fontomas-webfont.eot
+#font/fontomas-webfont.ttf
+#font/fontomas.svg
+font/icomoon.eot
+font/icomoon.svg
+font/icomoon.ttf
+font/icomoon.woff
 font/DroidSans-webfont.eot
 font/DroidSans-webfont.woff
 font/DroidSans-webfont.ttf

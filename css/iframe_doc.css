@@ -87,6 +87,20 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'IcoMoon';
+  src: url("../font/icomoon.eot");
+  src: url("../font/icomoon.eot?#iefix") format("embedded-opentype"), url("../font/icomoon.svg#IcoMoon") format("svg"), url("../font/icomoon.woff") format("woff"), url("../font/icomoon.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* line 41, src/_fonts.scss */
+.icon-b:before, .icon-a:after {
+  font-family: 'IcoMoon';
+  content: attr(data-icon);
+}
+
 /* line 4, src/iframe_doc.scss */
 html::-webkit-scrollbar {
   display: none;

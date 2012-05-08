@@ -19,13 +19,13 @@
 		.index{
 			position: relative;
 			z-index: 1;
-			font-family: fontnomas;
+			font-family: IcoMoon;
 			font-size: 1.5em;
 			color: $inactive;
 			display: block;
 			padding-top: 0.4em;
 			text-align: left;
-			text-indent: 0.18em;
+			text-indent: 0.091em;
 		}
 		.items{
 			overflow: hidden;
@@ -99,7 +99,7 @@
 			font-size: 1.2em;
 			width: 0.8em;
 			top: 0.2em;
-			font-family: fontnomas;
+			font-family: IcoMoon;
 			opacity: 0;
 			@include transition-property(all);
 			@include transition-duration(100ms);
@@ -147,15 +147,15 @@
 		cursor: pointer;
 
 		.index{
-			font-size: 1.2em;
-			text-indent: 0.38em;
+			font-size: 1.35em;
+			text-indent: 0.17em;
 			margin-top: 1em;
 		}
 	}
 	#options{
 		.index{
-			font-size: 1.05em;
-			text-indent: 0.32em;
+			font-size: 1.0em;
+			text-indent: 0.4em;
 			margin-top: 0.6em;
 		}
 		.items{
@@ -167,7 +167,7 @@
 
 		.index{
 			font-size: 0.95em;
-			text-indent: 0.54em;
+			text-indent: 0.4em;
 			margin-top: 0.7em;
 		}
 	}
