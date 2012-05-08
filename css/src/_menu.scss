@@ -1,0 +1,193 @@
+#menu{
+	position: fixed;
+	text-decoration: none;
+	padding: 0;
+	width: 1.7em;
+	background: $bg;
+	background: url(../img/leatherb.png) #151515;
+	top: 0;
+	left: 0;
+	height: 100%;
+	text-align: center;
+	padding: 0;
+	z-index: 9;
+	@include box-shadow(-4px 0 10px 3px #333);
+
+	li{
+		position: relative;
+
+		.index{
+			position: relative;
+			z-index: 1;
+			font-family: fontnomas;
+			font-size: 1.5em;
+			color: $inactive;
+			display: block;
+			padding-top: 0.4em;
+			text-align: left;
+			text-indent: 0.18em;
+		}
+		.items{
+			overflow: hidden;
+			font-size: 0.7em;
+			background-color: #fff;
+			position: absolute;
+			border: 1px solid rgba(0,0,0,0.5);
+			border-left: none;
+			z-index: 9;
+			color: #777;
+			width: 15em;
+			left: 100%;
+			text-align: left;
+			opacity: 0;
+			top: 0px;
+			width: 0;
+
+			@include transition-property(all);
+			@include transition-duration(300ms);
+
+			&.first{
+				border-top: none;
+			}
+		}
+
+		&:hover{
+			cursor: default;
+			z-index: 3;
+			.index{
+				color: $active;
+			}
+			.items{
+				opacity: 1;
+				height: auto;
+				width: 15em;
+			}
+		}
+		
+		li{
+			list-style: none;
+			padding: 0.6em 3.7em 0.6em 0.6em;
+			margin: 0;
+			font-family: sans-serif;
+			cursor: pointer;
+			position: relative;
+			width: 15em;
+			@include box-sizing(border-box);
+
+			&:hover{
+				color: #fff;
+				background: $blue;
+
+				.option{
+					color: #fff;
+					opacity: 1;
+				}
+				.delete:hover{
+					color: $red;
+				}
+				.rename:hover{
+					color: $blue-dark;
+				}
+			} 
+		}
+		.dragging{
+			cursor: move;
+			opacity: 0.5;
+		}
+		.option{
+			color: rgba(0, 0, 0, 0.3);;
+			font-size: 1.2em;
+			width: 0.8em;
+			top: 0.2em;
+			font-family: fontnomas;
+			opacity: 0;
+			@include transition-property(all);
+			@include transition-duration(100ms);
+
+
+			&.delete{
+				position: absolute;
+				right: 0.3em;
+				padding: 0.2em;
+				font-size: 1.3em;
+			}
+			&.rename{
+				position: absolute;
+				right: 1.8em;
+				padding: 0.3em;
+			}
+		}
+		.txt{
+			word-break: break-word;
+		}
+
+		#newnote{
+			background: rgba(0,0,0,0.5);
+			color: white;
+			&:hover{
+				background: $blue;
+			}
+			.option{
+				position: absolute;
+				right: 0.3em;
+				padding: 0.3em;
+				top: 0;
+				color: white;
+				font-size: 1.3em;
+				right: 0.74em;
+				width: 1em;
+				opacity: 1;
+			}
+		}
+		.over{
+			border-top: 1.8em solid #ccc;
+		}
+	} 
+	#shortcuts{
+		cursor: pointer;
+
+		.index{
+			font-size: 1.2em;
+			text-indent: 0.38em;
+			margin-top: 1em;
+		}
+	}
+	#options{
+		.index{
+			font-size: 1.05em;
+			text-indent: 0.32em;
+			margin-top: 0.6em;
+		}
+		.items{
+			top: 0.3em;
+		}
+	}
+	#about{
+		cursor: pointer;
+
+		.index{
+			font-size: 0.95em;
+			text-indent: 0.54em;
+			margin-top: 0.7em;
+		}
+	}
+
+	#shortcuts, #options, #about{
+		.index{
+			opacity: 0.5;
+		}
+
+		&:hover .index{
+			opacity: 0.8;
+		}
+		.option{
+			position: absolute;
+			right: 0.3em;
+			padding: 0.3em;
+			top: 0;
+			font-size: 1.3em;
+			right: 0.74em;
+			opacity: 1;
+		}
+	}
+}

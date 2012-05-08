@@ -1,0 +1,149 @@
+[draggable] {
+	-webkit-user-select: none;
+	user-select: none;
+}
+html {
+	// font-family: $font;
+	font-family: DroidSans;
+	font-size: 22px;
+	padding: 0;
+	margin: 0;
+	height:100%;
+	width:100%;
+	background: #F2D199;
+	background-color: #F2D199;
+	background-image: url(../img/wood.png);
+
+	// Cicada
+	// background-image: -webkit-linear-gradient(0, rgba(255, 255, 255, .07) 50%, transparent 50%), -webkit-linear-gradient(0, rgba(255, 255, 255, .13) 50%, transparent 50%), -webkit-linear-gradient(0, transparent 50%, rgba(255, 255, 255, .17) 50%), -webkit-linear-gradient(0, transparent 50%, rgba(255, 255, 255, .19) 50%);
+	// background-color: #F6C980;
+	// background-size: 4%, 11%, 35%, 23%;
+}
+html::-webkit-scrollbar {
+	display:none;
+}
+iframe::-webkit-scrollbar {
+	display:none;
+}
+
+a{
+	color: dodgerblue;
+}
+
+body {
+	height:100%;
+	padding: 0 0 0 1.8em;
+	margin: 0;
+	@include box-shadow(-3px 0 17px 5px rgba(0,0,0,0.7), inset -2px 0 25px -10px rgba(0,0,0,0.7));
+	background: white;
+	max-width: 25em;
+}
+
+#header{
+	z-index: 2;
+	background: white;
+	position: relative;
+	@include box-shadow(inset -12px 0 25px -20px rgba(0, 0, 0, 0.7), -2px 4px 9px -3px rgba(0, 0, 0, 0.2));
+
+	input{
+		border: none;
+		display: block;
+		width: 100%;
+		padding: 0;
+		box-sizing: border-box;
+		background: transparent;
+		text-align: center;
+		padding: 0.75em 1em 0.4em;
+		font-size: 1.1em;
+		box-sizing: border-box;
+		height: 58px;
+
+		&:focus {
+		    @include box-shadow(inset 0 0 5px 8px rgba(255, 255, 0, 0.2));
+		}
+	}
+}
+
+#textarea{
+	@include box-sizing(border-box);
+	color:#888;
+	display:block;
+	font-family: $font;
+	margin: -56px auto 0;
+	outline:none;
+	padding: 0;
+	padding: 0;
+	position: relative;
+	width: 100%;
+	z-index: 1;
+	min-height: 100%;
+	height: auto;
+	line-height: 1.6em;
+
+	img{
+		display: block;
+	}
+}
+		
+#status{
+	position: fixed;
+	left: 38px;
+	top: 15px;
+	padding: 8px 11px 6px;
+	color: #333;
+	background-color: 
+	rgba(245, 245, 80, 0.4);
+	font-size: 14px;
+	opacity: 0;
+	@include transition-property(opacity);
+	@include transition-duration(500ms);
+	z-index: 4;
+	@include border-radius(0 6px 6px 0 );
+	font-size: 0.55em;
+	@include box-shadow(3px 0px 9px rgba(245, 245, 80, 0.4));
+
+	
+	&.show{
+		opacity: 1;
+	}
+	&.hide{
+		-webkit-transition-delay: 5s;
+		opacity: 0;
+	}
+}
+
+.shortcuts, .about, .data-output{
+	text-align: left;
+
+	h1{
+		margin-bottom: 1.3em;
+		font-size: 1.4em;
+		font-weight: normal;
+	}
+	textarea{
+		width: 290px;
+		height: 145px;
+		border: 2px dotted #DDD;
+		padding: 10px;
+		@include box-sizing(border-box);
+		padding: 1em;
+		margin: 0 auto 0.8em;
+		border: 1px solid rgba(0,0,0,0.2);
+		@include border-radius(5px);
+		font-family: monospace;
+		color: #555;
+		@include box-shadow(inset 0 0 11px -5px rgba(0,0,0,0.7));
+
+		&:focus{
+			border-color: rgba(0,0,0,0.4);
+		}
+	}
+}
+
+input, button{
+	font-family: DroidSans;
+
+	&:focus{
+		outline: none;
+	}
+}

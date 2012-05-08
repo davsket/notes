@@ -1,0 +1,656 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 17, /Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* line 20, /Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+body {
+  line-height: 1;
+}
+
+/* line 22, /Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 24, /Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 26, /Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 28, /Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 101, /Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 30, /Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 114, /Library/Ruby/Gems/1.8/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+@font-face {
+  font-family: 'fontnomas';
+  src: url("../font/fontomas-webfont.eot");
+  src: url("../font/fontomas-webfont.eot?#iefix") format("embedded-opentype"), url("../font/fontomas-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DroidSans';
+  src: url("../font/DroidSans-webfont.eot");
+  src: url("../font/DroidSans-webfont.eot?#iefix") format("embedded-opentype"), url("../font/DroidSans-webfont.woff") format("woff"), url("../font/DroidSans-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DroidSans';
+  src: url("../font/DroidSans-Bold-webfont.eot");
+  src: url("../font/DroidSans-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("../font/DroidSans-Bold-webfont.woff") format("woff"), url("../font/DroidSans-Bold-webfont.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* line 1, /Users/davsket/workspace/notes/css/src/_general.scss */
+[draggable] {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* line 5, /Users/davsket/workspace/notes/css/src/_general.scss */
+html {
+  font-family: DroidSans;
+  font-size: 22px;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background: #F2D199;
+  background-color: #F2D199;
+  background-image: url(../img/wood.png);
+}
+
+/* line 22, /Users/davsket/workspace/notes/css/src/_general.scss */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* line 25, /Users/davsket/workspace/notes/css/src/_general.scss */
+iframe::-webkit-scrollbar {
+  display: none;
+}
+
+/* line 29, /Users/davsket/workspace/notes/css/src/_general.scss */
+a {
+  color: dodgerblue;
+}
+
+/* line 33, /Users/davsket/workspace/notes/css/src/_general.scss */
+body {
+  height: 100%;
+  padding: 0 0 0 1.8em;
+  margin: 0;
+  -moz-box-shadow: -3px 0 17px 5px rgba(0, 0, 0, 0.7), inset -2px 0 25px -10px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: -3px 0 17px 5px rgba(0, 0, 0, 0.7), inset -2px 0 25px -10px rgba(0, 0, 0, 0.7);
+  -o-box-shadow: -3px 0 17px 5px rgba(0, 0, 0, 0.7), inset -2px 0 25px -10px rgba(0, 0, 0, 0.7);
+  box-shadow: -3px 0 17px 5px rgba(0, 0, 0, 0.7), inset -2px 0 25px -10px rgba(0, 0, 0, 0.7);
+  background: white;
+  max-width: 25em;
+}
+
+/* line 42, /Users/davsket/workspace/notes/css/src/_general.scss */
+#header {
+  z-index: 2;
+  background: white;
+  position: relative;
+  -moz-box-shadow: inset -12px 0 25px -20px rgba(0, 0, 0, 0.7), -2px 4px 9px -3px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset -12px 0 25px -20px rgba(0, 0, 0, 0.7), -2px 4px 9px -3px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: inset -12px 0 25px -20px rgba(0, 0, 0, 0.7), -2px 4px 9px -3px rgba(0, 0, 0, 0.2);
+  box-shadow: inset -12px 0 25px -20px rgba(0, 0, 0, 0.7), -2px 4px 9px -3px rgba(0, 0, 0, 0.2);
+}
+/* line 48, /Users/davsket/workspace/notes/css/src/_general.scss */
+#header input {
+  border: none;
+  display: block;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  background: transparent;
+  text-align: center;
+  padding: 0.75em 1em 0.4em;
+  font-size: 1.1em;
+  box-sizing: border-box;
+  height: 58px;
+}
+/* line 61, /Users/davsket/workspace/notes/css/src/_general.scss */
+#header input:focus {
+  -moz-box-shadow: inset 0 0 5px 8px rgba(255, 255, 0, 0.2);
+  -webkit-box-shadow: inset 0 0 5px 8px rgba(255, 255, 0, 0.2);
+  -o-box-shadow: inset 0 0 5px 8px rgba(255, 255, 0, 0.2);
+  box-shadow: inset 0 0 5px 8px rgba(255, 255, 0, 0.2);
+}
+
+/* line 67, /Users/davsket/workspace/notes/css/src/_general.scss */
+#textarea {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #888;
+  display: block;
+  font-family: "Droid Sans", sans-serif;
+  margin: -56px auto 0;
+  outline: none;
+  padding: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  min-height: 100%;
+  height: auto;
+  line-height: 1.6em;
+}
+/* line 83, /Users/davsket/workspace/notes/css/src/_general.scss */
+#textarea img {
+  display: block;
+}
+
+/* line 88, /Users/davsket/workspace/notes/css/src/_general.scss */
+#status {
+  position: fixed;
+  left: 38px;
+  top: 15px;
+  padding: 8px 11px 6px;
+  color: #333;
+  background-color: rgba(245, 245, 80, 0.4);
+  font-size: 14px;
+  opacity: 0;
+  -moz-transition-property: opacity;
+  -webkit-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
+  -moz-transition-duration: 500ms;
+  -webkit-transition-duration: 500ms;
+  -o-transition-duration: 500ms;
+  transition-duration: 500ms;
+  z-index: 4;
+  -moz-border-radius: 0 6px 6px 0;
+  -webkit-border-radius: 0 6px 6px 0;
+  -o-border-radius: 0 6px 6px 0;
+  -ms-border-radius: 0 6px 6px 0;
+  -khtml-border-radius: 0 6px 6px 0;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.55em;
+  -moz-box-shadow: 3px 0px 9px rgba(245, 245, 80, 0.4);
+  -webkit-box-shadow: 3px 0px 9px rgba(245, 245, 80, 0.4);
+  -o-box-shadow: 3px 0px 9px rgba(245, 245, 80, 0.4);
+  box-shadow: 3px 0px 9px rgba(245, 245, 80, 0.4);
+}
+/* line 106, /Users/davsket/workspace/notes/css/src/_general.scss */
+#status.show {
+  opacity: 1;
+}
+/* line 109, /Users/davsket/workspace/notes/css/src/_general.scss */
+#status.hide {
+  -webkit-transition-delay: 5s;
+  opacity: 0;
+}
+
+/* line 115, /Users/davsket/workspace/notes/css/src/_general.scss */
+.shortcuts, .about, .data-output {
+  text-align: left;
+}
+/* line 118, /Users/davsket/workspace/notes/css/src/_general.scss */
+.shortcuts h1, .about h1, .data-output h1 {
+  margin-bottom: 1.3em;
+  font-size: 1.4em;
+  font-weight: normal;
+}
+/* line 123, /Users/davsket/workspace/notes/css/src/_general.scss */
+.shortcuts textarea, .about textarea, .data-output textarea {
+  width: 290px;
+  height: 145px;
+  border: 2px dotted #DDD;
+  padding: 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 1em;
+  margin: 0 auto 0.8em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  font-family: monospace;
+  color: #555;
+  -moz-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+  -o-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+}
+/* line 137, /Users/davsket/workspace/notes/css/src/_general.scss */
+.shortcuts textarea:focus, .about textarea:focus, .data-output textarea:focus {
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+/* line 143, /Users/davsket/workspace/notes/css/src/_general.scss */
+input, button {
+  font-family: DroidSans;
+}
+/* line 146, /Users/davsket/workspace/notes/css/src/_general.scss */
+input:focus, button:focus {
+  outline: none;
+}
+
+/* line 1, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu {
+  position: fixed;
+  text-decoration: none;
+  padding: 0;
+  width: 1.7em;
+  background: #3a3533;
+  background: url(../img/leatherb.png) #151515;
+  top: 0;
+  left: 0;
+  height: 100%;
+  text-align: center;
+  padding: 0;
+  z-index: 9;
+  -moz-box-shadow: -4px 0 10px 3px #333333;
+  -webkit-box-shadow: -4px 0 10px 3px #333333;
+  -o-box-shadow: -4px 0 10px 3px #333333;
+  box-shadow: -4px 0 10px 3px #333333;
+}
+/* line 16, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li {
+  position: relative;
+}
+/* line 19, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li .index {
+  position: relative;
+  z-index: 1;
+  font-family: fontnomas;
+  font-size: 1.5em;
+  color: #999999;
+  display: block;
+  padding-top: 0.4em;
+  text-align: left;
+  text-indent: 0.18em;
+}
+/* line 30, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li .items {
+  overflow: hidden;
+  font-size: 0.7em;
+  background-color: #fff;
+  position: absolute;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-left: none;
+  z-index: 9;
+  color: #777;
+  width: 15em;
+  left: 100%;
+  text-align: left;
+  opacity: 0;
+  top: 0px;
+  width: 0;
+  -moz-transition-property: all;
+  -webkit-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -moz-transition-duration: 300ms;
+  -webkit-transition-duration: 300ms;
+  -o-transition-duration: 300ms;
+  transition-duration: 300ms;
+}
+/* line 49, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li .items.first {
+  border-top: none;
+}
+/* line 54, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li:hover {
+  cursor: default;
+  z-index: 3;
+}
+/* line 57, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li:hover .index {
+  color: #dddddd;
+}
+/* line 60, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li:hover .items {
+  opacity: 1;
+  height: auto;
+  width: 15em;
+}
+/* line 67, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li li {
+  list-style: none;
+  padding: 0.6em 3.7em 0.6em 0.6em;
+  margin: 0;
+  font-family: sans-serif;
+  cursor: pointer;
+  position: relative;
+  width: 15em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 77, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li li:hover {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.75);
+}
+/* line 81, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li li:hover .option {
+  color: #fff;
+  opacity: 1;
+}
+/* line 85, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li li:hover .delete:hover {
+  color: rgba(200, 35, 35, 0.9);
+}
+/* line 88, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li li:hover .rename:hover {
+  color: #0f7dd6;
+}
+/* line 93, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li .dragging {
+  cursor: move;
+  opacity: 0.5;
+}
+/* line 97, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li .option {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 1.2em;
+  width: 0.8em;
+  top: 0.2em;
+  font-family: fontnomas;
+  opacity: 0;
+  -moz-transition-property: all;
+  -webkit-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -moz-transition-duration: 100ms;
+  -webkit-transition-duration: 100ms;
+  -o-transition-duration: 100ms;
+  transition-duration: 100ms;
+}
+/* line 108, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li .option.delete {
+  position: absolute;
+  right: 0.3em;
+  padding: 0.2em;
+  font-size: 1.3em;
+}
+/* line 114, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li .option.rename {
+  position: absolute;
+  right: 1.8em;
+  padding: 0.3em;
+}
+/* line 120, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li .txt {
+  word-break: break-word;
+}
+/* line 124, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li #newnote {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+}
+/* line 127, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li #newnote:hover {
+  background: rgba(0, 0, 0, 0.75);
+}
+/* line 130, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li #newnote .option {
+  position: absolute;
+  right: 0.3em;
+  padding: 0.3em;
+  top: 0;
+  color: white;
+  font-size: 1.3em;
+  right: 0.74em;
+  width: 1em;
+  opacity: 1;
+}
+/* line 142, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu li .over {
+  border-top: 1.8em solid #ccc;
+}
+/* line 146, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu #shortcuts {
+  cursor: pointer;
+}
+/* line 149, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu #shortcuts .index {
+  font-size: 1.2em;
+  text-indent: 0.38em;
+  margin-top: 1em;
+}
+/* line 156, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu #options .index {
+  font-size: 1.05em;
+  text-indent: 0.32em;
+  margin-top: 0.6em;
+}
+/* line 161, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu #options .items {
+  top: 0.3em;
+}
+/* line 165, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu #about {
+  cursor: pointer;
+}
+/* line 168, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu #about .index {
+  font-size: 0.95em;
+  text-indent: 0.54em;
+  margin-top: 0.7em;
+}
+/* line 176, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu #shortcuts .index, #menu #options .index, #menu #about .index {
+  opacity: 0.5;
+}
+/* line 180, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu #shortcuts:hover .index, #menu #options:hover .index, #menu #about:hover .index {
+  opacity: 0.8;
+}
+/* line 183, /Users/davsket/workspace/notes/css/src/_menu.scss */
+#menu #shortcuts .option, #menu #options .option, #menu #about .option {
+  position: absolute;
+  right: 0.3em;
+  padding: 0.3em;
+  top: 0;
+  font-size: 1.3em;
+  right: 0.74em;
+  opacity: 1;
+}
+
+/* line 1, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  -moz-transition-duration: 300ms;
+  -webkit-transition-duration: 300ms;
+  -o-transition-duration: 300ms;
+  transition-duration: 300ms;
+  -moz-transition-property: opacity;
+  -webkit-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
+}
+/* line 13, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal.show {
+  height: 100%;
+  opacity: 1;
+}
+/* line 19, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal .back {
+  background-color: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/* line 28, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal .container {
+  padding: 40px 30px;
+  margin: 30px auto;
+  background: white;
+  -moz-box-shadow: 0 0 15px #cccccc;
+  -webkit-box-shadow: 0 0 15px #cccccc;
+  -o-box-shadow: 0 0 15px #cccccc;
+  box-shadow: 0 0 15px #cccccc;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+  position: relative;
+  max-width: 300px;
+}
+/* line 37, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal .container .close {
+  position: absolute;
+  top: -0.4em;
+  right: -0.3em;
+  color: rgba(8, 4, 0, 0.9);
+  background: transparent;
+  border: none;
+  font-size: 1.6em;
+  opacity: 0.7;
+  cursor: pointer;
+  font-family: fontnomas;
+  width: 1em;
+}
+/* line 50, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal .container .close:hover {
+  opacity: 1;
+}
+/* line 53, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal .container .close:active {
+  color: rgba(200, 35, 35, 0.9);
+}
+/* line 57, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal .container .content {
+  overflow: auto;
+  padding-bottom: 10px;
+}
+/* line 64, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal .prompt, #modal .confirm, #modal .alert {
+  color: #666;
+  font-size: 14px;
+  text-align: center;
+}
+/* line 69, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal .prompt .message, #modal .confirm .message, #modal .alert .message {
+  margin-bottom: 1.4em;
+  font-weight: 100;
+  line-height: 1.4em;
+}
+/* line 74, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal .prompt .text, #modal .confirm .text, #modal .alert .text {
+  padding: 0.5em 0.6em 0.4em;
+  margin: 0 auto 0.8em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 1.3em;
+  color: #555;
+  -moz-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+  -o-box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0 0 11px -5px rgba(0, 0, 0, 0.7);
+}
+/* line 83, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal .prompt .text:focus, #modal .confirm .text:focus, #modal .alert .text:focus {
+  border-color: rgba(0, 0, 0, 0.4);
+}
+/* line 91, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal button {
+  background: rgba(8, 4, 0, 0.9);
+  color: #E0E0E0;
+  -moz-border-radius: 2em;
+  -webkit-border-radius: 2em;
+  -o-border-radius: 2em;
+  -ms-border-radius: 2em;
+  -khtml-border-radius: 2em;
+  border-radius: 2em;
+  padding: 0.7em 1.4em 0.7em;
+  font-size: 13px;
+  cursor: pointer;
+  margin: 5px;
+  text-shadow: 0 0px 2px black;
+  border: none;
+  -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+  -o-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+}
+/* line 104, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal button:active {
+  background: rgba(8, 4, 0, 0.6);
+}
+/* line 108, /Users/davsket/workspace/notes/css/src/_modal.scss */
+#modal button:hover, #modal button:focus {
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}

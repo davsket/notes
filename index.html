@@ -1,262 +1,69 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" manifest="manifest.cache">
+<html xmlns="http://www.w3.org/1999/xhtml" manifest="manifest.appcache">
 	<head>
-		<title i18n-content="appname">Simple text editor | davsket</title>
-		<link rel="shortcut icon" href="http://davsket.me/notes/sicon.png">
-		<style type="text/css">
-		html {
-			background:#000000;
-			padding: 0;
-			margin: 0;
-			height:100%;
-			width:100%;
-			background: #142547;
-		}
-
-		body {
-			height:100%;
-			padding: 0 40px;
-			margin: 0;
-		}
-
-		section {
-			cursor:text;
-			display:block;
-			height:100%;
-			padding-bottom:0px;
-			padding-top:0px;
-			width:100%;
-		}
-
-		textarea {
-			background-color: #142547;
-			border:0px;
-			color:#eee;
-			display:block;
-			font-family: sans-serif;
-			font-size:12pt;
-			height:100%;
-			width: 100%;
-			max-width: 600px;
-			line-height:1.3em;
-			outline:none;
-			overflow-y:scroll;
-			padding: 0;
-			margin: 0 auto;
-			resize:none;
-			box-sizing:border-box;
-			-webkit-box-sizing:border-box;
-			position: relative;
-			z-index: 1;
-			/*user-select:text;
-			-webkit-user-select:text;*/
-			padding: 20px 0px 40px 0px;
-		}
-
-		textarea::-webkit-scrollbar {
-			display:none;
-		}
-		#menu{
-			position: absolute;
-			left: 10px;
-			top: 10px;
-			color: #ccc;
-			font-size:22px;
-			text-decoration: none;
-			padding-right: 10px;
-		}
-		#menu .index{
-			position: relative;
-			background-color: #142547;
-			width: auto;
-			z-index: 1;
-		}
-		#menu:hover{
-			color: #eee;
-			cursor: default;
-			z-index: 3;
-		}
-		#menu:hover .items{
-			/*height: 300px;*/
-			left: 0;
-		}
-		#menu .items{
-			/*height: 0;*/
-			overflow: hidden;
-			list-style: none;
-			font-size: 12px;
-			top: 0;
-			margin: 0;
-			padding: 0;
-			-webkit-transition-property: all;
-			-webkit-transition-duration: 500ms;
-			background-color: #142547;
-			position: relative;
-			left: -1000px;
-		}
-		#menu li{
-			list-style: none;
-			padding: 5px 30px 5px 5px;
-			margin: 0;
-			font-family: sans-serif;
-			cursor: pointer;
-			position: relative;
-		}
-		#menu .delete{
-			position: absolute;
-			right: 5px;
-			padding: 5px;
-			top: 0;
-		}
-		#menu .delete:hover{
-			color: #F2133C;
-		}
-		#menu li:hover{
-			color: #142547;
-			background: #eee;
-		}
-		#menu ul{
-			padding: 0;
-			margin: 0;
-		}
-		</style>
-		
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title i18n-content="appname">Notes App</title>
+		<meta name="description" content="The simplest notes application!" />
+		<meta property="og:title" content="Notes App"/>
+		<meta property="og:description" content="The simplest notes application!"/>
+		<link rel="shortcut icon" href="note_icon.png">
+		<link rel="stylesheet" type="text/css" href="css/screen.css" />
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-10555523-1']);
+			_gaq.push(['_setDomainName', 'davsket.me']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
 	</head>
 	<body>
-		<div id="menu">
-			<span href="#" class="index">&#10026;</span>
-			<div class="items">
-				<ul id="menulist">
-					<li id="newnote">
-						New Note
-					</li>
-				</ul>
+		<h1 id="header"><input type="text" class="title" value="This is the title" /><span class="date"></span></h1>
+		<ul id="menu">
+			<li>
+				<span href="#" class="index">7</span>
+				<div class="items first">
+					<ul id="menulist">
+						<li id="newnote">
+							Add Note <span class="option">5</span>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<li id="shortcuts">
+				<span href="#" class="index" title="Shortcuts">8</span>
+			</li>
+			<li id="options">
+				<span href="#" class="index">6</span>
+				<div class="items">
+					<ul>
+						<li id="export_data">
+							<span class="option">1</span> Export Notes
+						</li>
+						<li id="import_data">
+							<span class="option">0</span> Import Notes
+						</li>
+					</ul>
+				</div>
+			</li>
+			<li id="about">
+				<span href="#" class="index">a</span>
+			</li>
+		</ul>
+		<iframe id="textarea" spellcheck="true" style="display: none;"></iframe>
+		<div id="status" class='hide'></div>
+		<div id="modal">
+			<div class="back"></div>
+			<div class="container">
+				<div class="content">
+				</div>
+				<a class="close">o</a>
 			</div>
 		</div>
-			<textarea id="textarea" spellcheck="true"></textarea>
-		<script type="text/javascript">
-			var actualnote = '';
-
-			Storage.prototype.getItemJSON = function(item){
-				var val = this.getItem(item)||'null';
-				try{
-					return JSON.parse(val);
-				}catch(e){
-					return val;
-				}
-			}
-			
-			initialize();
-
-			textarea.addEventListener('keyup', function(evt){
-				localStorage.setItem('dasket-'+actualnote+'content', textarea.value);
-			});
-			newnote.addEventListener('click', function(evt){
-				var name = window.prompt('New note name:');
-				evt.cancelBubble = true;
-				evt.preventDefault();
-				if(name){
-					createNote(name);
-				}
-			});
-			menulist.addEventListener('click', function(evt){
-				var tn = evt.target.tagName, name, bool;
-				if(tn == 'LI'){
-					loadNote(evt.target.getElementsByClassName('txt')[0].innerHTML);
-				}
-				else if(tn == 'SPAN' && !/delete/.test(evt.target.className)){
-					loadNote(evt.target.parentElement.getElementsByClassName('txt')[0].innerHTML);
-				}
-				else if(tn == 'SPAN' && /delete/.test(evt.target.className)){
-					name = evt.target.parentElement.getElementsByClassName('txt')[0].innerHTML;
-					bool = window.confirm('Are you sure you want to delete the note: '+name+'?');
-					if(!bool) return false;
-					if(name == 'Main'){
-						alert('You can\'t delete this note.');
-						return false;
-					}else{
-						menulist.removeChild(evt.target.parentElement);
-						deleteList(name);
-					}
-				}
-			});
-
-			function initialize(){
-				var lists, i, list, length;
-				if(!localStorage.getItemJSON('dasket-lists')){
-					localStorage.setItem('dasket-lists','["Main"]');
-				}
-				lists = localStorage.getItemJSON('dasket-lists');
-				for (i = 0; i < lists.length; i++) {
-					list = lists[i];
-					createMenuItem(list);
-				};
-				loadNote(localStorage.getItemJSON('dasket-lastlist'));
-			}
-
-			function loadNote(noteName){
-				noteName = noteName || 'Main';
-				localStorage.setItem('dasket-lastlist', noteName);
-				actualnote = noteName.toLowerCase().replace(/[^\w\d]/,'');
-				textarea.value = localStorage.getItemJSON('dasket-'+actualnote+'content') || 'Write something...';
-
-				length = textarea.value.length;
-				//textarea.scrollTop = textarea.scrollHeight;
-				textarea.setSelectionRange(length, length);
-				textarea.focus();
-			}
-
-			function createNote(name){
-				lists = localStorage.getItemJSON('dasket-lists');
-				for(var i=0; i<lists.length; i++){
-					if(lists[i] == name){
-						alert('Already extists anote with the name: '+name+'. Opening note '+name+'.');
-						loadNote(name);
-						return false;
-					}
-					if(lists[i].toLowerCase().replace(/[^\w\d]/,'') == name.toLowerCase().replace(/[^\w\d]/,'')){
-						alert('Already extists anote with equivalent name, loading note '+name+'.');
-						loadNote(name);
-						return false;
-					}
-				}
-				createMenuItem(name);
-				loadNote(name);
-				lists.push(name)
-				localStorage.setItem('dasket-lists',JSON.stringify(lists));
-			}
-
-			function createMenuItem(note){
-					var el = document.createElement('li'), del;
-					del = note == 'Main' ? '' : '<span class="delete">&#10006;</span>';
-					el.innerHTML = '<span class="txt">'+note+'</span>' + del;
-					menulist.insertBefore(el, newnote);
-			}
-
-			function deleteList(name){
-				var lists = localStorage.getItemJSON('dasket-lists');
-				for(var i=0; i<lists.length; i++){
-					if(lists[i] == name){
-						lists.splice(i,1);
-					}
-				}
-				if(localStorage.getItem('dasket-lastlist')==name){
-					loadNote('Main');
-				}
-				name = name.toLowerCase().replace(/[^\w\d]/,'');
-				localStorage.setItem('dasket-lists', JSON.stringify(lists));
-				localStorage.setItem('dasket-'+name+'content', '');
-				localStorage.removeItem('dasket-'+name+'content');
-
-			}
-
-			/*textarea.addEventListener('keydown', function(evt){
-				if(evt.metaKey && evt.keyIdentifier== "U+005A"){
-					evt.preventDefault();
-					
-				}
-				return false;
-			});*/
-		</script>
+		<script type="text/javascript" src="js/modal.js"></script>
+		<script type="text/javascript" src="js/general.js"></script>
 	</body>
 </html>

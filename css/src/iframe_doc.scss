@@ -1,0 +1,76 @@
+@import "compass/reset";
+@import "variables";
+@import "fonts"; 
+html::-webkit-scrollbar {
+	display:none;
+}
+body{
+	color:#555;
+	// font-family: $font;
+	font-family: DroidSans;
+	font-size: 18px !important;
+	margin: 0 auto;
+	outline:none;
+	padding: 0;
+	position: relative;
+	width: 100%;
+	z-index: 1;
+	min-height: 100%;
+	height: auto;
+	line-height: 1.6em;
+	word-wrap: break-word;
+	padding: 3.65em 1.6em 1.6em !important;
+	background-image: -webkit-linear-gradient(#EEE 0.05em, transparent 0.05em) !important;
+	background-size: 100% 1.6em;
+
+	// background: url(../img/paper.png) !important;
+	box-sizing: border-box !important;
+
+	img{
+		display: block;
+		max-height: 100%;
+		max-width: 100%;
+	}
+
+}
+//MY RESET
+*{
+	font-family: DroidSans !important;
+	// font-family: $font !important;
+	background: transparent !important;
+	font-size: 1em !important;
+	color: #555 !important;
+	padding: 0 !important;
+	margin-right: 0!important;
+	margin-top: 0!important;
+	margin-bottom: 0!important;
+	border: none !important;
+	font-weight: normal !important;
+	line-height: 1.6em !important;
+}
+
+strong, b {
+	font-weight: bold !important;
+}
+u{
+	text-decoration: underline;
+}
+i{
+	font-style: italic;
+}
+ul{
+	list-style: disc !important;
+	list-style-position: inside !important;
+	li{
+		list-style: disc !important;
+		list-style-position: inside !important;
+	}
+}
+ol{
+	list-style: decimal !important;
+	list-style-position: inside !important;
+	li{
+		list-style: decimal !important;
+		list-style-position: inside !important;
+	}
+}
