@@ -44,7 +44,7 @@ app.post('/test', function(request, response) {
 		}
 	);
 
-  	response.send(req.query.note);
+  	response.send('{"OK":"'+request.body.note+'"}');
 });
 
 var port = process.env.PORT || 3000;
