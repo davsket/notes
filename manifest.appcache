@@ -12,8 +12,8 @@ css/screen.css
 css/iframe_doc.css
 
 #Scripts
-js/general.js
 js/modal.js
+js/general.js
 
 #Fonts
 font/fontomas-webfont.eot
