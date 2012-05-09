@@ -398,21 +398,25 @@ function showShortcuts(){
 	var message = 
 		"<div class='shortcuts'> "+
 			"<h1>Notes Application' Shortcuts</h1>"+
-			"(Cmd in Mac, Ctrl in Windows/Linux)"
-			"Cmd + b = Bold<br>"+
-			"Cmd + u = Underline<br>"+
-			"Cmd + k = Strike Through<br>"+
-			"Cmd + i = Italic<br>"+
-			"Cmd + e = Erase format<br>"+
-			"Cmd + l = Unordered list<br>"+
-			"Cmd + Shift + l = Ordered list<br>"+
-			"Cmd + } = Indent<br>"+
-			"Cmd + { = Outdent<br>"+
+			// "(Cmd in Mac, Ctrl in Windows/Linux)<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>B</span> = Bold<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>U</span> = Underline<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>K</span> = Strike Through<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>I</span> = Italic<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>E</span> = Erase format<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>L</span> = Unordered list<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>Shift</span> + <span class='key'>l</span> = Ordered list<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>}</span> = Indent<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>{</span> = Outdent<br>"+
 			"<br>"+
-			"Cmd + s = Saves (again)<br>"+
-			"Alt + s = Shortcuts info (this message)<br>"+
-			"Alt + i = About the Notes App<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>S</span> = Saves (again)<br>"+
+			"<span class='key'>Alt</span> + <span class='key'>S</span> = Shortcuts info (this message)<br>"+
+			"<span class='key'>Alt</span> + <span class='key'>I</span> = About the Notes App<br>"+
 		"</div>";
+
+	if(navigator.userAgent.match(/mac os/gi).length != 0){
+		message = message.replace(/Cmd/g,'Ctrl');
+	}
 	modal.alert(message, function(){
 		textarea.contentDocument.body.focus();
 	});
@@ -554,7 +558,6 @@ function _importData(evt){
 			throw new NonObject("the format of the data is incorrect.");
 		}
 	}catch(e){
-		console.log(e);
 		if(e instanceof NonObject){
 			setTimeout(function(){
 				modal.alert('Sorry, the data couldn\'t be imported, '+ e.message);
