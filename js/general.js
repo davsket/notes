@@ -414,7 +414,7 @@ function showShortcuts(){
 			"<span class='key'>Alt</span> + <span class='key'>I</span> = About the Notes App<br>"+
 		"</div>";
 
-	if(navigator.userAgent.match(/mac os/gi).length != 0){
+	if(navigator.userAgent.match(/mac os/gi).length == 0){
 		message = message.replace(/Cmd/g,'Ctrl');
 	}
 	modal.alert(message, function(){
