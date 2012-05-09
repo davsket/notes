@@ -5,7 +5,11 @@ var express = require('express'),
 	myEmail = 'foo@foo.com',
 	myPassword = 'le_password';
 
-app.use(express.static(__dirname+'/'));
+app.get('/notes', function(request, response) {
+	response.redirect('/notes/');
+});
+app.use('/notes/', express.static(__dirname + '/static'));
+// app.use(express.static(__dirname+'/static'));
 app.use(express.bodyParser());
 
 //Getting the application's email and password 
