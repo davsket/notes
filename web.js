@@ -23,6 +23,13 @@ app.post('/load/', function(request, response) {
 	response.redirect('/');
 });
 
+app.get('/load/', function(request, response) {
+	console.log('----------------------g');
+	var shortNote = '';
+	console.log(request.body.notes);
+	response.redirect('/');
+});
+
 app.post('/test', function(request, response) {
 	var shortNote = '';
 	console.log(request);
