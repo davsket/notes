@@ -6,8 +6,6 @@ var express = require('express'),
 	myPassword = 'le_password';
 
 console.log(redis.get('hola',function(e,v){console.log(v+'++++++++++++++');}))
-app.use('/', express.static(__dirname + '/static'));
-// app.use(express.static(__dirname+'/static'));
 app.use(express.bodyParser());
 
 //Getting the application's email and password 
@@ -19,6 +17,7 @@ redis.get('notesapp_email_password', function(err, value) {
 });
 
 app.post('/load/', function(request, response) {
+	console.log('----------------------');
 	var shortNote = '';
 	console.log(request.body.notes);
 	response.redirect('/');
@@ -59,6 +58,9 @@ app.post('/test', function(request, response) {
 		response.send('{"status": false, "message": "not enough params"}');
 	}
 });
+
+app.use('/', express.static(__dirname + '/static'));
+// app.use(express.static(__dirname+'/static'));
 
 var port = process.env.PORT || 3000;
 app.listen(port, function() {
