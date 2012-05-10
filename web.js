@@ -5,6 +5,7 @@ var express = require('express'),
 	myEmail = 'foo@foo.com',
 	myPassword = 'le_password';
 
+console.log(redis.get('hola',function(e,v){console.log(v+'++++++++++++++');}))
 app.use('/', express.static(__dirname + '/static'));
 // app.use(express.static(__dirname+'/static'));
 app.use(express.bodyParser());
