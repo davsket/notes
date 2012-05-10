@@ -21,7 +21,7 @@ redis.get('notesapp_email_password', function(err, value) {
 app.post('/load/', function(request, response) {
 	var shortNote = '';
 	console.log(request.body.notes);
-	esponse.redirect('/');
+	response.redirect('/');
 });
 
 app.post('/test', function(request, response) {
