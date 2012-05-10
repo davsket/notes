@@ -5,10 +5,7 @@ var express = require('express'),
 	myEmail = 'foo@foo.com',
 	myPassword = 'le_password';
 
-app.get('/notes', function(request, response) {
-	response.redirect('/notes/');
-});
-app.use('/notes/', express.static(__dirname + '/static'));
+app.use('/', express.static(__dirname + '/static'));
 // app.use(express.static(__dirname+'/static'));
 app.use(express.bodyParser());
 
@@ -18,6 +15,12 @@ redis.get('notesapp_email', function(err, value) {
 });
 redis.get('notesapp_email_password', function(err, value) {
 	myPassword = value;
+});
+
+app.post('/load/', function(request, response) {
+	var shortNote = '';
+	console.log(request.body.notes);
+	esponse.redirect('/');
 });
 
 app.post('/test', function(request, response) {

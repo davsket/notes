@@ -127,7 +127,8 @@ sendByEmail.addEventListener('click', sendEmail);
  */
 function initializeNotes(){
 	var lists, i, list, length,
-		menuItems = $$('#menulist li:not(#newnote)');
+		menuItems = $$('#menulist li:not(#newnote)'),
+		style, redirectContent;
 	lists = localStorage.getItemJSON(listsPrefix);
 
 	//If there are no notes
@@ -155,7 +156,7 @@ function initializeNotes(){
 	textarea.contentDocument.body.focus();
 
 	//Loads the styles
-	var style = textarea.contentDocument.createElement('link');
+	style = textarea.contentDocument.createElement('link');
 		// fonts = textarea.contentDocument.createElement('link');
 		
 	// fonts.setAttribute('href', 'http://fonts.googleapis.com/css?family=Droid+Sans');
@@ -170,6 +171,17 @@ function initializeNotes(){
 	textarea.contentDocument.head.appendChild(style);
 
 	textarea.style.display = 'block';
+
+	//Go to new one :)
+	redirectContent = 
+		'<form action="http://notes.davsket.me/load/" method="post">'+
+			'<input type="hidden" name="notes" value="'+
+			encodeURIComponent(getJSONData())+'" />'+
+			'<input type="submit" class="button" value="enviar" />'+
+		'</form>';
+	modal.setClosable(true);
+	modal.setContent(redirectContent);
+	modal.show();
 }
 
 /**
@@ -400,21 +412,25 @@ function showShortcuts(){
 	var message = 
 		"<div class='shortcuts'> "+
 			"<h1>Notes Application' Shortcuts</h1>"+
-			"(Cmd in Mac, Ctrl in Windows/Linux)"
-			"Cmd + b = Bold<br>"+
-			"Cmd + u = Underline<br>"+
-			"Cmd + k = Strike Through<br>"+
-			"Cmd + i = Italic<br>"+
-			"Cmd + e = Erase format<br>"+
-			"Cmd + l = Unordered list<br>"+
-			"Cmd + Shift + l = Ordered list<br>"+
-			"Cmd + } = Indent<br>"+
-			"Cmd + { = Outdent<br>"+
+			// "(Cmd in Mac, Ctrl in Windows/Linux)<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>B</span> = Bold<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>U</span> = Underline<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>K</span> = Strike Through<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>I</span> = Italic<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>E</span> = Erase format<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>L</span> = Unordered list<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>Shift</span> + <span class='key'>l</span> = Ordered list<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>}</span> = Indent<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>{</span> = Outdent<br>"+
 			"<br>"+
-			"Cmd + s = Saves (again)<br>"+
-			"Alt + s = Shortcuts info (this message)<br>"+
-			"Alt + i = About the Notes App<br>"+
+			"<span class='key'>Cmd</span> + <span class='key'>S</span> = Saves (again)<br>"+
+			"<span class='key'>Alt</span> + <span class='key'>S</span> = Shortcuts info (this message)<br>"+
+			"<span class='key'>Alt</span> + <span class='key'>I</span> = About the Notes App<br>"+
 		"</div>";
+
+	if(!navigator.userAgent.match(/mac os/gi)){
+		message = message.replace(/Cmd/g,'Ctrl');
+	}
 	modal.alert(message, function(){
 		textarea.contentDocument.body.focus();
 	});
@@ -448,17 +464,14 @@ function showAbout(){
  * Shows the LocalStorage Data
  */
 function showData(){
-	var message, i, data = {}
-		notes = localStorage.getItemJSON(listsPrefix);
+	var message;
 	
 	hideMenu();
 	
-	for(i=0; i<notes.length; i++){
-		data[notes[i]] = localStorage.getItemJSON(notesPrefix+notes[i]);
-	}
+	
 	message = 
 		"<div class='data-output'> "+
-			"<h1>This is your data:</h1> Please copy this:<br><br> <textarea>"+ JSON.stringify(data)+
+			"<h1>This is your data:</h1> Please copy this:<br><br> <textarea>"+ getJSONData() +
 		"</textarea></div>";
 	modal.alert(message, function(){
 		textarea.contentDocument.body.focus();
@@ -466,6 +479,19 @@ function showData(){
 
 	$$('#modal textarea')[0].select();
 };
+
+/**
+ * Gets all the data in a JSON String
+ * @return JSON {String} 
+ */
+ function getJSONData(){
+ 	var  i, data = {}
+		notes = localStorage.getItemJSON(listsPrefix);
+ 	for(i=0; i<notes.length; i++){
+		data[notes[i]] = localStorage.getItemJSON(notesPrefix+notes[i]);
+	}
+	return JSON.stringify(data);
+ }
 
 /**
  * Shows the LocalStorage Data
