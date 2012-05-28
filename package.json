@@ -4,6 +4,7 @@
 	"dependencies": {
 		"redis-url": "0.1.0",
 		"express": "2.5.8",
-		"mailer": "*"
+		"mailer": "*",
+		"jade": "0.26.1"
 	}
 }
