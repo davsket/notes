@@ -264,7 +264,13 @@ function deleteNote(name){
  */
 function saveContent(content){
 	content = content || textarea.contentDocument.body.innerHTML;
-	localStorage.setItem(notesPrefix+localStorage.getItem(lastPrefix), content);
+	//TEST
+	clearTimeout(timeOutSave);
+	timeOutSave = setTimeout((function(key, new_content){
+		return function delayedTimeoutSave(){
+			localStorage.setItem(key, new_content);
+		}
+	})(notesPrefix+lastNoteName, content), 200);
 };
 
 /**
