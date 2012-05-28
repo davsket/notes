@@ -170,16 +170,19 @@ function initializeNotes(){
 	textarea.style.display = 'block';
 
 	var goOn = document.createElement('div');
+	goOn.className = 'goOn';
 	goOn.innerHTML = 'The new version of Notes is now at <a target="_blank" href="http://notes.davsket.me">notes.davsket.me</a>. \
-		Do you want to move your notes to the new-updated-cool version? (please say yes) \
-		<form action="http://localhost:5000/" method="post">\
+		Do you want to move your notes to the new-updated version? <span class="please">(please say yes)</span> \
+		<form action="http://notes.davsket.me" method="post">\
 			<input type="hidden" name="notes" value="'+encodeURIComponent(getJSONData())+'" />\
-			<input type="submit" class="button" value="HELL YEAH!" onclick="" />\
-		</form>\
-		<input type="submit" class="button" value="No, not yet" onclick="" />\
-		'
+			<input type="submit" id="accept-goOn" class="button" value="HELL YEAH!" onclick="" />\
+			<input type="button" id="cancel-goOn" class="button less" value="No, not yet" onclick="" />\
+		</form>'
+	modal.setClosable(false);
 	modal.setContent(goOn);
-	modal.show()
+	modal.show();
+	document.getElementById('cancel-goOn').onclick = modal.hide;
+	setTimeout(function(){document.getElementById('accept-goOn').focus()}, 500);
 }
 
 /**

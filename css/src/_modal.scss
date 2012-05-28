@@ -61,6 +61,28 @@
 		}
 	}
 
+	.goOn{
+		font-size: 0.8em;
+		line-height: 1.3em;
+
+		.please{
+			font-size: 0.85em;
+			display: inline-block;
+			font-style: italic;
+			color: #aaa;
+			font-weight: 100;
+		}
+
+		form{
+			padding-top: 20px;
+			text-align: center;
+
+			.less{
+				background: rgba(8, 4, 0, 0.6);
+			}
+		}
+	}
+
 	.prompt, .confirm, .alert{
 		color: #666;
 		font-size: 14px;
@@ -102,7 +124,7 @@
 		}
 	}
 
-	button{
+	button, .button{
 		background: rgba(8, 4, 0, 0.9);
 		// @include background(linear-gradient(rgba(8, 4, 0, 0.6) 13%, rgba(8, 4, 0, 0.9) 74%));
 		color: #E0E0E0;
