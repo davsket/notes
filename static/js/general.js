@@ -66,18 +66,37 @@ var
 	notesPrefix = 'notes/lists/',
 	//The note prefix for the last/active note
 	lastPrefix = 'notes/lastlist',
+	//Last Note Name for perfomance optimization
+	lastNoteName = localStorage.getItem(lastPrefix),
 	//The modal used
 	modal = new Modal(null, true),
 	//Timeout for notifications
 	timeOut,
 	//Timeout for keyEvent
 	timeOutKey,
+	//Timeout for saveContent
+	timeOutSave,
+	//Iframe's content
+	content,
 	menuAbout = $('about'),
 	menuExportData = $('export_data'),
 	menuImportData = $('import_data'),
 	menuShortcuts = $('shortcuts'),
 	sendByEmail = $('send_email'),
-	welcomeNote = {name: "Welcome", content: "<div><br></div><div>Hello, it looks like it's your first time here. Here are some tips about this application, you can modify this note as you want:</div><blockquote style=\"margin: 0 0 0 40px; border: none; padding: 0px;\"><ol><li>It lets you apply to your notes styles like: <i>italic, </i><b>bold, </b><u>underline</u>, all them <i><u><b>together</b></u></i>, and erase them, just by using key board short-cuts.</li><li>You can also make indentations, ordered and unordered lists, and tabs, just in the <i>same way</i>.</li><li>Your data keeps locally (this browser) and it's never gonna be stored in any server or elsewhere.</li><li>It lets you do: <b>undo</b> and <b>redo </b>your changes.</li><li>You can change the name of this note by editing the title directly or using the list... <i>(read next tip)</i></li><li>Te <b>four-squared</b> icon lets you acces to a list with all the notes you have. From there you can create new notes, edit them and delete them.</li><li>The <b>lightning</b> icon lets you access to a list with all the shortcuts.</li><li>The <b>wheel</b> lets you access to all the configuration options, by the while just: copy your notes and import some notes.</li><li>The information, there I will put information about this app, like versioning and fixes/improvements.</li></ol></blockquote>"}
+	welcomeNote = {name: "Welcome", content: "<div><br></div><div>\
+	Hello, it looks like it's your first time here. Here are some tips about this application, \
+	you can modify this note as you want:</div>\
+	<blockquote style=\"margin: 0 0 0 40px; border: none; padding: 0px;\"><ol>\
+	<li>It lets you apply to your notes styles like: <i>italic, </i><b>bold, </b><u>underline</u>, \
+	all them <i><u><b>together</b></u></i>, and erase them, just by using key board short-cuts.</li>\
+	<li>You can also make indentations, ordered and unordered lists, and tabs, just in the <i>same way</i>.</li>\
+	<li>Your data keeps locally (this browser) and it's never gonna be stored in any server or elsewhere.</li>\
+	<li>It lets you do: <b>undo</b> and <b>redo </b>your changes.</li>\
+	<li>You can change the name of this note by editing the title directly or using the list... <i>(read next tip)</i></li>\
+	<li>Te <b>four-squared</b> icon lets you acces to a list with all the notes you have. From there you can create new notes, \
+	edit them and delete them.</li><li>The <b>lightning</b> icon lets you access to a list with all the shortcuts.</li>\
+	<li>The <b>wheel</b> lets you access to all the configuration options, by the while just: copy your notes and import some notes.</li>\
+	<li>The information, there I will put information about this app, like versioning and fixes/improvements.</li></ol></blockquote>"}
 ;
 
 
@@ -128,13 +147,14 @@ sendByEmail.addEventListener('click', sendEmail);
 function initializeNotes(){
 	var lists, i, list, length,
 		menuItems = $$('#menulist li:not(#newnote)'),
-		style, redirectContent;
+		style, redirectContent, cssRules;
 	lists = localStorage.getItemJSON(listsPrefix);
 
 	//If there are no notes
 	if(!lists || lists.length == 0){
 		createNote(welcomeNote.name);
 		localStorage.setItem(lastPrefix, welcomeNote.name);
+		lastNoteName = welcomeNote.name;
 		saveContent(welcomeNote.content);
 		loadNote(welcomeNote.name);
 	}
@@ -156,32 +176,72 @@ function initializeNotes(){
 	textarea.contentDocument.body.focus();
 
 	//Loads the styles
-	style = textarea.contentDocument.createElement('link');
+	style = textarea.contentDocument.createElement('style');
 		// fonts = textarea.contentDocument.createElement('link');
 		
 	// fonts.setAttribute('href', 'http://fonts.googleapis.com/css?family=Droid+Sans');
 	// fonts.setAttribute('rel', 'stylesheet');
 	// fonts.setAttribute('type', 'text/css');
-		
-	style.setAttribute('href', 'css/iframe_doc.css?v=1');
-	style.setAttribute('rel', 'stylesheet');
+	//No cache in iframe
+	cssRules = document.createTextNode('html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,\
+		a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u\
+		,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,asi\
+		de,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,ma\
+		rk,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}body{line-he\
+		ight:1}ol,ul{list-style:none}table{border-collapse:collapse;border-spacing:0}caption,th,td{text-align:left\
+		;font-weight:normal;vertical-align:middle}q,blockquote{quotes:none}q:before,q:after,blockquote:before,block\
+		quote:after{content:"";content:none}a img{border:none}article,aside,details,figcaption,figure,footer,header\
+		,hgroup,menu,nav,section,summary{display:block}@font-face{font-family:fontnomas;src:url("font/fontomas-w\
+		ebfont.eot");src:url("font/fontomas-webfont.eot?#iefix") format("embedded-opentype"), url("font/fonto\
+		mas-webfont.ttf") format("truetype");font-weight:normal;font-style:normal}@font-face{font-family:DroidSans;\
+		src:url("font/DroidSans-webfont.eot");src:url("font/DroidSans-webfont.eot?#iefix") format("embedded-o\
+		pentype"), url("font/DroidSans-webfont.woff") format("woff"), url("font/DroidSans-webfont.ttf") forma\
+		t("truetype");font-weight:normal;font-style:normal}@font-face{font-family:DroidSans;src:url("font/Droi\
+		dSans-Bold-webfont.eot");src:url("font/DroidSans-Bold-webfont.eot?#iefix") format("embedded-opentype"), \
+		url("font/DroidSans-Bold-webfont.woff") format("woff"), url("font/DroidSans-Bold-webfont.ttf") format\
+		("truetype");font-weight:bold;font-style:normal}@font-face{font-family:IcoMoon;src:url("font/icomoon.eot\
+		");src:url("font/icomoon.eot?#iefix") format("embedded-opentype"), url("font/icomoon.svg#IcoMoon") fo\
+		rmat("svg"), url("font/icomoon.woff") format("woff"), url("font/icomoon.ttf") format("truetype");font\
+		-weight:normal;font-style:normal}.icon-b:before,.icon-a:after{font-family:IcoMoon;content:attr(data-icon)}h\
+		tml::-webkit-scrollbar{display:none}body{color:#555;font-family:DroidSans;font-size:18px !important;margin:\
+		0 auto;outline:none;padding:0;position:relative;width:100%;z-index:1;min-height:100%;height:auto;line-heigh\
+		t:1.6em;word-wrap:break-word;padding:3.65em 1.6em 1.6em !important;background-image: -webkit-linear-gradient\
+		(#eeeeee 0.05em, transparent 0.05em) !important;background-size:100% 1.6em;box-sizing:border-box !important\
+		}body img{display:block;max-height:100%;max-width:100%}*{font-family:DroidSans !important;background:transp\
+		arent !important;font-size:1em !important;color:#555 !important;padding:0 !important;margin-right:0!importa\
+		nt;margin-top:0!important;margin-bottom:0!important;border:none !important;font-weight:normal !important;li\
+		ne-height:1.6em !important}strong,b{font-weight:bold !important}u{text-decoration:underline}i{font-style:it\
+		alic}ul{list-style:disc !important;list-style-position:inside !important}ul li{list-style:disc !important;l\
+		ist-style-position:inside !important}ol{list-style:decimal !important;list-style-position:inside !important\
+		}ol li{list-style:decimal !important;list-style-position:inside !important}');
 	style.setAttribute('type', 'text/css');
+	if(style.styleSheet)
+    	style.styleSheet.cssText = cssRules.nodeValue;
+	else style.appendChild(cssRules);
 
 	// textarea.contentDocument.head.appendChild(fonts);
 	textarea.contentDocument.head.appendChild(style);
 
 	textarea.style.display = 'block';
 
+	console.log(localStorage.getItem('wasServed'));
+
 	//Go to new one :)
 	redirectContent = 
+		'<div class="about"><h1>Hello! we\'ve moved to notes.davsket.me!</h1>'+
+		'To move your notes to the new app just click the button:'+
 		'<form action="http://notes.davsket.me/load/" method="post">'+
 			'<input type="hidden" name="notes" value="'+
 			encodeURIComponent(getJSONData())+'" />'+
-			'<input type="submit" class="button" value="enviar" />'+
-		'</form>';
+			'<input type="submit" class="button" value="send my notes!" onclick="heWasServed()" />'+
+		'</form></div>';
 	modal.setClosable(true);
 	modal.setContent(redirectContent);
 	modal.show();
+}
+
+function heWasServed(){
+	localStorage.setItem('wasServed','True');
 }
 
 /**
@@ -211,6 +271,7 @@ function createNote(name, ignore_new_item){
 	}
 	//Adds the note to the notes list
 	lists.push(name)
+
 	localStorage.setItem(listsPrefix,JSON.stringify(lists));
 }
 
@@ -229,6 +290,7 @@ function loadNote(noteName, ignoreFocus){
 	}
 	//Then set this note as the actual
 	localStorage.setItem(lastPrefix, noteName);
+	lastNoteName = noteName;
 
 	//Loads the content in the textarea iframe
 	textarea.contentDocument.body.innerHTML = localStorage.getItemJSON(notesPrefix+noteName) || '';
@@ -263,12 +325,13 @@ function deleteNote(name){
 	if(lists.length == 0){
 		createNote(welcomeNote.name);
 		localStorage.setItem(lastPrefix, welcomeNote.name);
+		lastNoteName = welcomeNote.name;
 		saveContent(welcomeNote.content);
 		loadNote(welcomeNote.name);
 	}
 	//Else, if the actual note is the deleted one
 	//then open the first one
-	else if(localStorage.getItem(lastPrefix) == name){
+	else if(lastNoteName == name){
 		loadNote(lists[0]);
 	}
 }
@@ -278,7 +341,13 @@ function deleteNote(name){
  */
 function saveContent(content){
 	content = content || textarea.contentDocument.body.innerHTML;
-	localStorage.setItem(notesPrefix+localStorage.getItem(lastPrefix), content);
+	//TEST
+	clearTimeout(timeOutSave);
+	timeOutSave = setTimeout((function(key, new_content){
+		return function delayedTimeoutSave(){
+			localStorage.setItem(key, new_content);
+		}
+	})(notesPrefix+lastNoteName, content), 200);
 };
 
 /**
@@ -646,42 +715,42 @@ function hideMenu(){
  */
 function titleKeyUpEvents(evt){
 	var name = this.value,
-		oldname = localStorage.getItem(lastPrefix),
 		liNode,
 		textNode;
 	
 	clearTimeout(timeOutKey);
 	
-	console.log(name , oldname, name == oldname);
-	if(oldname == name)
+	// console.log(name , lastNoteName, name == lastNoteName);
+	if(lastNoteName == name)
 			return true;
 
 	if(name == ""){
-		this.value = oldname;
+		this.value = lastNoteName;
 		return true;
 	}
 
-	liNode = $$('[data-name="'+oldname+'"]')[0];
-	textNode = $$('[data-name="'+oldname+'"] .txt')[0];
+	liNode = $$('[data-name="'+lastNoteName+'"]')[0];
+	textNode = $$('[data-name="'+lastNoteName+'"] .txt')[0];
 
-	timeOutKey = setTimeout((function(name, oldname, liNode, textNode){ 
+	timeOutKey = setTimeout((function(name, lastNoteName, liNode, textNode){ 
 		return function blind(){
 			textNode.innerHTML = name;
 			//Reset the parent node dataset
 			liNode.dataset.name = name;
 			//Rename the local storage note name
-			localStorage.setItem(notesPrefix+name, localStorage.getItem(notesPrefix+oldname));
+			localStorage.setItem(notesPrefix+name, localStorage.getItem(notesPrefix+lastNoteName));
 			//Update the notes list
 			newlists = localStorage.getItemJSON(listsPrefix);
 			newlists.push(name);
 			localStorage.setItem(listsPrefix, JSON.stringify(newlists));
 			localStorage.setItem(lastPrefix, name);
+			lastNoteName = name;
 			//Deletes the old one
-			deleteNote(oldname);
+			deleteNote(lastNoteName);
 			//Load this note (sets this note as actual)
 			loadNote(name, true);
 		}
-	 })(name, oldname, liNode, textNode), 300);
+	 })(name, lastNoteName, liNode, textNode), 300);
 };
 
 /**
@@ -1019,6 +1088,7 @@ function onDropEvent(evt){
 						//else he wants to append it in the actual..
 						else{
 							textarea.document.execCommand('InsertHTML', false, result);
+							saveContent();
 						}
 					};
 					reader.readAsText(file);
@@ -1031,6 +1101,7 @@ function onDropEvent(evt){
 						var result = event.target.result;
 						//And generates the image tag with the DataURL
 			    		textarea.document.execCommand('InsertHTML', false, '<img src="'+result+'"/>');
+						saveContent();
 					};
 				reader.readAsDataURL(file);
 			}
@@ -1038,14 +1109,15 @@ function onDropEvent(evt){
     	else{
     		//For default I insert the data as the first type
     		textarea.document.execCommand('InsertHTML', false, evt.dataTransfer.getData(type));
+			saveContent();
     	}
 	}
 	else {
 		//As before, insert the data as text
 		textarea.document.execCommand('InsertHTML', false, evt.dataTransfer.getData(type));
+		saveContent();
 	}
 
-	saveContent();
 	return false;
 };
 

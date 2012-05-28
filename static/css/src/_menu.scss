@@ -28,7 +28,7 @@
 			text-indent: 0.091em;
 		}
 		.items{
-			overflow: hidden;
+			overflow: auto;
 			font-size: 0.7em;
 			background-color: #fff;
 			position: absolute;
@@ -48,6 +48,7 @@
 
 			&.first{
 				border-top: none;
+				max-height: 100vh;
 			}
 		}
 
