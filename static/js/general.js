@@ -522,7 +522,7 @@ function showAbout(){
 			(27/may/2012) Now it doesn't matter if you have a large list of notes, you can scroll them. <br><br>\
 			(27/may/2012) Improved modals :) no more awefull internal scrolls. <br><br>\
 			(27/may/2012) Several minor fixes. <br><br>\
-			(xx/mar/2012) Improved shortcuts and the first ofline mode out.<br><br><br>\
+			(xx/mar/2012) Improved shortcuts and the first offline mode out.<br><br><br>\
 		</div>";
 
 	hideMenu();
