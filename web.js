@@ -24,8 +24,7 @@ app.configure('production', function(){
 app.get('/save/access_token', routes.save_token);
 
 app.all('/', routes.index);
-app.all('/load', routes.load);
-app.post('/test', routes.email);
+app.post('/send_to_email', routes.email);
 
 
 

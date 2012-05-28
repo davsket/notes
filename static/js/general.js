@@ -625,7 +625,7 @@ function sendEmail(){
 			var req = new XMLHttpRequest(),
 				params = 'email=' + encodeURIComponent(res) + '&note=' + encodeURIComponent(localStorage.getItemJSON(notesPrefix+localStorage.getItemJSON(lastPrefix)));
 			
-			req.open('POST', '/test', true);
+			req.open('POST', '/send_to_email', true);
 			req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			req.setRequestHeader("Content-length", params.length);
 			req.setRequestHeader("Connection", "close");
@@ -667,13 +667,14 @@ function _importData(evt){
 						localStorage.setItem(listsPrefix, JSON.stringify(list));
 					}
 					localStorage.setItem(notesPrefix+key, note);
+					createMenuItem(key);
 					imported.push(key);
 				}else{
 					throw new NonObject("the format of the data is incorrect."+(imported.length?' Except for these notes, the other couldn\'t be imported: '+imported.join(', '):''));
 				}
 			}
 			setTimeout(function(){
-				modal.alert('These notes were imported successfully: '+ imported.join(', '));
+				modal.alert('These notes were successfully imported:<br><br> '+ imported.join('<br>'));
 			}, 300);
 		}else{
 			throw new NonObject("the format of the data is incorrect.");
