@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#Cache version 69
+#Cache version 72
 
 CACHE:
 #Images
@@ -29,6 +29,17 @@ font/DroidSans-webfont.ttf
 font/DroidSans-Bold-webfont.eot
 font/DroidSans-Bold-webfont.woff
 font/DroidSans-Bold-webfont.ttf
+
+http://notes.davsket.me/font/icomoon.eot
+http://notes.davsket.me/font/icomoon.svg
+http://notes.davsket.me/font/icomoon.ttf
+http://notes.davsket.me/font/icomoon.woff
+http://notes.davsket.me/font/DroidSans-webfont.eot
+http://notes.davsket.me/font/DroidSans-webfont.woff
+http://notes.davsket.me/font/DroidSans-webfont.ttf
+http://notes.davsket.me/font/DroidSans-Bold-webfont.eot
+http://notes.davsket.me/font/DroidSans-Bold-webfont.woff
+http://notes.davsket.me/font/DroidSans-Bold-webfont.ttf
 
 NETWORK:
 *

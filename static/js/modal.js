@@ -17,7 +17,7 @@ function Modal(content, closable){
 	
 	this.show = function(){
 		modal.className = 'show';
-		contentW.style.maxHeight = parseInt(getStyle(document.body,'height')) - 150 + 'px';
+		// contentW.style.maxHeight = parseInt(getStyle(document.body,'height')) - 150 + 'px';
 		document.addEventListener('keyup', this.bindKeyUpEvents);
 	};
 

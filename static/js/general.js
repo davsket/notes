@@ -184,36 +184,34 @@ function initializeNotes(){
 	// fonts.setAttribute('type', 'text/css');
 	//No cache in iframe
 	cssRules = document.createTextNode('html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,\
-		a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u\
-		,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,asi\
-		de,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,ma\
-		rk,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}body{line-he\
-		ight:1}ol,ul{list-style:none}table{border-collapse:collapse;border-spacing:0}caption,th,td{text-align:left\
+		a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,\
+		u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,\
+		aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,\
+		mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}body{\
+		line-height:1}ol,ul{list-style:none}table{border-collapse:collapse;border-spacing:0}caption,th,td{text-align:left\
 		;font-weight:normal;vertical-align:middle}q,blockquote{quotes:none}q:before,q:after,blockquote:before,block\
 		quote:after{content:"";content:none}a img{border:none}article,aside,details,figcaption,figure,footer,header\
-		,hgroup,menu,nav,section,summary{display:block}@font-face{font-family:fontnomas;src:url("font/fontomas-w\
-		ebfont.eot");src:url("font/fontomas-webfont.eot?#iefix") format("embedded-opentype"), url("font/fonto\
-		mas-webfont.ttf") format("truetype");font-weight:normal;font-style:normal}@font-face{font-family:DroidSans;\
-		src:url("font/DroidSans-webfont.eot");src:url("font/DroidSans-webfont.eot?#iefix") format("embedded-o\
-		pentype"), url("font/DroidSans-webfont.woff") format("woff"), url("font/DroidSans-webfont.ttf") forma\
-		t("truetype");font-weight:normal;font-style:normal}@font-face{font-family:DroidSans;src:url("font/Droi\
-		dSans-Bold-webfont.eot");src:url("font/DroidSans-Bold-webfont.eot?#iefix") format("embedded-opentype"), \
-		url("font/DroidSans-Bold-webfont.woff") format("woff"), url("font/DroidSans-Bold-webfont.ttf") format\
-		("truetype");font-weight:bold;font-style:normal}@font-face{font-family:IcoMoon;src:url("font/icomoon.eot\
-		");src:url("font/icomoon.eot?#iefix") format("embedded-opentype"), url("font/icomoon.svg#IcoMoon") fo\
-		rmat("svg"), url("font/icomoon.woff") format("woff"), url("font/icomoon.ttf") format("truetype");font\
-		-weight:normal;font-style:normal}.icon-b:before,.icon-a:after{font-family:IcoMoon;content:attr(data-icon)}h\
-		tml::-webkit-scrollbar{display:none}body{color:#555;font-family:DroidSans;font-size:18px !important;margin:\
-		0 auto;outline:none;padding:0;position:relative;width:100%;z-index:1;min-height:100%;height:auto;line-heigh\
-		t:1.6em;word-wrap:break-word;padding:3.65em 1.6em 1.6em !important;background-image: -webkit-linear-gradient\
-		(#eeeeee 0.05em, transparent 0.05em) !important;background-size:100% 1.6em;box-sizing:border-box !important\
-		}body img{display:block;max-height:100%;max-width:100%}*{font-family:DroidSans !important;background:transp\
-		arent !important;font-size:1em !important;color:#555 !important;padding:0 !important;margin-right:0!importa\
-		nt;margin-top:0!important;margin-bottom:0!important;border:none !important;font-weight:normal !important;li\
-		ne-height:1.6em !important}strong,b{font-weight:bold !important}u{text-decoration:underline}i{font-style:it\
-		alic}ul{list-style:disc !important;list-style-position:inside !important}ul li{list-style:disc !important;l\
-		ist-style-position:inside !important}ol{list-style:decimal !important;list-style-position:inside !important\
-		}ol li{list-style:decimal !important;list-style-position:inside !important}');
+		,hgroup,menu,nav,section,summary{display:block} @font-face{font-family:fontnomas;src:url("http://notes.davsket.me/font/fontomas-webfont.eot");\
+		src:url("http://notes.davsket.me/font/fontomas-webfont.eot?#iefix") format("embedded-opentype"), url("http://notes.davsket.me/font/fontomas-webfont.ttf") format("truetype");\
+		font-weight:normal;font-style:normal} @font-face{font-family: DroidSans;src:url("http://notes.davsket.me/font/DroidSans-webfont.eot");\
+		src:url("http://notes.davsket.me/font/DroidSans-webfont.eot?#iefix") format("embedded-opentype"), url("http://notes.davsket.me/font/DroidSans-webfont.woff")\
+		format("woff"), url("http://notes.davsket.me/font/DroidSans-webfont.ttf") format("truetype");font-weight:normal;font-style:normal}\
+		@font-face{font-family: DroidSans;src:url("http://notes.davsket.me/font/DroidSans-Bold-webfont.eot");src:url("http://notes.davsket.me/font/DroidSans-Bold-webfont.eot?#iefix")\
+		format("embedded-opentype"), url("http://notes.davsket.me/font/DroidSans-Bold-webfont.woff") format("woff"), url("http://notes.davsket.me/font/DroidSans-Bold-webfont.ttf")\
+		format("truetype");font-weight:bold;font-style:normal} @font-face{font-family:IcoMoon;src:url("http://notes.davsket.me/font/icomoon.eot");\
+		src:url("http://notes.davsket.me/font/icomoon.eot?#iefix") format("embedded-opentype"), url("http://notes.davsket.me/font/icomoon.svg#IcoMoon") format("svg"), \
+		url("http://notes.davsket.me/font/icomoon.woff") format("woff"), url("http://notes.davsket.me/font/icomoon.ttf") format("truetype");font-weight:normal;font-style:normal}\
+		.icon-b:before,.icon-a:after{font-family:IcoMoon;content:attr(data-icon)} html::-webkit-scrollbar{display:none}\
+		body{color:#555;font-family: DroidSans;font-size:18px !important;margin:0 auto;outline:none;padding:0;position:relative;\
+		width:100%;z-index:1;min-height:100%;height:auto;line-height:1.6em;word-wrap:break-word;padding:3.65em 1.6em 1.6em \
+		!important;background-image: -webkit-linear-gradient(#eeeeee 0.05em, transparent 0.05em) !important;background-size:100% 1.6em;\
+		box-sizing:border-box !important}body img{display:block;max-height:100%;max-width:100%} *{font-family: DroidSans, sans-serif !important;\
+		background:transparent !important;font-size:1em !important;color:#555 !important;padding:0 !important;\
+		margin-right:0!important;margin-top:0!important;margin-bottom:0!important;border:none !important;font-weight:normal !important;\
+		line-height:1.6em !important}strong,b{font-weight:bold !important}u{text-decoration:underline}i{font-style:italic}\
+		ul{list-style:disc !important;list-style-position:inside !important}ul li{list-style:disc !important;list-style-position:inside\
+		!important}ol{list-style:decimal !important;list-style-position:inside !important}ol li{list-style:decimal !important;\
+		list-style-position:inside !important}');
 	style.setAttribute('type', 'text/css');
 	if(style.styleSheet)
     	style.styleSheet.cssText = cssRules.nodeValue;
@@ -224,20 +222,20 @@ function initializeNotes(){
 
 	textarea.style.display = 'block';
 
-	console.log(localStorage.getItem('wasServed'));
+	// console.log(localStorage.getItem('wasServed'));
 
-	//Go to new one :)
-	redirectContent = 
-		'<div class="about"><h1>Hello! we\'ve moved to notes.davsket.me!</h1>'+
-		'To move your notes to the new app just click the button:'+
-		'<form action="http://notes.davsket.me/load/" method="post">'+
-			'<input type="hidden" name="notes" value="'+
-			encodeURIComponent(getJSONData())+'" />'+
-			'<input type="submit" class="button" value="send my notes!" onclick="heWasServed()" />'+
-		'</form></div>';
-	modal.setClosable(true);
-	modal.setContent(redirectContent);
-	modal.show();
+	// //Go to new one :)
+	// redirectContent = 
+	// 	'<div class="about"><h1>Hello! we\'ve moved to notes.davsket.me!</h1>'+
+	// 	'To move your notes to the new app just click the button:'+
+	// 	'<form action="http://notes.davsket.me/load/" method="post">'+
+	// 		'<input type="hidden" name="notes" value="'+
+	// 		encodeURIComponent(getJSONData())+'" />'+
+	// 		'<input type="submit" class="button" value="send my notes!" onclick="heWasServed()" />'+
+	// 	'</form></div>';
+	// modal.setClosable(true);
+	// modal.setContent(redirectContent);
+	// modal.show();
 }
 
 function heWasServed(){
@@ -510,17 +508,23 @@ function showShortcuts(){
  */
 function showAbout(){
 	var message = 
-		"<div class='about'> "+
-			"<h1>The more you know...</h1>"+
-			"This application stores the data every time you type, which means, you dont need to press any button to save the info.<br><br>"+
-			"Notes also lets you set styling on the notes via shortcuts like: Cmd+b, Cmd+i, etc. (For more information visit the shurcuts, or press Alt+s)!<br><br>"+
-			"All your data is stored in the browser Local Storage, which means: your data won't ever be stored on the server, but in the browser, so... yes, you change from browser or open this in an incognito window and there won't be any of your notes.<br><br>"+
-			"Is there a way to retrieve your notes and load them in other browser? yes! if you go to the menu options or press Alt+g, it will open a modal with the application data as text. And in the menu options or with Alt+l you can load (add/append) that data into the other Notes app.<br><br><br>"+
-			"<h1>About me and Notes (v 0.1)</h1>"+
-			"My name is David Avellaneda a.k.a. <a href='http://twitter.com/Davsket' target='_blank'>Davsket</a> and I built this app for my self and my friends.<br><br>"+
-			"The source of this application can be found at <a href='http://github.com/davsket/notes' target='_blank'>Github</a>.<br><br>"+
-			"Please enjoy it and any suggestion please let me know via <a href='http://twitter.com/intent/tweet?text=Hey @notes_app, I like your app but...' target='_blank'>Twitter: @notes_app</a>."+
-		"</div>";
+		"<div class='about'> \
+			<h1>Hello!!</h1>\
+			This application stores the data every time you type, which means, you dont need to press any button to save the info.<br><br>\
+			Notes also lets you set styling on the notes via shortcuts like: Cmd+b, Cmd+i, etc. (For more information visit the shurcuts, or press Alt+s)!<br><br>\
+			All your data is stored in the browser Local Storage, which means: your data won't ever be stored on the server, but in the browser, so... yes, you change from browser or open this in an incognito window and there won't be any of your notes.<br><br>\
+			Is there a way to retrieve your notes and load them in other browser? yes! if you go to the menu options or press Alt+g, it will open a modal with the application data as text. And in the menu options or with Alt+l you can load (add/append) that data into the other Notes app.<br><br><br>\
+			<h1>About me and Notes (v 0.2)</h1>\
+			My name is David Avellaneda a.k.a. <a href='http://twitter.com/Davsket' target='_blank'>Davsket</a> and I built this app for my self and my friends.<br><br>\
+			The source of this application can be found at <a href='http://github.com/davsket/notes' target='_blank'>Github</a>.<br><br>\
+			Please enjoy it and any suggestion please let me know via <a href='http://twitter.com/intent/tweet?text=Hey @notes_app, I like your app but...' target='_blank'>Twitter: @notes_app</a>. <br><br><br>\
+			<h1>Notes (v 0.2) change log</h1>\
+			(27/may/2012) Adjustments for perfomance when storing pretty laaarge notes.<br><br>\
+			(27/may/2012) The styles have being improved for offline editing. <br><br>\
+			(27/may/2012) Now it doesn't matter if you have a large list of notes, you can scroll them. <br><br>\
+			(27/may/2012) Improved modals :) no more awefull internal scrolls\
+			(xx/mar/2012) Improved shortcuts and the first ofline mode out.<br><br><br>\
+		</div>";
 
 	hideMenu();
 	
