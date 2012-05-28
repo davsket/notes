@@ -172,7 +172,7 @@ function initializeNotes(){
 	var goOn = document.createElement('div');
 	goOn.innerHTML = 'The new version of Notes is now at <a target="_blank" href="http://notes.davsket.me">notes.davsket.me</a>. \
 		Do you want to move your notes to the new-updated-cool version? (please say yes) \
-		<form action="http://localhost:5000/load/" method="post">\
+		<form action="http://localhost:5000/" method="post">\
 			<input type="hidden" name="notes" value="'+encodeURIComponent(getJSONData())+'" />\
 			<input type="submit" class="button" value="HELL YEAH!" onclick="" />\
 		</form>\
