@@ -76,8 +76,6 @@ var
 	timeOutKey,
 	//Timeout for saveContent
 	timeOutSave,
-	//Iframe's content
-	content,
 	menuAbout = $('about'),
 	menuExportData = $('export_data'),
 	menuImportData = $('import_data'),
