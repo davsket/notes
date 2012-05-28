@@ -678,7 +678,7 @@ function _importData(evt){
 					var message = 'These notes were imported successfully:<br><br> '+ imported.join('<br>');
 					if(that.firstTime)
 						message = 'Welcome back! Your notes: '+ imported.join(', ')+', were imported successfully. Please the next time enter to <bold><a href="http://notes.davsket.me">notes.davsket.me</a></bold> instead of the old <strike>davsket.me/notes</strike> version. <br><br> Thank you!'
-					modal.alert();
+					modal.alert(message);
 				}
 			})(this), 300);
 		}else{
