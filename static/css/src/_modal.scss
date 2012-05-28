@@ -10,6 +10,10 @@
 	@include transition-duration(300ms);
 	@include transition-property(opacity);
 
+	bold{
+		font-weight: bold;
+	}
+
 	&.show{
 		height: 100%;
 		opacity: 1;

@@ -673,9 +673,14 @@ function _importData(evt){
 					throw new NonObject("the format of the data is incorrect."+(imported.length?' Except for these notes, the other couldn\'t be imported: '+imported.join(', '):''));
 				}
 			}
-			setTimeout(function(){
-				modal.alert('These notes were successfully imported:<br><br> '+ imported.join('<br>'));
-			}, 300);
+			setTimeout((function(that){
+				return function(){
+					var message = 'These notes were imported successfully:<br><br> '+ imported.join('<br>');
+					if(that.firstTime)
+						message = 'Welcome back! Your notes: '+ imported.join(', ')+', were imported successfully. Please the next time enter to <bold><a href="http://notes.davsket.me">notes.davsket.me</a></bold> instead of the old <strike>davsket.me/notes</strike> version. <br><br> Thank you!'
+					modal.alert();
+				}
+			})(this), 300);
 		}else{
 			throw new NonObject("the format of the data is incorrect.");
 		}

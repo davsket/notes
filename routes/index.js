@@ -19,7 +19,7 @@ redis.get('notesapp_email_password', function(err, value) {
 exports.index = function(req, res){
 	var notes = req.body.notes
 	console.log(notes)
-	res.render('index', {notes: notes})
+	res.render('index', {notes: notes, firstTime: 'yeah'})
 };
 
 exports.email = function(request, response) {
