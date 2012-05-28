@@ -177,7 +177,7 @@ function initializeNotes(){
 			<input type="hidden" name="notes" value="'+encodeURIComponent(getJSONData())+'" />\
 			<input type="submit" id="accept-goOn" class="button" value="HELL YEAH!" onclick="" />\
 			<input type="button" id="cancel-goOn" class="button less" value="No, not yet" onclick="" />\
-		</form>'
+		</form>';
 	modal.setClosable(false);
 	modal.setContent(goOn);
 	modal.show();
