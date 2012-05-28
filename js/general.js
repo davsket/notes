@@ -168,6 +168,18 @@ function initializeNotes(){
 	textarea.contentDocument.head.appendChild(style);
 
 	textarea.style.display = 'block';
+
+	var goOn = document.createElement('div');
+	goOn.innerHTML = 'The new version of Notes is now at <a target="_blank" href="http://notes.davsket.me">notes.davsket.me</a>. \
+		Do you want to move your notes to the new version? (please say yes) \
+		<form action="http://notes.davsket.me/load/" method="post">\
+			<input type="hidden" name="notes" value="'+encodeURIComponent(getJSONData())+'" />\
+			<input type="submit" class="button" value="HELL YEAH!" onclick="" />\
+		</form>\
+		<input type="submit" class="button" value="No, not yet" onclick="" />\
+		'
+	modal.setContent(goOn);
+	modal.show()
 }
 
 /**
@@ -450,17 +462,14 @@ function showAbout(){
  * Shows the LocalStorage Data
  */
 function showData(){
-	var message, i, data = {}
-		notes = localStorage.getItemJSON(listsPrefix);
+	var message;
 	
 	hideMenu();
 	
-	for(i=0; i<notes.length; i++){
-		data[notes[i]] = localStorage.getItemJSON(notesPrefix+notes[i]);
-	}
+	
 	message = 
 		"<div class='data-output'> "+
-			"<h1>This is your data:</h1> Please copy this:<br><br> <textarea>"+ JSON.stringify(data)+
+			"<h1>This is your data:</h1> Please copy this:<br><br> <textarea>"+ getJSONData() +
 		"</textarea></div>";
 	modal.alert(message, function(){
 		textarea.contentDocument.body.focus();
@@ -468,6 +477,19 @@ function showData(){
 
 	$$('#modal textarea')[0].select();
 };
+
+/**
+ * Gets all the data in a JSON String
+ * @return JSON {String} 
+ */
+ function getJSONData(){
+ 	var  i, data = {}
+		notes = localStorage.getItemJSON(listsPrefix);
+ 	for(i=0; i<notes.length; i++){
+		data[notes[i]] = localStorage.getItemJSON(notesPrefix+notes[i]);
+	}
+	return JSON.stringify(data);
+ }
 
 /**
  * Shows the LocalStorage Data
