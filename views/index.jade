@@ -1,0 +1,52 @@
+div.
+	<h1 id="header"><input type="text" class="title" value="This is the title" /><span class="date"></span></h1>
+	<ul id="menu">
+		<li>
+			<span href="#" class="index">P</span>
+			<div class="items first">
+				<ul id="menulist">
+					<li id="newnote">
+						Add Note <span class="option">A</span>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li id="shortcuts">
+			<span href="#" class="index" title="Shortcuts">r</span>
+		</li>
+		<li id="options">
+			<span href="#" class="index">5</span>
+			<div class="items">
+				<ul>
+					<li id="export_data">
+						<span class="option">)</span> Export Notes
+					</li>
+					<li id="import_data">
+						<span class="option">(</span> Import Notes
+					</li>
+					<li id="send_email">
+						<span class="option">1</span> Send this by Email
+					</li>
+				</ul>
+			</div>
+		</li>
+		<li id="about">
+			<span href="#" class="index">i</span>
+		</li>
+	</ul>
+	<iframe id="textarea" spellcheck="true" style="display: none;"></iframe>
+	<div id="status" class='hide'></div>
+	<div id="modal">
+		<div class="back"></div>
+		<div class="container">
+			<div class="content">
+			</div>
+			<a class="close">o</a>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/modal.js"></script>
+	<script type="text/javascript" src="js/general.js"></script>
+
+script(type="text/javascript") 
+	var _les_notes_ = '#{notes}';
+	if(_les_notes_) _importData.bind({value: window.decodeURIComponent(_les_notes_)})();
