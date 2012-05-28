@@ -4,17 +4,20 @@
     "version": "1",
     "app": {
         "urls": [
+            "*://notes.davsket.me",
             "*://davsket.me/notes"
         ],
         "launch": {
-            "web_url": "http://davsket.me/notes"
+            "web_url": "http://notes.davsket.me"
         }
     },
     "icons": {
         "128": "icon128.png"
     },
+    "offline_enabled": true,
     "permissions": [
         "unlimitedStorage",
-        "notifications"
+        "notifications",
+        "*://davsket.me/notes"
     ]
 }
