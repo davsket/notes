@@ -1,7 +1,8 @@
+console.log(1)
 var express = require('express'),
 	routes = require('./routes'),
 	app = express.createServer(express.logger());
-
+console.log(2)
 // console.log(redis.get('hola',function(e,v){console.log(v+'++++++++++++++');}))
 
 app.configure(function(){

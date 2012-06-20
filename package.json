@@ -2,7 +2,6 @@
 	"name": "NotesApp",
 	"version": "0.0.1",
 	"dependencies": {
-		"spdy":"*",
 		"express": "2.5.8",
 		"redis-url": "0.1.0",
 		"mailer": "*",
