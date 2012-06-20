@@ -1,7 +1,7 @@
 console.log(1)
-var express = require('express');
-console.log(1)
 var redis = require('redis-url').connect(process.env.REDISTOGO_URL)
+console.log(1)
+var express = require('express');
 console.log(2)
 var	routes = require('./routes');
 console.log(3)
