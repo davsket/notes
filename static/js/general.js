@@ -154,7 +154,9 @@ function initializeNotes(){
 		localStorage.setItem(lastPrefix, welcomeNote.name);
 		lastNoteName = welcomeNote.name;
 		saveContent(welcomeNote.content);
-		loadNote(welcomeNote.name);
+		setTimeout(function(){
+			loadNote(welcomeNote.name);
+		},300);
 	}
 	else{
 		//Create the menu list
@@ -323,7 +325,9 @@ function deleteNote(name){
 		localStorage.setItem(lastPrefix, welcomeNote.name);
 		lastNoteName = welcomeNote.name;
 		saveContent(welcomeNote.content);
-		loadNote(welcomeNote.name);
+		setTimeout(function(){
+			loadNote(welcomeNote.name);
+		},300);
 	}
 	//Else, if the actual note is the deleted one
 	//then open the first one
@@ -336,7 +340,13 @@ function deleteNote(name){
  * Saves the content in the actual note
  */
 function saveContent(content){
-	content = content || textarea.contentDocument.body.innerHTML;
+	if(content){
+		textarea.contentDocument.body.innerHTML = content;
+		console.log(textarea.contentDocument.body.innerHTML)
+	}
+	else{
+		content = textarea.contentDocument.body.innerHTML;
+	}
 	//TEST
 	clearTimeout(timeOutSave);
 	timeOutSave = setTimeout((function(key, new_content){
@@ -729,37 +739,38 @@ function titleKeyUpEvents(evt){
 	
 	clearTimeout(timeOutKey);
 	
-	// console.log(name , lastNoteName, name == lastNoteName);
-	if(lastNoteName == name)
+	if(lastNoteName === name)
 			return true;
 
-	if(name == ""){
+	if(name === ""){
 		this.value = lastNoteName;
 		return true;
 	}
 
-	liNode = $$('[data-name="'+lastNoteName+'"]')[0];
-	textNode = $$('[data-name="'+lastNoteName+'"] .txt')[0];
 
-	timeOutKey = setTimeout((function(name, lastNoteName, liNode, textNode){ 
+	timeOutKey = setTimeout((function(name, lastNoteName){ 
 		return function blind(){
-			textNode.innerHTML = name;
-			//Reset the parent node dataset
+			liNode = $$('[data-name="'+lastNoteName+'"]')[0];
+			textNode = $$('[data-name="'+lastNoteName+'"] .txt')[0];
+
+			//Reset the parent node data
 			liNode.dataset.name = name;
+			textNode.innerHTML = name;
 			//Rename the local storage note name
 			localStorage.setItem(notesPrefix+name, localStorage.getItem(notesPrefix+lastNoteName));
 			//Update the notes list
 			newlists = localStorage.getItemJSON(listsPrefix);
+			newlists.splice(newlists.indexOf(lastNoteName), 1);
 			newlists.push(name);
+
 			localStorage.setItem(listsPrefix, JSON.stringify(newlists));
 			localStorage.setItem(lastPrefix, name);
-			lastNoteName = name;
-			//Deletes the old one
-			deleteNote(lastNoteName);
+			
 			//Load this note (sets this note as actual)
+			lastNoteName = name;
 			loadNote(name, true);
 		}
-	 })(name, lastNoteName, liNode, textNode), 300);
+	 })(name, lastNoteName), 300);
 };
 
 /**
